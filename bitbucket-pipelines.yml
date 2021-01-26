@@ -11,4 +11,18 @@ pipelines:
         caches:
           - maven
         script: # Modify the commands below to build your repository.
+          - export TESTCONTAINERS_RYUK_DISABLED=true
           - mvn -B verify # -B batch mode makes Maven less verbose
+        services:
+          - postgres
+          - docker
+
+definitions:
+  services:
+    docker:
+      memory: 2048
+    postgres:
+      image: postgres
+      variables:
+        POSTGRES_DB: call4help
+        POSTGRES_PASSWORD: 1234
