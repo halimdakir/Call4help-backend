@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
 
     //NOT UNAUTHORIZED
     @ExceptionHandler(RegistrationException.class)
-    public ResponseEntity<Object> notAcceptedExceptionExceptionHandling(RegistrationException exception, WebRequest request){
+    public ResponseEntity<Object> registrationExceptionExceptionHandling(RegistrationException exception, WebRequest request){
         String errorMessageDesc = exception.getLocalizedMessage();
         if (errorMessageDesc == null) errorMessageDesc=exception.toString();
         ErrorDetails errorDetails = new ErrorDetails(new Date(), errorMessageDesc, request.getDescription(false));

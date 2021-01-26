@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.util.Optional;
 
 @Service
 public class UserServiceImplement implements UserService{
@@ -37,5 +39,10 @@ public class UserServiceImplement implements UserService{
             userRepository.save(user);
 
         return userDTO;
+    }
+
+    @Override
+    public UserDTO updateToken(String token, String newToken) {
+        return null;
     }
 }
