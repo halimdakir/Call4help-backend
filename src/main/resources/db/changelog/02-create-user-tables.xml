@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <property name="now" value="now()" dbms="postgresql"/>
+
+    <changeSet id="1" author="Halim Dakir">
+
+        <createTable tableName="user" remarks="A table to contain all users that has registered to the application">
+
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+
+            <column name="user_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="auth_token" type="varchar(255)"/>
+
+            <column name="latest_call_for_help_date" type="timestamptz"/>
+
+            <column name="creation_date" type="timestamptz"/>
+
+            <column name="token_update_date" type="timestamptz"/>
+
+
+        </createTable>
+
+        <addDefaultValue tableName="user" columnName="creation_date" defaultValueDate="${now}"></addDefaultValue>
+
+        <addUniqueConstraint tableName="user" columnNames="user_id, auth_token"></addUniqueConstraint>
+    </changeSet>
+
+</databaseChangeLog>
