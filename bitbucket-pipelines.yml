@@ -25,4 +25,4 @@ definitions:
       image: postgres
       variables:
         POSTGRES_DB: call4help
-        POSTGRES_PASSWORD: 1234
+        POSTGRES_PASSWORD: "1234"
