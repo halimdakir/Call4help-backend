@@ -16,7 +16,7 @@ public class UserServiceImplement implements UserService{
     UserRepository userRepository;
 
     @Override
-    public UserDTO createNewUser(UserDTO userDTO) {
+    public Users createNewUser(UserDTO userDTO) {
 
 
             var userFound = userRepository.findUserByUserId(userDTO.getUserId());
@@ -34,9 +34,7 @@ public class UserServiceImplement implements UserService{
                 user.setLatestCall4HelpDate(null);
             }
 
-            userRepository.save(user);
-
-        return userDTO;
+            return userRepository.save(user);
     }
 
     @Override
