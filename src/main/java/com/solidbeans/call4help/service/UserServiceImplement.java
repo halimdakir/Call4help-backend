@@ -1,15 +1,13 @@
 package com.solidbeans.call4help.service;
 
 import com.solidbeans.call4help.dto.UserDTO;
-import com.solidbeans.call4help.entity.User;
+import com.solidbeans.call4help.entity.Users;
 import com.solidbeans.call4help.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.util.Optional;
 
 @Service
 public class UserServiceImplement implements UserService{
@@ -22,7 +20,7 @@ public class UserServiceImplement implements UserService{
 
 
             var userFound = userRepository.findUserByUserId(userDTO.getUserId());
-            User user = new User();
+            Users user = new Users();
 
             if (userFound !=null){                        //User already exist
                 user = userFound;

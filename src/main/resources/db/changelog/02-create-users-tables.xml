@@ -9,7 +9,7 @@
 
     <changeSet id="1" author="Halim Dakir">
 
-        <createTable tableName="user" remarks="A table to contain all users that has registered to the application">
+        <createTable tableName="users" remarks="A table to contain all users that has registered to the application">
 
             <column name="id" type="int" autoIncrement="true">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
@@ -30,9 +30,9 @@
 
         </createTable>
 
-        <addDefaultValue tableName="user" columnName="creation_date" defaultValueDate="${now}"></addDefaultValue>
+        <addDefaultValue tableName="users" columnName="creation_date" defaultValueDate="${now}"></addDefaultValue>
 
-        <addUniqueConstraint tableName="user" columnNames="user_id, auth_token"></addUniqueConstraint>
+        <addUniqueConstraint tableName="users" columnNames="user_id, auth_token"></addUniqueConstraint>
     </changeSet>
 
 </databaseChangeLog>
