@@ -1,12 +1,13 @@
 package com.solidbeans.call4help.security.filter;
 
-import com.solidbeans.call4help.util.Call4HelpConstants;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,9 @@ import java.io.IOException;
 
 public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
+    @Value("${jwt.auth}")
+    private String authorization;
+
     public AuthenticationFilter(final RequestMatcher requiresAuth) {
         super(requiresAuth);
     }
@@ -22,7 +26,7 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
     @Override
     public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException {
 
-        final String authorizationHeader = httpServletRequest.getHeader(Call4HelpConstants.AUTHORIZATION);
+        final String authorizationHeader = httpServletRequest.getHeader(authorization);
         String token = null;
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer")) {
