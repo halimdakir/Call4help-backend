@@ -22,7 +22,7 @@ definitions:
     docker:
       memory: 2048
     postgres:
-      image: timescale/timescaledb-postgis:1.7.4-pg11
+      image: timescale/timescaledb-postgis:2.0.0-pg12
       variables:
         POSTGRES_DB: call4help
-        POSTGRES_PASSWORD: 1234
+        POSTGRES_PASSWORD: "1234"
