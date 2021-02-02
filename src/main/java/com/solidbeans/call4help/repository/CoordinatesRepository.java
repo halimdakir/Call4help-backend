@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UserCoordinatesRepository extends CrudRepository<Coordinates, Long> {
+public interface CoordinatesRepository extends CrudRepository<Coordinates, Long> {
     Optional<Coordinates> findById(Long id);
 }
