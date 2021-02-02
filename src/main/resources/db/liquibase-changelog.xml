@@ -6,4 +6,6 @@
 
     <include file="changelog/01-init.xml" relativeToChangelogFile="true"/>
     <include file="changelog/02-create-users-tables.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/03-create-coordinates-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/04-create-alert-table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
