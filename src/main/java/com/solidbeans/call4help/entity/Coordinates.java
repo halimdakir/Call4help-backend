@@ -2,10 +2,7 @@ package com.solidbeans.call4help.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.ZonedDateTime;
 
 @NoArgsConstructor
@@ -16,11 +13,15 @@ import java.time.ZonedDateTime;
 @Entity
 @ToString
 @EqualsAndHashCode
-public class UserCoordinates {
+public class Coordinates {
     @EqualsAndHashCode.Exclude
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private ZonedDateTime dateTime;
     private org.locationtech.jts.geom.Point coordinates;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private Users users;
 }

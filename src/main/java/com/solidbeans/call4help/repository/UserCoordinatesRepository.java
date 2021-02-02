@@ -1,11 +1,11 @@
 package com.solidbeans.call4help.repository;
 
-import com.solidbeans.call4help.entity.UserCoordinates;
+import com.solidbeans.call4help.entity.Coordinates;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UserCoordinatesRepository extends CrudRepository<UserCoordinates, Long> {
-    Optional<UserCoordinates> findById(Long id);
+public interface UserCoordinatesRepository extends CrudRepository<Coordinates, Long> {
+    Optional<Coordinates> findById(Long id);
 }

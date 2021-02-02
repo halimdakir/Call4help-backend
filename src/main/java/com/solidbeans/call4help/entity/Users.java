@@ -1,9 +1,11 @@
 package com.solidbeans.call4help.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 import lombok.*;
 import javax.persistence.*;
 import java.time.ZonedDateTime;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,5 +31,14 @@ public class Users {
 
     @Column(name="token_update_date")
     private ZonedDateTime tokenUpdateDate;
+
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Alert> alertSet;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Coordinates> coordinatesSet;
 
 }
