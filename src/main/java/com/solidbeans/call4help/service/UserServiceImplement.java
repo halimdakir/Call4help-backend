@@ -41,4 +41,15 @@ public class UserServiceImplement implements UserService{
     public UserDTO updateToken(String token, String newToken) {
         return null;
     }
+
+    @Override
+    public Users findUserById(Long id) {
+        Users user = userRepository.findUsersById(id);
+        if (user != null){
+            return user;
+        }else {
+            throw new
+        }
+        return null;
+    }
 }
