@@ -32,11 +32,19 @@ public class PositionServiceImplement implements PositionService{
             position.setDateTime(positionDTO.getDateTime());
             position.setCoordinates(geometryFactory.createPoint(new Coordinate(positionDTO.getCoordinates().getLng(), positionDTO.getCoordinates().getLat())));
 
+            //Keep only the last position for every user
+
+            keepOnlyTheLastPosition(userId);
             return repository.save(new Position(position.getDateTime(), position.getCoordinates(), user));
 
         }else {
 
             throw new NotFoundException("User with id :"+userId+" is not found");
         }
+    }
+
+    private void keepOnlyTheLastPosition(Long id){
+        var position = repository.findPositionByUserId(id);
+        position.ifPresent(value -> repository.delete(value));
     }
 }
