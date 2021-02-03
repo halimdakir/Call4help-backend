@@ -21,4 +21,9 @@ public class Alert {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private Users users;
+
+    public Alert(ZonedDateTime alertDate, Users users) {
+        this.alertDate = alertDate;
+        this.users = users;
+    }
 }

@@ -2,6 +2,7 @@ package com.solidbeans.call4help.service;
 
 import com.solidbeans.call4help.dto.UserDTO;
 import com.solidbeans.call4help.entity.Users;
+import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,8 +49,7 @@ public class UserServiceImplement implements UserService{
         if (user != null){
             return user;
         }else {
-            throw new
+            throw new NotFoundException("User with id :"+id+" is not found");
         }
-        return null;
     }
 }
