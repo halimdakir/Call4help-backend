@@ -1,6 +1,7 @@
 package com.solidbeans.call4help.controller;
 
 import com.solidbeans.call4help.dto.UserDTO;
+import com.solidbeans.call4help.entity.Users;
 import com.solidbeans.call4help.exception.RegistrationException;
 import com.solidbeans.call4help.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +23,17 @@ public class RegisterController {
     private UserService userService;
 
     @PostMapping(value = "/create", produces = "application/json")
-    public ResponseEntity<UserDTO> registerNewUser(@Valid @RequestBody UserDTO userDTO){
+    public ResponseEntity<Users> registerNewUser(@Valid @RequestBody UserDTO userDTO){
 
         if (userDTO.getUserId() == null || userDTO.getUserId().isBlank()){
 
             throw new RegistrationException("Couldn't Register.");
 
         }else {
-            userService.createNewUser(userDTO);
-            return new ResponseEntity<>(userDTO, HttpStatus.OK);
+
+            var user = userService.createNewUser(userDTO);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+
         }
     }
 }

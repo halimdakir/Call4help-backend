@@ -25,6 +25,7 @@ public class PositionController {
     public ResponseEntity<PositionDTO> saveLastPosition(@Valid @RequestBody PositionDTO position, Long userId){
 
         if (position.getCoordinates().getLat()!= null && position.getCoordinates().getLng()!= null && position.getDateTime()!= null){
+
             positionService.createUserPosition(position, userId);
             return new ResponseEntity<>(position, HttpStatus.OK);
 

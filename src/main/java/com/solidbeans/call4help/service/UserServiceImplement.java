@@ -7,6 +7,8 @@ import com.solidbeans.call4help.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.time.Instant;
 import java.time.ZoneOffset;
 
@@ -15,6 +17,10 @@ public class UserServiceImplement implements UserService{
 
     @Autowired
     UserRepository userRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
 
     @Override
     public Users createNewUser(UserDTO userDTO) {
@@ -35,7 +41,9 @@ public class UserServiceImplement implements UserService{
                 user.setLatestCall4HelpDate(null);
             }
 
-            return userRepository.save(user);
+            userRepository.save(user);
+            entityManager.detach(user);
+            return user;
     }
 
     @Override
