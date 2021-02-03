@@ -35,6 +35,7 @@ public class PositionServiceImplement implements PositionService{
             //Keep only the last position for every user
 
             keepOnlyTheLastPosition(userId);
+
             return repository.save(new Position(position.getDateTime(), position.getCoordinates(), user));
 
         }else {

@@ -15,13 +15,13 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/register")
 public class RegisterController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/register", produces = "application/json")
+    @PostMapping(value = "/create", produces = "application/json")
     public ResponseEntity<UserDTO> registerNewUser(@Valid @RequestBody UserDTO userDTO){
 
         if (userDTO.getUserId() == null || userDTO.getUserId().isBlank()){
