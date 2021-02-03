@@ -39,6 +39,6 @@ public class Users {
 
     @JsonBackReference
     @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Coordinates> coordinatesSet;
+    private Set<Position> positionSet;
 
 }
