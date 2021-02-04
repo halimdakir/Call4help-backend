@@ -34,7 +34,7 @@ public class PositionServiceImplement implements PositionService{
 
             //Keep only the last position for every user
 
-            keepOnlyTheLastPosition(userId);
+            deletePreviousPosition(userId);
 
             return repository.save(new Position(position.getDateTime(), position.getCoordinates(), user));
 
@@ -44,8 +44,8 @@ public class PositionServiceImplement implements PositionService{
         }
     }
 
-    private void keepOnlyTheLastPosition(Long id){
+    private void deletePreviousPosition(Long id){
         var position = repository.findPositionByUserId(id);
-        position.ifPresent(value -> repository.delete(value));
+        position.ifPresent(value -> repository.deleteById(position.get().getId()));
     }
 }

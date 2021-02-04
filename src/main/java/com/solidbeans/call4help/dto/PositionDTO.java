@@ -1,6 +1,7 @@
 package com.solidbeans.call4help.dto;
 
 import com.solidbeans.call4help.entity.Users;
+import com.solidbeans.call4help.model.Coordinates;
 import lombok.*;
 import java.time.ZonedDateTime;
 

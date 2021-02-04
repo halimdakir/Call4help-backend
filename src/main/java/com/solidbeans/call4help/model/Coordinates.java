@@ -1,4 +1,4 @@
-package com.solidbeans.call4help.dto;
+package com.solidbeans.call4help.model;
 
 import lombok.*;
 
