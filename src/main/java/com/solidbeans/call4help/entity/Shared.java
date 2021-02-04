@@ -1,5 +1,7 @@
 package com.solidbeans.call4help.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.locationtech.jts.geom.Point;
 
@@ -25,13 +27,16 @@ public class AlarmPosition {
 
     private org.locationtech.jts.geom.Point coordinates;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonManagedReference
+    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
-    private Users users;
+    private Users user;
 
-    public AlarmPosition(ZonedDateTime dateTime, Point coordinates, Users users) {
+
+    public AlarmPosition(ZonedDateTime dateTime, Point coordinates, Users user) {
         this.dateTime = dateTime;
         this.coordinates = coordinates;
-        this.users = users;
+        this.user = user;
     }
 }
