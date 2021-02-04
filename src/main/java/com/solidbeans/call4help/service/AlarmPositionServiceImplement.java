@@ -11,6 +11,8 @@ import org.locationtech.jts.geom.PrecisionModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 
@@ -24,6 +26,8 @@ public class AlarmPositionServiceImplement implements AlarmPositionService {
 
     private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26910);
 
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public AlarmPosition registerAlarmPosition(PositionDTO positionDTO, Long userId) {
@@ -43,7 +47,11 @@ public class AlarmPositionServiceImplement implements AlarmPositionService {
 
             deletePreviousAlarmPosition(userId);
 
-            return repository.save(new AlarmPosition(alarmPosition.getDateTime(), alarmPosition.getCoordinates(), foundUser));
+             repository.save(new AlarmPosition(alarmPosition.getDateTime(), alarmPosition.getCoordinates(), foundUser));
+
+             entityManager.detach(alarmPosition);
+
+            return alarmPosition;
 
         }
     }

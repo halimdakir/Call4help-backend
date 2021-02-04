@@ -12,6 +12,8 @@ import org.locationtech.jts.geom.PrecisionModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 
@@ -22,6 +24,8 @@ public class PositionServiceImplement implements PositionService{
     private PositionRepository repository;
     @Autowired
     private UserService userService;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26910);
 
@@ -39,7 +43,10 @@ public class PositionServiceImplement implements PositionService{
 
             deletePreviousPosition(userId);
 
-            return repository.save(new Position(position.getDateTime(), position.getCoordinates(), user));
+            repository.save(new Position(position.getDateTime(), position.getCoordinates(), user));
+            entityManager.detach(position);
+
+            return position;
 
         }else {
 
