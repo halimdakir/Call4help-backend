@@ -12,6 +12,7 @@ import java.time.ZonedDateTime;
 @Setter
 @Builder
 @Entity
+@Table(name = "alam_position")
 public class AlarmPosition {
 
     @EqualsAndHashCode.Exclude

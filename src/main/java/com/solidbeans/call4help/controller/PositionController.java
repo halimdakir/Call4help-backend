@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/auth/position")
+@RequestMapping("/api/v1/position")
 public class PositionController {
 
     @Autowired

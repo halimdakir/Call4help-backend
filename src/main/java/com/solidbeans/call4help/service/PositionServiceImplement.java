@@ -1,5 +1,6 @@
 package com.solidbeans.call4help.service;
 
+import com.solidbeans.call4help.dto.DistanceDTO;
 import com.solidbeans.call4help.dto.PositionDTO;
 import com.solidbeans.call4help.entity.Position;
 import com.solidbeans.call4help.entity.Users;
@@ -10,6 +11,8 @@ import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.PrecisionModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -42,6 +45,11 @@ public class PositionServiceImplement implements PositionService{
 
             throw new NotFoundException("User with id :"+userId+" is not found");
         }
+    }
+
+    @Override
+    public List<DistanceDTO> nearestPersonsList(Long id) {
+        return repository.findNearestPersonList(id);
     }
 
     private void deletePreviousPosition(Long id){
