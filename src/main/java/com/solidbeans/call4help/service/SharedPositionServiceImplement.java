@@ -3,7 +3,7 @@ package com.solidbeans.call4help.service;
 import com.solidbeans.call4help.dto.PositionDTO;
 import com.solidbeans.call4help.entity.Shared;
 import com.solidbeans.call4help.exception.NotFoundException;
-import com.solidbeans.call4help.repository.AlarmPositionRepository;
+import com.solidbeans.call4help.repository.SharedRepository;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.PrecisionModel;
@@ -16,12 +16,12 @@ import java.util.List;
 
 
 @Service
-public class AlarmPositionServiceImplement implements AlarmPositionService {
+public class SharedPositionServiceImplement implements SharedPositionService {
 
     @Autowired
     private UserService userService;
     @Autowired
-    private AlarmPositionRepository repository;
+    private SharedRepository repository;
 
     private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26910);
 

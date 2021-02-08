@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface AlarmPositionRepository extends CrudRepository<Shared, Long> {
+public interface SharedRepository extends CrudRepository<Shared, Long> {
     /*@Query("SELECT DISTINCT ap FROM Shared ap INNER JOIN FETCH ap.user u WHERE u.id=:id")
     Optional<Shared> findAlarmPositionByUserId(Long id);*/
     Optional<Shared> findSharedByUserId(String userId);
