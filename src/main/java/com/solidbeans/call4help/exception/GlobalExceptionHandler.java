@@ -20,4 +20,12 @@ public class GlobalExceptionHandler {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), errorMessageDesc, request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);
     }
+    //Not Found
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<Object> notFoundExceptionHandling(NotFoundException exception, WebRequest request){
+        String errorMessageDesc = exception.getLocalizedMessage();
+        if (errorMessageDesc == null) errorMessageDesc=exception.toString();
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), errorMessageDesc, request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
 }

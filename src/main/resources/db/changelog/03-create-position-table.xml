@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet  id="1" author="AD Halim">
+        <createTable tableName="position"
+                     remarks="A table to contain all users coordinates">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_time" type="timestamptz">
+                <constraints nullable="false"/>
+            </column>
+            <column name="coordinates" type="geometry">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+
+
+
+    </changeSet>
+
+</databaseChangeLog>

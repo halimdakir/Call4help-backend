@@ -1,0 +1,59 @@
+package com.solidbeans.call4help.util;
+
+import com.solidbeans.call4help.entity.*;
+import com.solidbeans.call4help.repository.*;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.PrecisionModel;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
+
+@Configuration
+public class SetUpDatabase {
+    private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26986);
+
+    @Bean
+    CommandLineRunner initDatabase(UserRepository userRepository, PositionRepository positionRepository, AlertRepository alertRepository, AlarmPositionRepository alarmPositionRepository) {
+        return args -> {
+            if (userRepository.count() ==0 && positionRepository.count()==0 && alertRepository.count()==0 && alarmPositionRepository.count()==0){
+
+
+                var user1 = new Users("100MA100", "QWERTYUIOP0123456", null, ZonedDateTime.now(ZoneId.of("UTC")), null);
+                var user2 = new Users("100MA200", "QWERTYUIOP0123488", null, ZonedDateTime.now(ZoneId.of("UTC")), null);
+                var user3 = new Users("100MA300", "QWERTYUIOP0123499", null, ZonedDateTime.now(ZoneId.of("UTC")), null);
+                var user4 = new Users("100MA400", "QWERTYUIOP0123500", null, ZonedDateTime.now(ZoneId.of("UTC")), null);
+
+                userRepository.save(user1);
+                userRepository.save(user2);
+                userRepository.save(user3);
+                userRepository.save(user4);
+
+                var position1 = new Position("100MA100", ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.708116, 11.967694)));
+                var position2 = new Position("100MA200", ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.708104, 11.967196)));
+                var position3 = new Position("100MA300", ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.707617, 11.967883)));
+                var position4 = new Position("100MA300", ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.707015, 11.968140)));
+
+
+                positionRepository.save(position1);
+                positionRepository.save(position2);
+                positionRepository.save(position3);
+                positionRepository.save(position4);
+
+                var sharedPosition = new Shared("100MA100", ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.708116, 11.967694)));
+
+                alarmPositionRepository.save(sharedPosition);
+
+                var alert = new Alert("100MA100", ZonedDateTime.now(ZoneId.of("UTC")));
+
+                alertRepository.save(alert);
+
+
+
+            }
+        };
+    }
+}
