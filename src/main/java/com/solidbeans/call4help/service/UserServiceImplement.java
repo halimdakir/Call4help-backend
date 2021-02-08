@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.Instant;
 import java.time.ZoneOffset;
+import java.util.List;
 
 @Service
 public class UserServiceImplement implements UserService{
@@ -59,5 +60,10 @@ public class UserServiceImplement implements UserService{
         }else {
             throw new NotFoundException("User with id :"+id+" is not found");
         }
+    }
+
+    @Override
+    public List<Users> getAllUsers() {
+        return (List<Users>) userRepository.findAll();
     }
 }

@@ -6,6 +6,7 @@ import com.solidbeans.call4help.entity.Position;
 import com.solidbeans.call4help.entity.Users;
 import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.repository.PositionRepository;
+import com.solidbeans.call4help.repository.UserRepository;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.PrecisionModel;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,6 +24,8 @@ public class PositionServiceImplement implements PositionService{
 
     @Autowired
     private PositionRepository repository;
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private UserService userService;
     @PersistenceContext
@@ -41,9 +45,9 @@ public class PositionServiceImplement implements PositionService{
 
             //Keep only the last position for every user
 
-            deletePreviousPosition(userId);
+            deletePreviousPosition(user.getUserId());
 
-            repository.save(new Position(position.getDateTime(), position.getCoordinates(), user));
+            repository.save(new Position(user.getUserId(), position.getDateTime(), position.getCoordinates()));
             entityManager.detach(position);
 
             return position;
@@ -56,10 +60,23 @@ public class PositionServiceImplement implements PositionService{
 
     @Override
     public List<DistanceDTO> nearestPersonsList(Long id) {
-        return repository.findNearestPersonList(id);
+        List<DistanceDTO> oFilteredList= repository.findNearestPersonList(id);
+        List<DistanceDTO> filteredList = new ArrayList<>();
+        for (DistanceDTO distanceDTO : oFilteredList){
+            if (distanceDTO.getDistance() <= 500){
+                filteredList.add(distanceDTO);
+            }
+        }
+        return filteredList;
     }
 
-    private void deletePreviousPosition(Long id){
+    @Override
+    public List<Position> getAllPositions() {
+        return repository.findAllPosition();
+    }
+
+    private void deletePreviousPosition(String id){
+        //var position = repository.findPositionByUserId(id);
         var position = repository.findPositionByUserId(id);
         position.ifPresent(value -> repository.deleteById(position.get().getId()));
     }

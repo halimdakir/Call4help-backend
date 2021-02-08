@@ -1,8 +1,7 @@
 package com.solidbeans.call4help.service;
 
 import com.solidbeans.call4help.dto.PositionDTO;
-import com.solidbeans.call4help.entity.AlarmPosition;
-import com.solidbeans.call4help.entity.Position;
+import com.solidbeans.call4help.entity.Shared;
 import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.repository.AlarmPositionRepository;
 import org.locationtech.jts.geom.Coordinate;
@@ -30,9 +29,9 @@ public class AlarmPositionServiceImplement implements AlarmPositionService {
     private EntityManager entityManager;
 
     @Override
-    public AlarmPosition registerAlarmPosition(PositionDTO positionDTO, Long userId) {
+    public Shared registerAlarmPosition(PositionDTO positionDTO, Long userId) {
         var foundUser = userService.findUserById(userId);
-        AlarmPosition alarmPosition = new AlarmPosition();
+        Shared shared = new Shared();
 
         if (foundUser==null){
 
@@ -40,24 +39,30 @@ public class AlarmPositionServiceImplement implements AlarmPositionService {
 
         }else {
 
-            alarmPosition.setDateTime(positionDTO.getDateTime());
-            alarmPosition.setCoordinates(geometryFactory.createPoint(new Coordinate(positionDTO.getCoordinates().getLng(), positionDTO.getCoordinates().getLat())));
+            shared.setDateTime(positionDTO.getDateTime());
+            shared.setCoordinates(geometryFactory.createPoint(new Coordinate(positionDTO.getCoordinates().getLng(), positionDTO.getCoordinates().getLat())));
 
             //Keep only the last position for every user
 
-            deletePreviousAlarmPosition(userId);
+            deletePreviousAlarmPosition(foundUser.getUserId());
 
-             repository.save(new AlarmPosition(alarmPosition.getDateTime(), alarmPosition.getCoordinates(), foundUser));
+             repository.save(new Shared(foundUser.getUserId(), shared.getDateTime(), shared.getCoordinates()));
 
-             entityManager.detach(alarmPosition);
+             entityManager.detach(shared);
 
-            return alarmPosition;
+            return shared;
 
         }
     }
 
-    private void deletePreviousAlarmPosition(Long id){
-        var alarmPosition = repository.findAlarmPositionByUserId(id);
+    @Override
+    public List<Shared> getAllAlarmPosition() {
+        return (List<Shared>) repository.findAll();
+    }
+
+    private void deletePreviousAlarmPosition(String id){
+        //var alarmPosition = repository.findAlarmPositionByUserId(id);
+        var alarmPosition = repository.findSharedByUserId(id);
         alarmPosition.ifPresent(value -> repository.deleteById(alarmPosition.get().getId()));
     }
 }

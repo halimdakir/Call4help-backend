@@ -15,9 +15,15 @@ import java.util.Optional;
 public interface PositionRepository extends CrudRepository<Position, Long>, PagingAndSortingRepository<Position, Long> {
     Optional<Position> findById(Long id);
 
-    @Query("SELECT DISTINCT p FROM Position p INNER JOIN FETCH p.users u WHERE u.id=:id")
+    /*@Query("SELECT DISTINCT p FROM Position p INNER JOIN FETCH p.user u WHERE u.id=:id")
     Optional<Position> findPositionByUserId(Long id);
+     */
+    Optional<Position> findPositionByUserId(String id);
 
-    @Query(value ="SELECT position.id, ST_Distance(position.coordinates,alam_position.coordinates) FROM position,alam_position WHERE alam_position.id = :id and ST_Distance <= 1000", nativeQuery = true)
-    List<DistanceDTO> findNearestPersonList(@Param("id") Long id);
+    String query ="SELECT position.id, ST_Distance_Spheroid(geometry(position.coordinates), geometry(shared.coordinates), 'SPHEROID[\"WGS 84\",6378137,298.257223563]') AS distance FROM position, shared WHERE shared.id = :id and shared.user_id <> position.user_id";
+    @Query(nativeQuery = true, value = query)
+    List<DistanceDTO> findNearestPersonList(Long id);
+
+    @Query("SELECT DISTINCT p FROM Position p")
+    List<Position> findAllPosition();
 }

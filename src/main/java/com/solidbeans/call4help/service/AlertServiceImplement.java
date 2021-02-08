@@ -22,7 +22,9 @@ public class AlertServiceImplement implements AlertService{
         Users user = userService.findUserById(userId);
         if (user!=null){
 
-            return alertRepository.save(new Alert(alertDTO.getAlertDate(), user));
+
+            return alertRepository.save(new Alert(user.getUserId(), alertDTO.getAlertDate()));
+            //return alertRepository.save(new Alert(alertDTO.getAlertDate(), user));
 
         }else {
 

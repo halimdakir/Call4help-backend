@@ -1,8 +1,12 @@
 package com.solidbeans.call4help.service;
 
 import com.solidbeans.call4help.dto.PositionDTO;
-import com.solidbeans.call4help.entity.AlarmPosition;
+import com.solidbeans.call4help.entity.Shared;
+
+import java.util.List;
 
 public interface AlarmPositionService {
-    AlarmPosition registerAlarmPosition(PositionDTO position, Long userId);
+    Shared registerAlarmPosition(PositionDTO position, Long userId);
+
+    List<Shared> getAllAlarmPosition();
 }

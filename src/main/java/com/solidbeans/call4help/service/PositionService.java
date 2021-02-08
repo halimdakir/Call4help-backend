@@ -9,5 +9,5 @@ import java.util.List;
 public interface PositionService {
     Position createUserPosition(PositionDTO position, Long userId);
     List<DistanceDTO> nearestPersonsList(Long id);
-
+    List<Position> getAllPositions();
 }

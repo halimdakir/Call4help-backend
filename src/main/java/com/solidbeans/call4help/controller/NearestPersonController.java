@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api/v1/nearest")
 public class NearestPersonController {
@@ -17,7 +18,7 @@ public class NearestPersonController {
     @Autowired
     private PositionService positionService;
 
-    @GetMapping("/id/{id}")
+    @GetMapping(value = "/id/{id}", produces = "application/json")
     public List<DistanceDTO> getNearestPersons(@PathVariable Long id){
         return positionService.nearestPersonsList(id);
     }
