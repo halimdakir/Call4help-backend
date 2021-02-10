@@ -32,10 +32,16 @@ public class SetUpDatabase {
                 userRepository.save(user3);
                 userRepository.save(user4);
 
-                var position1 = new Position("100MA100", ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.708116, 11.967694)));
-                var position2 = new Position("100MA200", ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.708104, 11.967196)));
-                var position3 = new Position("100MA300", ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.707617, 11.967883)));
-                var position4 = new Position("100MA300", ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.707015, 11.968140)));
+                /*var position1 = new Position(ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.708116, 11.967694)));
+                var position2 = new Position( ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.708104, 11.967196)));
+                var position3 = new Position(ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.707617, 11.967883)));
+                var position4 = new Position(ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.707015, 11.968140)));*/
+
+                var position1 = new Position(ZonedDateTime.now(ZoneId.of("UTC")), "Göteborg", user1);
+                var position2 = new Position( ZonedDateTime.now(ZoneId.of("UTC")), "Göteborg", user2);
+                var position3 = new Position(ZonedDateTime.now(ZoneId.of("UTC")), "Stockholm", user3);
+                var position4 = new Position(ZonedDateTime.now(ZoneId.of("UTC")), "Malmö", user4);
+
 
 
                 positionRepository.save(position1);
@@ -47,7 +53,7 @@ public class SetUpDatabase {
 
                 sharedRepository.save(sharedPosition);
 
-                var alert = new Alert("100MA100", ZonedDateTime.now(ZoneId.of("UTC")));
+                var alert = new Alert( ZonedDateTime.now(ZoneId.of("UTC")), user1);
 
                 alertRepository.save(alert);
 

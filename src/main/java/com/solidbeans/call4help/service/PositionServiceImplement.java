@@ -31,7 +31,7 @@ public class PositionServiceImplement implements PositionService{
     @PersistenceContext
     private EntityManager entityManager;
 
-    private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26910);
+    //private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26910);
 
 
     @Override
@@ -40,14 +40,13 @@ public class PositionServiceImplement implements PositionService{
         Position position = new Position();
         if (user!=null){
 
-            position.setDateTime(positionDTO.getDateTime());
-            position.setCoordinates(geometryFactory.createPoint(new Coordinate(positionDTO.getCoordinates().getLng(), positionDTO.getCoordinates().getLat())));
+            /*position.setDateTime(positionDTO.getDateTime());
+            position.setCoordinates(geometryFactory.createPoint(new Coordinate(positionDTO.getCoordinates().getLng(), positionDTO.getCoordinates().getLat())));*/
 
             //Keep only the last position for every user
+            //deletePreviousPosition(user.getUserId());
 
-            deletePreviousPosition(user.getUserId());
-
-            repository.save(new Position(user.getUserId(), position.getDateTime(), position.getCoordinates()));
+            repository.save(new Position(position.getDateTime(), position.getMunicipality(), user));
             entityManager.detach(position);
 
             return position;

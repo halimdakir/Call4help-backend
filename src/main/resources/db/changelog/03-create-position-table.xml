@@ -10,16 +10,20 @@
             <column name="id" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="user_id" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
             <column name="date_time" type="timestamptz">
                 <constraints nullable="false"/>
             </column>
             <column name="coordinates" type="geometry">
                 <constraints nullable="false"/>
             </column>
+            <column name="user_id" type="int" />
         </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_position2user"
+                                 baseTableName="position"
+                                 baseColumnNames="user_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
 
 
 
