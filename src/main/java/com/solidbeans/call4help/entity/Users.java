@@ -32,20 +32,19 @@ public class Users {
     @Column(name="token_update_date")
     private ZonedDateTime tokenUpdateDate;
 
-    /*
-    @JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "user")
-    private Position position;
 
     @JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "user")
-    private Shared shared;
+    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
+    private Position position;
 
     @JsonBackReference
     @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Alert> alertSet;
 
-     */
+    /*@JsonBackReference
+    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "user")
+    private Shared shared;*/
+
 
 
     public Users(String userId, String authToken, ZonedDateTime latestCall4HelpDate, ZonedDateTime creationDate, ZonedDateTime tokenUpdateDate) {

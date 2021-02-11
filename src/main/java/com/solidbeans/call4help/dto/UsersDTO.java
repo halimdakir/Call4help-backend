@@ -1,6 +1,5 @@
 package com.solidbeans.call4help.dto;
 
-import com.solidbeans.call4help.entity.Users;
 import lombok.*;
 
 @Builder
@@ -9,7 +8,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class PositionDTO {
-    private String municipality;
-    private Users user;
+public class UsersDTO {
+    private Long id;
+    private String userId;
 }

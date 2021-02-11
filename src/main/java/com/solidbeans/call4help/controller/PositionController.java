@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @RestController
@@ -21,17 +23,19 @@ public class PositionController {
 
 
     @PostMapping(value = "/create", produces = "application/json")
-    public ResponseEntity<?> saveLastPosition(@Valid @RequestBody PositionDTO position, Long userId){
+    public ResponseEntity<?> registerUserPosition(@Valid @RequestBody PositionDTO positionDTO, String userId){
 
-        if (position.getCoordinates().getLat()!= null && position.getCoordinates().getLng()!= null && position.getDateTime()!= null){
-
-            var createdPosition = positionService.createUserPosition(position, userId);
-
-            return new ResponseEntity<>(createdPosition, HttpStatus.OK);
+        if (positionDTO.getMunicipality() == null || positionDTO.getMunicipality().equals("")){
+            throw new RegistrationException("All fields are required!");
 
         }else {
+            var position = new Position();
+            position.setDateTime(ZonedDateTime.now(ZoneId.of("UTC")));
+            position.setMunicipality(positionDTO.getMunicipality());
 
-            throw new RegistrationException("All fields are required!");
+            var createdPosition = positionService.createUserPosition(positionDTO, userId);
+
+            return new ResponseEntity<>(createdPosition, HttpStatus.OK);
 
         }
 
@@ -40,6 +44,11 @@ public class PositionController {
     @GetMapping(value = "/all", produces = "application/json")
     public List<Position> getAllPositions(){
         return positionService.getAllPositions();
+    }
+
+    @PutMapping("/userId/{userId}")
+    public Position updateUserPosition(@RequestBody String city, @PathVariable String userId) {
+        return positionService.updateUserPosition(city, userId);
     }
 
 }

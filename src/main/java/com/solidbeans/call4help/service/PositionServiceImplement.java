@@ -2,14 +2,12 @@ package com.solidbeans.call4help.service;
 
 import com.solidbeans.call4help.dto.DistanceDTO;
 import com.solidbeans.call4help.dto.PositionDTO;
+import com.solidbeans.call4help.dto.UsersDTO;
 import com.solidbeans.call4help.entity.Position;
 import com.solidbeans.call4help.entity.Users;
 import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.repository.PositionRepository;
 import com.solidbeans.call4help.repository.UserRepository;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.PrecisionModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,31 +21,22 @@ import java.util.List;
 public class PositionServiceImplement implements PositionService{
 
     @Autowired
-    private PositionRepository repository;
-    @Autowired
-    private UserRepository userRepository;
+    private PositionRepository positionRepository;
     @Autowired
     private UserService userService;
     @PersistenceContext
     private EntityManager entityManager;
 
-    private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26910);
+    //private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26910);
 
 
     @Override
-    public Position createUserPosition(PositionDTO positionDTO, Long userId) {
-        Users user = userService.findUserById(userId);
+    public Position createUserPosition(PositionDTO positionDTO, String userId) {
+        Users user = userService.findUserByUserId(userId);
         Position position = new Position();
         if (user!=null){
 
-            position.setDateTime(positionDTO.getDateTime());
-            position.setCoordinates(geometryFactory.createPoint(new Coordinate(positionDTO.getCoordinates().getLng(), positionDTO.getCoordinates().getLat())));
-
-            //Keep only the last position for every user
-
-            deletePreviousPosition(user.getUserId());
-
-            repository.save(new Position(user.getUserId(), position.getDateTime(), position.getCoordinates()));
+            positionRepository.save(new Position(position.getDateTime(), position.getMunicipality(), user));
             entityManager.detach(position);
 
             return position;
@@ -59,25 +48,42 @@ public class PositionServiceImplement implements PositionService{
     }
 
     @Override
-    public List<DistanceDTO> nearestPersonsList(Long id) {
-        List<DistanceDTO> oFilteredList= repository.findNearestPersonList(id);
-        List<DistanceDTO> filteredList = new ArrayList<>();
-        for (DistanceDTO distanceDTO : oFilteredList){
-            if (distanceDTO.getDistance() <= 500){
-                filteredList.add(distanceDTO);
+    public Position updateUserPosition(String city, String userId) {
+        return positionRepository.findPositionByUserId(userId)
+                .map(position -> {
+                    position.setMunicipality(city);
+                    return positionRepository.save(position);
+                })
+                .orElseThrow(() -> new NotFoundException("Position not found with user id :" + userId)
+                );
+    }
+
+    @Override
+    public List<UsersDTO> nearestPersonsList(String userId) {
+        List<UsersDTO> nearestUsersList = new ArrayList<>();
+        var position = positionRepository.findPositionByUserId(userId);
+
+        if (position.isPresent()){
+
+            List<Position> positionList = positionRepository.findAllByCityAndUserId(position.get().getMunicipality(), userId);
+
+            for (Position p: positionList){
+                Users user = userService.findUserById(p.getUsers().getId());
+                nearestUsersList.add(new UsersDTO(user.getId(), user.getUserId()));
             }
         }
-        return filteredList;
+
+        return nearestUsersList;
     }
 
     @Override
     public List<Position> getAllPositions() {
-        return repository.findAllPosition();
+        return positionRepository.findAllPosition();
     }
 
     private void deletePreviousPosition(String id){
         //var position = repository.findPositionByUserId(id);
-        var position = repository.findPositionByUserId(id);
-        position.ifPresent(value -> repository.deleteById(position.get().getId()));
+        var position = positionRepository.findPositionByUserId(id);
+        position.ifPresent(value -> positionRepository.deleteById(position.get().getId()));
     }
 }

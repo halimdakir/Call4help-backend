@@ -10,23 +10,19 @@
             <column name="id" type="int" autoIncrement="true">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
-            <column name="user_id" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
             <column name="alert_date" type="timestamptz">
                 <constraints nullable="false"/>
             </column>
-        </createTable>
-        <!--
+
             <column name="user_id" type="int" />
         </createTable>
 
         <addForeignKeyConstraint constraintName="fk_alert2user"
                                  baseTableName="alert"
                                  baseColumnNames="user_id"
-                                 referencedTableName="user"
+                                 referencedTableName="users"
                                  referencedColumnNames="id"/>
-                                 -->
+
     </changeSet>
 
 </databaseChangeLog>

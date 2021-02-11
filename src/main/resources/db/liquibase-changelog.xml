@@ -8,5 +8,4 @@
     <include file="changelog/02-create-users-tables.xml" relativeToChangelogFile="true"/>
     <include file="changelog/03-create-position-table.xml" relativeToChangelogFile="true"/>
     <include file="changelog/04-create-alert-table.xml" relativeToChangelogFile="true"/>
-    <include file="changelog/05-create-shared-table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

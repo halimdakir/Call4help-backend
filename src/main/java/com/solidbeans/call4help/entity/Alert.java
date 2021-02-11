@@ -17,21 +17,18 @@ public class Alert {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    private String userId;
-
     @Column(name="alert_date")
     private ZonedDateTime alertDate;
 
-    /*
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private Users users;
 
-     */
 
-    public Alert(String userId, ZonedDateTime alertDate) {
-        this.userId = userId;
+
+    public Alert(ZonedDateTime alertDate, Users users) {
         this.alertDate = alertDate;
+        this.users = users;
     }
 }

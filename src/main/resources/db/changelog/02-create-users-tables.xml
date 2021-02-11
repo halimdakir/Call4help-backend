@@ -28,31 +28,8 @@
             <column name="token_update_date" type="timestamptz"/>
 
         </createTable>
-        <!--
-            <column name="position_id" type="int" />
-            <column name="shared_id" type="int" />
-            <column name="alert_id" type="int" />
-        </createTable>
 
-        <addForeignKeyConstraint constraintName="fk_user2position"
-                                 baseTableName="user"
-                                 baseColumnNames="position_id"
-                                 referencedTableName="position"
-                                 referencedColumnNames="id"/>
 
-        <addForeignKeyConstraint constraintName="fk_user2shared"
-                                 baseTableName="user"
-                                 baseColumnNames="shared_id"
-                                 referencedTableName="shared"
-                                 referencedColumnNames="id"/>
-
-        <addForeignKeyConstraint constraintName="fk_user2alert"
-                                 baseTableName="user"
-                                 baseColumnNames="alert_id"
-                                 referencedTableName="alert"
-                                 referencedColumnNames="id"/>
-
-        -->
         <addDefaultValue tableName="users" columnName="creation_date" defaultValueDate="${now}"></addDefaultValue>
 
         <addUniqueConstraint tableName="users" columnNames="user_id, auth_token"></addUniqueConstraint>
