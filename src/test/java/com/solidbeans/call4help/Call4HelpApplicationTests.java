@@ -14,14 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class Call4HelpApplicationTests {
 
-	@Autowired
-	private AlarmPositionController alarmPositionController;
-
-	@Test
-	public void contextLoads() throws Exception {
-		assertThat(alarmPositionController).isNotNull();
-	}
-
 	@Test
 	void verify_java_version_support() {
 		var textBlock = """
