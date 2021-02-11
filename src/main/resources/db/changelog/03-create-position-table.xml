@@ -13,7 +13,7 @@
             <column name="date_time" type="timestamptz">
                 <constraints nullable="false"/>
             </column>
-            <column name="coordinates" type="geometry">
+            <column name="municipality" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="user_id" type="int" />
