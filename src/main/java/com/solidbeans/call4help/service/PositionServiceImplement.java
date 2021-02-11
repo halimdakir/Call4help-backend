@@ -60,13 +60,19 @@ public class PositionServiceImplement implements PositionService{
 
     @Override
     public List<UsersDTO> nearestPersonsList(String userId) {
-        var position = positionRepository.findPositionByUserId(userId);
-        List<Position> positionList = positionRepository.findAllByMunicipality(position.get().getMunicipality());
         List<UsersDTO> nearestUsersList = new ArrayList<>();
-        for (Position p: positionList){
-            Users user = userService.findUserById(p.getUsers().getId());
-            nearestUsersList.add(new UsersDTO(user.getId(), user.getUserId()));
+        var position = positionRepository.findPositionByUserId(userId);
+
+        if (position.isPresent()){
+
+            List<Position> positionList = positionRepository.findAllByCityAndUserId(position.get().getMunicipality(), userId);
+
+            for (Position p: positionList){
+                Users user = userService.findUserById(p.getUsers().getId());
+                nearestUsersList.add(new UsersDTO(user.getId(), user.getUserId()));
+            }
         }
+
         return nearestUsersList;
     }
 
