@@ -2,6 +2,7 @@ package com.solidbeans.call4help.service;
 
 import com.solidbeans.call4help.dto.DistanceDTO;
 import com.solidbeans.call4help.dto.PositionDTO;
+import com.solidbeans.call4help.dto.UsersDTO;
 import com.solidbeans.call4help.entity.Position;
 import com.solidbeans.call4help.entity.Users;
 import com.solidbeans.call4help.exception.NotFoundException;
@@ -21,8 +22,6 @@ public class PositionServiceImplement implements PositionService{
 
     @Autowired
     private PositionRepository positionRepository;
-    @Autowired
-    private UserRepository userRepository;
     @Autowired
     private UserService userService;
     @PersistenceContext
@@ -60,15 +59,15 @@ public class PositionServiceImplement implements PositionService{
     }
 
     @Override
-    public List<DistanceDTO> nearestPersonsList(Long id) {
-        List<DistanceDTO> oFilteredList= positionRepository.findNearestPersonList(id);
-        List<DistanceDTO> filteredList = new ArrayList<>();
-        for (DistanceDTO distanceDTO : oFilteredList){
-            if (distanceDTO.getDistance() <= 500){
-                filteredList.add(distanceDTO);
-            }
+    public List<UsersDTO> nearestPersonsList(String userId) {
+        var position = positionRepository.findPositionByUserId(userId);
+        List<Position> positionList = positionRepository.findAllByMunicipality(position.get().getMunicipality());
+        List<UsersDTO> nearestUsersList = new ArrayList<>();
+        for (Position p: positionList){
+            Users user = userService.findUserById(p.getUsers().getId());
+            nearestUsersList.add(new UsersDTO(user.getId(), user.getUserId()));
         }
-        return filteredList;
+        return nearestUsersList;
     }
 
     @Override

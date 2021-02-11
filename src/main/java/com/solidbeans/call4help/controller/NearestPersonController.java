@@ -1,6 +1,7 @@
 package com.solidbeans.call4help.controller;
 
 import com.solidbeans.call4help.dto.DistanceDTO;
+import com.solidbeans.call4help.dto.UsersDTO;
 import com.solidbeans.call4help.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +19,8 @@ public class NearestPersonController {
     @Autowired
     private PositionService positionService;
 
-    @GetMapping(value = "/id/{id}", produces = "application/json")
-    public List<DistanceDTO> getNearestPersons(@PathVariable Long id){
-        return positionService.nearestPersonsList(id);
+    @GetMapping(value = "/userId/{userId}", produces = "application/json")
+    public List<UsersDTO> getNearestPersons(@PathVariable String userId){
+        return positionService.nearestPersonsList(userId);
     }
 }

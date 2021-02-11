@@ -18,6 +18,8 @@ public interface PositionRepository extends CrudRepository<Position, Long>, Pagi
     @Query("SELECT DISTINCT p FROM Position p INNER JOIN FETCH p.users u WHERE u.userId=:userId")
     Optional<Position> findPositionByUserId(String userId);
 
+    List<Position> findAllByMunicipality(String city);
+
     String query ="SELECT position.id, ST_Distance_Spheroid(geometry(position.coordinates), geometry(shared.coordinates), 'SPHEROID[\"WGS 84\",6378137,298.257223563]') AS distance FROM position, shared WHERE shared.id = :id and shared.user_id <> position.user_id";
     @Query(nativeQuery = true, value = query)
     List<DistanceDTO> findNearestPersonList(Long id);
