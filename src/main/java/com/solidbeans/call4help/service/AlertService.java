@@ -4,6 +4,6 @@ import com.solidbeans.call4help.dto.AlertDTO;
 import com.solidbeans.call4help.entity.Alert;
 
 public interface AlertService {
-    Alert registerAlertDate(AlertDTO  alert, Long userId);
+    Alert registerHelpAlert(String userId);
 
 }
