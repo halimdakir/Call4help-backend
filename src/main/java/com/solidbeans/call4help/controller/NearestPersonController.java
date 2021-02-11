@@ -18,6 +18,9 @@ public class NearestPersonController {
     @Autowired
     private PositionService positionService;
 
+
+    //TODO This endpoints is only for test
+
     @GetMapping(value = "/userId/{userId}", produces = "application/json")
     public List<UsersDTO> getNearestPersons(@PathVariable String userId){
         return positionService.nearestPersonsList(userId);
