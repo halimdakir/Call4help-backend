@@ -26,10 +26,12 @@ public class SetUpDatabase {
                 var user3 = new Users("100MA300", "QWERTYUIOP0123499", null, ZonedDateTime.now(ZoneId.of("UTC")), null);
                 var user4 = new Users("100MA400", "QWERTYUIOP0123500", null, ZonedDateTime.now(ZoneId.of("UTC")), null);
 
+                /*
                 userRepository.save(user1);
                 userRepository.save(user2);
                 userRepository.save(user3);
                 userRepository.save(user4);
+                 */
 
                 /*var position1 = new Position(ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.708116, 11.967694)));
                 var position2 = new Position( ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.708104, 11.967196)));
