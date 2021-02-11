@@ -1,9 +1,7 @@
 package com.solidbeans.call4help.dto;
 
 import com.solidbeans.call4help.entity.Users;
-import com.solidbeans.call4help.model.Coordinates;
 import lombok.*;
-import java.time.ZonedDateTime;
 
 @Builder
 @Getter
@@ -12,7 +10,6 @@ import java.time.ZonedDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PositionDTO {
-    private ZonedDateTime dateTime;
-    private Coordinates coordinates;
+    private String municipality;
     private Users user;
 }

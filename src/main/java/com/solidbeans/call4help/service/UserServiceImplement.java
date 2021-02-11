@@ -53,6 +53,16 @@ public class UserServiceImplement implements UserService{
     }
 
     @Override
+    public Users findUserByUserId(String userId) {
+        Users user = userRepository.findUserByUserId(userId);
+        if (user != null){
+            return user;
+        }else {
+            throw new NotFoundException("User with id :"+userId+" is not found");
+        }
+    }
+
+    @Override
     public Users findUserById(Long id) {
         Users user = userRepository.findUsersById(id);
         if (user != null){

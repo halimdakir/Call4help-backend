@@ -32,16 +32,10 @@ public class PositionServiceImplement implements PositionService{
 
 
     @Override
-    public Position createUserPosition(PositionDTO positionDTO, Long userId) {
-        Users user = userService.findUserById(userId);
+    public Position createUserPosition(PositionDTO positionDTO, String userId) {
+        Users user = userService.findUserByUserId(userId);
         Position position = new Position();
         if (user!=null){
-
-            /*position.setDateTime(positionDTO.getDateTime());
-            position.setCoordinates(geometryFactory.createPoint(new Coordinate(positionDTO.getCoordinates().getLng(), positionDTO.getCoordinates().getLat())));*/
-
-            //Keep only the last position for every user
-            //deletePreviousPosition(user.getUserId());
 
             positionRepository.save(new Position(position.getDateTime(), position.getMunicipality(), user));
             entityManager.detach(position);
