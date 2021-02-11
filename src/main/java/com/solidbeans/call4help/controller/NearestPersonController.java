@@ -1,6 +1,5 @@
 package com.solidbeans.call4help.controller;
 
-import com.solidbeans.call4help.dto.DistanceDTO;
 import com.solidbeans.call4help.dto.UsersDTO;
 import com.solidbeans.call4help.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;

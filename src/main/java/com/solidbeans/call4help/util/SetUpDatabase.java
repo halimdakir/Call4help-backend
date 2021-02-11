@@ -14,12 +14,11 @@ import java.time.ZonedDateTime;
 
 @Configuration
 public class SetUpDatabase {
-    private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26986);
 
     @Bean
-    CommandLineRunner initDatabase(UserRepository userRepository, PositionRepository positionRepository, AlertRepository alertRepository, SharedRepository sharedRepository) {
+    CommandLineRunner initDatabase(UserRepository userRepository, PositionRepository positionRepository, AlertRepository alertRepository) {
         return args -> {
-            if (userRepository.count() ==0 && positionRepository.count()==0 && alertRepository.count()==0 && sharedRepository.count()==0){
+            if (userRepository.count() ==0 && positionRepository.count()==0 && alertRepository.count()==0 ){
 
 
                 var user1 = new Users("100MA100", "QWERTYUIOP0123456", null, ZonedDateTime.now(ZoneId.of("UTC")), null);
@@ -49,9 +48,6 @@ public class SetUpDatabase {
                 positionRepository.save(position3);
                 positionRepository.save(position4);
 
-                var sharedPosition = new Shared("100MA100", ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.708116, 11.967694)));
-
-                sharedRepository.save(sharedPosition);
 
                 var alert = new Alert( ZonedDateTime.now(ZoneId.of("UTC")), user1);
 
