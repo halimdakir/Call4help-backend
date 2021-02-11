@@ -34,7 +34,7 @@ public class Users {
 
 
     @JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "user")
+    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
     private Position position;
 
     @JsonBackReference

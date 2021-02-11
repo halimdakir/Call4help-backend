@@ -15,10 +15,8 @@ import java.util.Optional;
 public interface PositionRepository extends CrudRepository<Position, Long>, PagingAndSortingRepository<Position, Long> {
     Optional<Position> findById(Long id);
 
-    /*@Query("SELECT DISTINCT p FROM Position p INNER JOIN FETCH p.user u WHERE u.id=:id")
-    Optional<Position> findPositionByUserId(Long id);
-     */
-    Optional<Position> findPositionByUserId(String id);
+    @Query("SELECT DISTINCT p FROM Position p INNER JOIN FETCH p.users u WHERE u.userId=:userId")
+    Optional<Position> findPositionByUserId(String userId);
 
     String query ="SELECT position.id, ST_Distance_Spheroid(geometry(position.coordinates), geometry(shared.coordinates), 'SPHEROID[\"WGS 84\",6378137,298.257223563]') AS distance FROM position, shared WHERE shared.id = :id and shared.user_id <> position.user_id";
     @Query(nativeQuery = true, value = query)

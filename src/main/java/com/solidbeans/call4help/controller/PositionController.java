@@ -21,7 +21,7 @@ public class PositionController {
 
 
     @PostMapping(value = "/create", produces = "application/json")
-    public ResponseEntity<?> saveLastPosition(@Valid @RequestBody PositionDTO position, Long userId){
+    public ResponseEntity<?> registerUserPosition(@Valid @RequestBody PositionDTO position, Long userId){
 
         if (position.getCoordinates().getLat()!= null && position.getCoordinates().getLng()!= null && position.getDateTime()!= null){
 
@@ -40,6 +40,11 @@ public class PositionController {
     @GetMapping(value = "/all", produces = "application/json")
     public List<Position> getAllPositions(){
         return positionService.getAllPositions();
+    }
+
+    @PutMapping("/userId/{userId}")
+    public Position updateUserPosition(@RequestBody String city, @PathVariable String userId) {
+        return positionService.updateUserPosition(city, userId);
     }
 
 }

@@ -34,11 +34,11 @@ public class Position {
     @JsonManagedReference
     @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private Users users;
 
-    public Position(ZonedDateTime dateTime, String municipality, Users user) {
+    public Position(ZonedDateTime dateTime, String municipality, Users users) {
         this.dateTime = dateTime;
         this.municipality = municipality;
-        this.user = user;
+        this.users = users;
     }
 }

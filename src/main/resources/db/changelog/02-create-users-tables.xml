@@ -27,22 +27,7 @@
 
             <column name="token_update_date" type="timestamptz"/>
 
-            <column name="position_id" type="int" />
-            <column name="alert_id" type="int" />
         </createTable>
-
-        <addForeignKeyConstraint constraintName="fk_user2position"
-                                 baseTableName="user"
-                                 baseColumnNames="position_id"
-                                 referencedTableName="position"
-                                 referencedColumnNames="id"/>
-
-
-        <addForeignKeyConstraint constraintName="fk_user2alert"
-                                 baseTableName="user"
-                                 baseColumnNames="alert_id"
-                                 referencedTableName="alert"
-                                 referencedColumnNames="id"/>
 
 
         <addDefaultValue tableName="users" columnName="creation_date" defaultValueDate="${now}"></addDefaultValue>

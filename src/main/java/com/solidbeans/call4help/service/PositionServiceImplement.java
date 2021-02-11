@@ -7,9 +7,6 @@ import com.solidbeans.call4help.entity.Users;
 import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.repository.PositionRepository;
 import com.solidbeans.call4help.repository.UserRepository;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.PrecisionModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +20,7 @@ import java.util.List;
 public class PositionServiceImplement implements PositionService{
 
     @Autowired
-    private PositionRepository repository;
+    private PositionRepository positionRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -46,7 +43,7 @@ public class PositionServiceImplement implements PositionService{
             //Keep only the last position for every user
             //deletePreviousPosition(user.getUserId());
 
-            repository.save(new Position(position.getDateTime(), position.getMunicipality(), user));
+            positionRepository.save(new Position(position.getDateTime(), position.getMunicipality(), user));
             entityManager.detach(position);
 
             return position;
@@ -58,8 +55,19 @@ public class PositionServiceImplement implements PositionService{
     }
 
     @Override
+    public Position updateUserPosition(String city, String userId) {
+        return positionRepository.findPositionByUserId(userId)
+                .map(position -> {
+                    position.setMunicipality(city);
+                    return positionRepository.save(position);
+                })
+                .orElseThrow(() -> new NotFoundException("Position not found with user id :" + userId)
+                );
+    }
+
+    @Override
     public List<DistanceDTO> nearestPersonsList(Long id) {
-        List<DistanceDTO> oFilteredList= repository.findNearestPersonList(id);
+        List<DistanceDTO> oFilteredList= positionRepository.findNearestPersonList(id);
         List<DistanceDTO> filteredList = new ArrayList<>();
         for (DistanceDTO distanceDTO : oFilteredList){
             if (distanceDTO.getDistance() <= 500){
@@ -71,12 +79,12 @@ public class PositionServiceImplement implements PositionService{
 
     @Override
     public List<Position> getAllPositions() {
-        return repository.findAllPosition();
+        return positionRepository.findAllPosition();
     }
 
     private void deletePreviousPosition(String id){
         //var position = repository.findPositionByUserId(id);
-        var position = repository.findPositionByUserId(id);
-        position.ifPresent(value -> repository.deleteById(position.get().getId()));
+        var position = positionRepository.findPositionByUserId(id);
+        position.ifPresent(value -> positionRepository.deleteById(position.get().getId()));
     }
 }

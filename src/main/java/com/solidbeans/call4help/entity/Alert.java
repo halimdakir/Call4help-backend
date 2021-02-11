@@ -23,11 +23,12 @@ public class Alert {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private Users users;
 
 
-    public Alert(ZonedDateTime alertDate, Users user) {
+
+    public Alert(ZonedDateTime alertDate, Users users) {
         this.alertDate = alertDate;
-        this.user = user;
+        this.users = users;
     }
 }
