@@ -5,6 +5,7 @@ import lombok.*;
 @Data
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class ReportDTO {
     @Setter(value= AccessLevel.NONE)
     private String text;
