@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.Instant;
 import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Service
@@ -48,8 +49,16 @@ public class UserServiceImplement implements UserService{
     }
 
     @Override
-    public UserDTO updateToken(String token, String newToken) {
-        return null;
+    public Users updateToken(String token, String newToken) {
+        return userRepository.findUsersByAuthToken(token)
+                .map(user -> {
+                    user.setAuthToken(newToken);
+                    user.setTokenUpdateDate(ZonedDateTime.now());
+                    return userRepository.save(user);
+                })
+                .orElseThrow(() -> new NotFoundException("User not found with token :" + token)
+                );
+
     }
 
     @Override
