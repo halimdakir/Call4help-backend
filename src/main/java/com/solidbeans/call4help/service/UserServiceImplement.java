@@ -3,6 +3,7 @@ package com.solidbeans.call4help.service;
 import com.solidbeans.call4help.dto.UserDTO;
 import com.solidbeans.call4help.entity.Users;
 import com.solidbeans.call4help.exception.NotFoundException;
+import com.solidbeans.call4help.exception.RegistrationException;
 import com.solidbeans.call4help.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,16 +27,22 @@ public class UserServiceImplement implements UserService{
 
     @Override
     public Users createNewUser(UserDTO userDTO) {
+        Users user = new Users();
 
+        if (userDTO.getUserId() == null || userDTO.getUserId().isBlank() && userDTO.getAuthToken().isEmpty()){
+
+            throw new RegistrationException("Couldn't Register.");
+
+        }else {
 
             var userFound = userRepository.findUserByUserId(userDTO.getUserId());
-            Users user = new Users();
 
-            if (userFound !=null){                        //User already exist
+
+            if (userFound != null) {                        //User already exist
                 user = userFound;
                 user.setAuthToken(userDTO.getAuthToken());
 
-            }else {                                       //Create new user
+            } else {                                       //Create new user
                 user.setUserId(userDTO.getUserId());
                 user.setAuthToken(userDTO.getAuthToken());
 
@@ -45,7 +52,9 @@ public class UserServiceImplement implements UserService{
 
             userRepository.save(user);
             entityManager.detach(user);
+
             return user;
+        }
     }
 
     @Override

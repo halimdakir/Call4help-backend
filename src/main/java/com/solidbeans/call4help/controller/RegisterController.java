@@ -25,15 +25,8 @@ public class RegisterController {
     @PostMapping(value = "/create", produces = "application/json")
     public ResponseEntity<Users> registerNewUser(@Valid @RequestBody UserDTO userDTO){
 
-        if (userDTO.getUserId() == null || userDTO.getUserId().isBlank()){
-
-            throw new RegistrationException("Couldn't Register.");
-
-        }else {
-
             var user = userService.createNewUser(userDTO);
             return new ResponseEntity<>(user, HttpStatus.OK);
 
-        }
     }
 }
