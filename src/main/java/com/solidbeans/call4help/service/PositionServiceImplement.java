@@ -1,5 +1,7 @@
 package com.solidbeans.call4help.service;
 
+import com.amazonaws.services.sns.AmazonSNS;
+import com.amazonaws.services.sns.model.*;
 import com.solidbeans.call4help.dto.DistanceDTO;
 import com.solidbeans.call4help.dto.PositionDTO;
 import com.solidbeans.call4help.dto.UsersDTO;
@@ -13,6 +15,10 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,25 +33,51 @@ public class PositionServiceImplement implements PositionService{
     @PersistenceContext
     private EntityManager entityManager;
 
+    private String Gothenburg_Topic_ARN = "arn:aws:sns:eu-north-1:372046788717:gothenburg-topic";
     //private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26910);
+    private final AmazonSNS snsClient;
 
+    public PositionServiceImplement(AmazonSNS client) {
+        this.snsClient = client;
+    }
 
     @Override
-    public Position createUserPosition(PositionDTO positionDTO, String userId) {
-        Users user = userService.findUserByUserId(userId);
-        Position position = new Position();
+    public Position createUserPosition(PositionDTO positionDTO) {
+        Users user = userService.findUserByUserId(positionDTO.getUserId());
+
         if (user!=null){
 
-            positionRepository.save(new Position(position.getDateTime(), position.getMunicipality(), user));
+            Position position = new Position(Instant.now().atZone(ZoneOffset.UTC), positionDTO.getMunicipality(), user);
+
+            positionRepository.save(position);
+
+            //TODO create an Create application endpoint
+            //createDeviceEndpoint("",user.getAuthToken(),"arn:aws:sns:eu-west-1:372046788717:app/GCM/call4help");
             entityManager.detach(position);
+
 
             return position;
 
         }else {
 
-            throw new NotFoundException("User with id :"+userId+" is not found");
+            throw new NotFoundException("User with id :"+positionDTO.getUserId()+" is not found");
         }
     }
+    /*
+
+    public String createDeviceEndpoint(String customData, String token, String platformAppArn) throws AuthorizationErrorException, InternalErrorException, InvalidParameterException, NotFoundException {
+        CreatePlatformEndpointResult result = new CreatePlatformEndpointResult();
+        CreatePlatformEndpointRequest request = new CreatePlatformEndpointRequest();
+        request.setCustomUserData(customData);
+        request.setToken(token);
+        request.setPlatformApplicationArn(platformAppArn);
+        result  = snsClient.createPlatformEndpoint(request);
+        return result.getEndpointArn();
+
+    }
+
+     */
+
 
     @Override
     public Position updateUserPosition(String city, String userId) {

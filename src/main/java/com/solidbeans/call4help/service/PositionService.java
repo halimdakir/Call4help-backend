@@ -8,7 +8,7 @@ import com.solidbeans.call4help.entity.Position;
 import java.util.List;
 
 public interface PositionService {
-    Position createUserPosition(PositionDTO position, String userId);
+    Position createUserPosition(PositionDTO position);
     Position updateUserPosition(String city, String userId);
     List<UsersDTO> nearestPersonsList(String userId);
     List<Position> getAllPositions();

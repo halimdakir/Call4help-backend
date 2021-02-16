@@ -2,7 +2,6 @@ package com.solidbeans.call4help.controller;
 
 import com.solidbeans.call4help.dto.UserDTO;
 import com.solidbeans.call4help.entity.Users;
-import com.solidbeans.call4help.exception.RegistrationException;
 import com.solidbeans.call4help.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import javax.validation.Valid;
 
+import javax.validation.Valid;
 
 
 @RestController
@@ -29,4 +28,5 @@ public class RegisterController {
             return new ResponseEntity<>(user, HttpStatus.OK);
 
     }
+
 }

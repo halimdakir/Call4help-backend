@@ -12,7 +12,7 @@ import java.util.Date;
 public class GlobalExceptionHandler {
 
 
-    //NOT UNAUTHORIZED
+    //REGISTRATION UNAUTHORIZED
     @ExceptionHandler(RegistrationException.class)
     public ResponseEntity<Object> registrationExceptionExceptionHandling(RegistrationException exception, WebRequest request){
         String errorMessageDesc = exception.getLocalizedMessage();
@@ -20,6 +20,7 @@ public class GlobalExceptionHandler {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), errorMessageDesc, request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);
     }
+
     //Not Found
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Object> notFoundExceptionHandling(NotFoundException exception, WebRequest request){
@@ -27,5 +28,30 @@ public class GlobalExceptionHandler {
         if (errorMessageDesc == null) errorMessageDesc=exception.toString();
         ErrorDetails errorDetails = new ErrorDetails(new Date(), errorMessageDesc, request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+    //Not Accepted
+    @ExceptionHandler(NotAcceptedException.class)
+    public ResponseEntity<Object> notAcceptedExceptionExceptionHandling(NotAcceptedException exception, WebRequest request){
+        String errorMessageDesc = exception.getLocalizedMessage();
+        if (errorMessageDesc == null) errorMessageDesc=exception.toString();
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), errorMessageDesc, request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    //Unauthorized
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<Object> unauthorizedExceptionHandling(UnauthorizedException exception, WebRequest request){
+        String errorMessageDesc = exception.getLocalizedMessage();
+        if (errorMessageDesc == null) errorMessageDesc=exception.toString();
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), errorMessageDesc, request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);
+    }
+    //Unprocessable Entity
+    @ExceptionHandler(UnprocessableEntityException.class)
+    public ResponseEntity<Object> unprocessableEntityExceptionHandling(UnprocessableEntityException exception, WebRequest request){
+        String errorMessageDesc = exception.getLocalizedMessage();
+        if (errorMessageDesc == null) errorMessageDesc=exception.toString();
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), errorMessageDesc, request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }

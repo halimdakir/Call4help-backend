@@ -23,7 +23,7 @@ public class PositionController {
 
 
     @PostMapping(value = "/create", produces = "application/json")
-    public ResponseEntity<?> registerUserPosition(@Valid @RequestBody PositionDTO positionDTO, String userId){
+    public ResponseEntity<?> registerUserPosition(@Valid @RequestBody PositionDTO positionDTO){
 
         if (positionDTO.getMunicipality() == null || positionDTO.getMunicipality().equals("")){
             throw new RegistrationException("All fields are required!");
@@ -33,7 +33,7 @@ public class PositionController {
             position.setDateTime(ZonedDateTime.now(ZoneId.of("UTC")));
             position.setMunicipality(positionDTO.getMunicipality());
 
-            var createdPosition = positionService.createUserPosition(positionDTO, userId);
+            var createdPosition = positionService.createUserPosition(positionDTO);
 
             return new ResponseEntity<>(createdPosition, HttpStatus.OK);
 
