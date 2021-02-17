@@ -1,7 +1,6 @@
 package com.solidbeans.call4help.service;
 
 import com.solidbeans.call4help.dto.PositionDTO;
-import com.solidbeans.call4help.dto.UsersDTO;
 import com.solidbeans.call4help.entity.Position;
 import com.solidbeans.call4help.entity.Users;
 import com.solidbeans.call4help.exception.NotFoundException;
@@ -9,12 +8,10 @@ import com.solidbeans.call4help.exception.RegistrationException;
 import com.solidbeans.call4help.repository.PositionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.Instant;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
