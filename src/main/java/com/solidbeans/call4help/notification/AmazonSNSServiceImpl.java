@@ -2,6 +2,7 @@ package com.solidbeans.call4help.notification;
 
 import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.model.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.solidbeans.call4help.entity.Endpoints;
 import com.solidbeans.call4help.entity.Position;
 import com.solidbeans.call4help.exception.NotAcceptedException;
@@ -11,17 +12,27 @@ import com.solidbeans.call4help.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 @Service
 public class AmazonSNSServiceImpl implements AmazonSNSService{
 
-    @Autowired
-    private EndpointsRepository endpointsRepository;
-    @Autowired
-    private UserService userService;
-    private final AmazonSNS snsClient;
     @Value("${cloud.aws.platform.app.arn}")
     private String platform_App_Arn;
+
+    @Autowired
+    private EndpointsRepository endpointsRepository;
+
+    @Autowired
+    private UserService userService;
+
+    private final AmazonSNS snsClient;
+
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
 
 
     public AmazonSNSServiceImpl(AmazonSNS snsClient) {
@@ -54,6 +65,16 @@ public class AmazonSNSServiceImpl implements AmazonSNSService{
 
     }
 
+
+    @Override
+    public void publishMessage(List<Endpoints> endpointsList, String message){
+        if (endpointsList.size() > 0){
+            for (Endpoints endpoint: endpointsList){
+                publish(endpoint.getArn(), message);
+            }
+        }
+    }
+
     public String createDeviceEndpoint(String token, String platformAppArn) throws AuthorizationErrorException, InternalErrorException, InvalidParameterException, NotFoundException {
         CreatePlatformEndpointResult result = new CreatePlatformEndpointResult();
         CreatePlatformEndpointRequest request = new CreatePlatformEndpointRequest();
@@ -62,5 +83,27 @@ public class AmazonSNSServiceImpl implements AmazonSNSService{
         result  = snsClient.createPlatformEndpoint(request);
         return result.getEndpointArn();
 
+    }
+
+    public PublishResult publish(String arn, String message) {
+        PublishRequest request = new PublishRequest();
+        request.setMessageStructure("json");
+        Map<String, String> msgMap = new HashMap<>();
+        msgMap.put("GCM", message);
+
+        String sendMsg = jsonify(msgMap);
+        request.setTargetArn(arn);
+        request.setMessage(sendMsg);
+        return snsClient.publish(request);
+    }
+
+
+    public static String jsonify(Object message) {
+        try {
+            return objectMapper.writeValueAsString(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw (RuntimeException) e;
+        }
     }
 }

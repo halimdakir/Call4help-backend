@@ -1,6 +1,5 @@
 package com.solidbeans.call4help.service;
 
-import com.amazonaws.services.sns.AmazonSNS;
 import com.solidbeans.call4help.dto.PositionDTO;
 import com.solidbeans.call4help.dto.UsersDTO;
 import com.solidbeans.call4help.entity.Position;
@@ -75,34 +74,16 @@ public class PositionServiceImplement implements PositionService{
                 );
     }
 
-    @Override
-    public List<UsersDTO> nearestPersonsList(String userId) {
-        List<UsersDTO> nearestUsersList = new ArrayList<>();
-        var position = positionRepository.findPositionByUserId(userId);
-
-        if (position.isPresent()){
-
-            List<Position> positionList = positionRepository.findAllByCityAndUserId(position.get().getMunicipality(), userId);
-
-            for (Position p: positionList){
-                Users user = userService.findUserById(p.getUsers().getId());
-                nearestUsersList.add(new UsersDTO(user.getId(), user.getUserId()));
-            }
-        }
-
-        return nearestUsersList;
-    }
 
     @Override
     public List<Position> getAllPositions() {
         return positionRepository.findAllPosition();
     }
 
-
-    private void deletePreviousPosition(String id){
-        //var position = repository.findPositionByUserId(id);
-        var position = positionRepository.findPositionByUserId(id);
-        position.ifPresent(value -> positionRepository.deleteById(position.get().getId()));
+    @Override
+    public Optional<Position> getPositionByUserId(String userId) {
+        return positionRepository.findPositionByUserId(userId);
     }
+
 
 }

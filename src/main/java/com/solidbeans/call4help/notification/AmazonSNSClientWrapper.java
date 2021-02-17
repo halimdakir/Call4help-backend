@@ -42,7 +42,7 @@ public class AmazonSNSClientWrapper {
 
     }
 
-     */
+
 
     public PublishResult publish(String arn, Map<String, Map<String, String>> data) {
         String platform = "";
@@ -79,5 +79,5 @@ public class AmazonSNSClientWrapper {
             throw (RuntimeException) e;
         }
     }
-
+*/
 }

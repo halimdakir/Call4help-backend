@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface PositionService {
     Position createUserPosition(PositionDTO position);
     Position updateUserPosition(String city, String userId);
-    List<UsersDTO> nearestPersonsList(String userId);
     List<Position> getAllPositions();
+    Optional<Position> getPositionByUserId(String userId);
 }
