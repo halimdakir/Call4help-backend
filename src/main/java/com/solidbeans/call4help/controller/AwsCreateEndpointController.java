@@ -17,6 +17,7 @@ public class AwsCreateEndpointController {
     @Autowired
     private AmazonSNSService amazonSNSService;
 
+    //TODO CREATE THIS ENDPOINT ONLY FOR TEST, WE ARE GOING TO IMPLEMENT DIRECTLY THE FUNCTION IN THE AmazonSNSService CLASS
 
     @PostMapping
     public ResponseEntity<?> createAwsEndpoint(@RequestBody PlatformEndpointDTO platformEndpoint){
