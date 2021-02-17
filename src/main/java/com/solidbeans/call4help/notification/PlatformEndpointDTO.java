@@ -1,5 +1,6 @@
 package com.solidbeans.call4help.notification;
 
+import com.solidbeans.call4help.entity.Position;
 import lombok.*;
 
 @Builder
@@ -9,9 +10,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PlatformEndpointDTO {
-
-    private String customData;
     private String token;
-    private String platformAppArn;
-
+    private Position position;
 }

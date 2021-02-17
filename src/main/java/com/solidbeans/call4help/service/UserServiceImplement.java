@@ -14,6 +14,7 @@ import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImplement implements UserService{
@@ -104,4 +105,10 @@ public class UserServiceImplement implements UserService{
             throw new NotFoundException("User with id :"+id+" is not found");
         }
     }
+
+    @Override
+    public Optional<Users> getUserByPositionId(Long id) {
+        return userRepository.findUsersByPositionId(id);
+    }
+
 }

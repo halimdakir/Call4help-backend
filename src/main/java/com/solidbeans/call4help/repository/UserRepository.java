@@ -14,5 +14,7 @@ public interface UserRepository extends CrudRepository<Users, Long> {
     Users findUserByUserId(String userId);
     Users findUsersById(Long id);
     Optional<Users> findUsersByAuthToken(String token);
+    @Query("SELECT DISTINCT u FROM Users u INNER JOIN FETCH u.position p WHERE p.id=:id")
+    Optional<Users> findUsersByPositionId(Long id);
 
 }

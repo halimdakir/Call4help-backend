@@ -2,16 +2,13 @@ package com.solidbeans.call4help.controller;
 
 import com.solidbeans.call4help.dto.PositionDTO;
 import com.solidbeans.call4help.entity.Position;
-import com.solidbeans.call4help.exception.RegistrationException;
+import com.solidbeans.call4help.notification.AmazonSNSService;
 import com.solidbeans.call4help.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 @RestController
@@ -20,24 +17,19 @@ public class PositionController {
 
     @Autowired
     private PositionService positionService;
+    @Autowired
+    private AmazonSNSService amazonSNSService;
 
 
     @PostMapping(value = "/create", produces = "application/json")
     public ResponseEntity<?> registerUserPosition(@Valid @RequestBody PositionDTO positionDTO){
 
-        if (positionDTO.getMunicipality() == null || positionDTO.getMunicipality().equals("")){
-            throw new RegistrationException("All fields are required!");
-
-        }else {
-            var position = new Position();
-            position.setDateTime(ZonedDateTime.now(ZoneId.of("UTC")));
-            position.setMunicipality(positionDTO.getMunicipality());
-
+        //Create user's position
             var createdPosition = positionService.createUserPosition(positionDTO);
+        //Create user's endpoint ARN
+            amazonSNSService.createAwsSnsEndpoint(createdPosition);
 
-            return new ResponseEntity<>(createdPosition, HttpStatus.OK);
-
-        }
+            return new ResponseEntity<>( HttpStatus.OK);
 
     }
 

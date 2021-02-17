@@ -4,6 +4,7 @@ import com.solidbeans.call4help.dto.UserDTO;
 import com.solidbeans.call4help.entity.Users;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface UserService {
@@ -13,4 +14,5 @@ public interface UserService {
     Users findUserByUserId(String userId);
     List<Users> getAllUsers();
     void deleteUser(Long id);
+    Optional<Users> getUserByPositionId(Long id);
 }
