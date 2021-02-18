@@ -9,4 +9,5 @@
     <include file="changelog/03-create-position-table.xml" relativeToChangelogFile="true"/>
     <include file="changelog/04-create-alert-table.xml" relativeToChangelogFile="true"/>
     <include file="changelog/05-create-report-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/06-create-endpoints-table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

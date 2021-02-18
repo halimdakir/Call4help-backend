@@ -14,6 +14,7 @@ import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImplement implements UserService{
@@ -94,4 +95,20 @@ public class UserServiceImplement implements UserService{
     public List<Users> getAllUsers() {
         return (List<Users>) userRepository.findAll();
     }
+
+    @Override
+    public void deleteUser(Long id) {
+        var user = userRepository.findUsersById(id);
+        if (user!=null){
+            userRepository.deleteById(id);
+        }else {
+            throw new NotFoundException("User with id :"+id+" is not found");
+        }
+    }
+
+    @Override
+    public Optional<Users> getUserByPositionId(Long id) {
+        return userRepository.findUsersByPositionId(id);
+    }
+
 }

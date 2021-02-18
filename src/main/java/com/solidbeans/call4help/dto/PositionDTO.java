@@ -11,5 +11,5 @@ import lombok.*;
 @NoArgsConstructor
 public class PositionDTO {
     private String municipality;
-    private Users user;
+    private String userId;
 }

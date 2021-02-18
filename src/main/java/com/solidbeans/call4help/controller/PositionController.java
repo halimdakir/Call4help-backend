@@ -2,53 +2,47 @@ package com.solidbeans.call4help.controller;
 
 import com.solidbeans.call4help.dto.PositionDTO;
 import com.solidbeans.call4help.entity.Position;
-import com.solidbeans.call4help.exception.RegistrationException;
+import com.solidbeans.call4help.notification.AmazonSNSService;
 import com.solidbeans.call4help.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/position")
+@RequestMapping(value = "/api/v1/position", produces = "application/json")
 public class PositionController {
 
     @Autowired
     private PositionService positionService;
+    @Autowired
+    private AmazonSNSService amazonSNSService;
 
 
-    @PostMapping(value = "/create", produces = "application/json")
-    public ResponseEntity<?> registerUserPosition(@Valid @RequestBody PositionDTO positionDTO, String userId){
+    @PostMapping(value = "/create")
+    public ResponseEntity<?> registerUserPosition(@Valid @RequestBody PositionDTO positionDTO){
 
-        if (positionDTO.getMunicipality() == null || positionDTO.getMunicipality().equals("")){
-            throw new RegistrationException("All fields are required!");
+        //Create user's position
+            var createdPosition = positionService.createUserPosition(positionDTO);
+        //Create user's endpoint ARN
+            amazonSNSService.createAwsSnsEndpoint(createdPosition);
 
-        }else {
-            var position = new Position();
-            position.setDateTime(ZonedDateTime.now(ZoneId.of("UTC")));
-            position.setMunicipality(positionDTO.getMunicipality());
-
-            var createdPosition = positionService.createUserPosition(positionDTO, userId);
-
-            return new ResponseEntity<>(createdPosition, HttpStatus.OK);
-
-        }
+            return new ResponseEntity<>( HttpStatus.OK);
 
     }
 
-    @GetMapping(value = "/all", produces = "application/json")
-    public List<Position> getAllPositions(){
-        return positionService.getAllPositions();
+    @GetMapping(value = "/all")
+    public ResponseEntity<?> getAllPositions(){
+        List<Position> list =  positionService.getAllPositions();
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @PutMapping("/userId/{userId}")
-    public Position updateUserPosition(@RequestBody String city, @PathVariable String userId) {
-        return positionService.updateUserPosition(city, userId);
+    public ResponseEntity<?> updateUserPosition(@RequestBody String city, @PathVariable String userId) {
+        Position position = positionService.updateUserPosition(city, userId);
+        return new ResponseEntity<>(position, HttpStatus.OK);
     }
 
 }

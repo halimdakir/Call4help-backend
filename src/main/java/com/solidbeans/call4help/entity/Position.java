@@ -1,5 +1,6 @@
 package com.solidbeans.call4help.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
@@ -35,6 +36,10 @@ public class Position {
     @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
     private Users users;
+
+    @JsonBackReference
+    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "position")
+    private Endpoints endpoints;
 
     public Position(ZonedDateTime dateTime, String municipality, Users users) {
         this.dateTime = dateTime;
