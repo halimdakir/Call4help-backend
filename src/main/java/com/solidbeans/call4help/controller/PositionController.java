@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/position")
+@RequestMapping(value = "/api/v1/position", produces = "application/json")
 public class PositionController {
 
     @Autowired
@@ -21,7 +21,7 @@ public class PositionController {
     private AmazonSNSService amazonSNSService;
 
 
-    @PostMapping(value = "/create", produces = "application/json")
+    @PostMapping(value = "/create")
     public ResponseEntity<?> registerUserPosition(@Valid @RequestBody PositionDTO positionDTO){
 
         //Create user's position
@@ -33,14 +33,16 @@ public class PositionController {
 
     }
 
-    @GetMapping(value = "/all", produces = "application/json")
-    public List<Position> getAllPositions(){
-        return positionService.getAllPositions();
+    @GetMapping(value = "/all")
+    public ResponseEntity<?> getAllPositions(){
+        List<Position> list =  positionService.getAllPositions();
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @PutMapping("/userId/{userId}")
-    public Position updateUserPosition(@RequestBody String city, @PathVariable String userId) {
-        return positionService.updateUserPosition(city, userId);
+    public ResponseEntity<?> updateUserPosition(@RequestBody String city, @PathVariable String userId) {
+        Position position = positionService.updateUserPosition(city, userId);
+        return new ResponseEntity<>(position, HttpStatus.OK);
     }
 
 }

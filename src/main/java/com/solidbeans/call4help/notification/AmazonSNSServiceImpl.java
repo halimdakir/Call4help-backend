@@ -85,16 +85,16 @@ public class AmazonSNSServiceImpl implements AmazonSNSService{
 
     }
 
-    public PublishResult publish(String arn, String message) {
+    public void publish(String arn, String message) {
         PublishRequest request = new PublishRequest();
         request.setMessageStructure("json");
         Map<String, String> msgMap = new HashMap<>();
-        msgMap.put("GCM", message);
+        msgMap.put("FCM", message);
 
         String sendMsg = jsonify(msgMap);
         request.setTargetArn(arn);
         request.setMessage(sendMsg);
-        return snsClient.publish(request);
+        snsClient.publish(request);
     }
 
 
@@ -103,6 +103,7 @@ public class AmazonSNSServiceImpl implements AmazonSNSService{
             return objectMapper.writeValueAsString(message);
         } catch (Exception e) {
             e.printStackTrace();
+            assert e instanceof RuntimeException;
             throw (RuntimeException) e;
         }
     }

@@ -11,19 +11,20 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping(value = "/api/v1/users", produces = "application/json")
 public class UsersController {
 
     @Autowired
     private UserService userService;
 
     @GetMapping("/all")
-    public List<Users> getAllUsers(){
-        return userService.getAllUsers();
+    public ResponseEntity<?> getAllUsers(){
+        var users =  userService.getAllUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
 
-    @DeleteMapping(value = "/id/{id}", produces = "application/json")
+    @DeleteMapping(value = "/id/{id}")
     public ResponseEntity<?> registerNewUser(@PathVariable Long id){
         userService.deleteUser(id);
         return new ResponseEntity<>("Successfully deleted!", HttpStatus.OK);

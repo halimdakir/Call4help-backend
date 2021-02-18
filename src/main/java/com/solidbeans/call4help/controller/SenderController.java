@@ -17,19 +17,18 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/sender")
+@RequestMapping(value = "/api/v1/sender", produces = "application/json")
 public class SenderController {
 
     @Autowired
     private AlertService alertService;
-    @Autowired
-    private PositionService positionService;
     @Autowired
     private EndpointService endpointService;
     @Autowired
     private AmazonSNSService amazonSNSService;
 
 
+    //TODO Language of the MESSAGE depending on the language used on the phone
 
     @GetMapping("userId/{userId}")
     public ResponseEntity<?> sendHelpRequest(@PathVariable String userId){
@@ -38,11 +37,7 @@ public class SenderController {
 
         //Get user nearest users
         List<Endpoints> endpointsList = endpointService.getEndpointsByPosition(userId);
-
-
         //Publish message to the nearest users
-        //TODO Language of the MESSAGE depending on the language used on the phone
-
         amazonSNSService.publishMessage(endpointsList, "I need help!");
 
         return new ResponseEntity<>("Message has successfully sent!", HttpStatus.OK);
