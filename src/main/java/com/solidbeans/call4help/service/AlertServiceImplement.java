@@ -1,7 +1,7 @@
 package com.solidbeans.call4help.service;
 
-import com.solidbeans.call4help.entity.Alert;
-import com.solidbeans.call4help.entity.Users;
+import com.solidbeans.call4help.entities.Alert;
+import com.solidbeans.call4help.entities.Users;
 import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.repository.AlertRepository;
 import org.springframework.beans.factory.annotation.Autowired;

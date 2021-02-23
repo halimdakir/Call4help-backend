@@ -1,6 +1,6 @@
 package com.solidbeans.call4help.notification;
 
-import com.solidbeans.call4help.entity.Position;
+import com.solidbeans.call4help.entities.Position;
 import lombok.*;
 
 @Builder

@@ -3,8 +3,8 @@ package com.solidbeans.call4help.notification;
 import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.model.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.solidbeans.call4help.entity.Endpoints;
-import com.solidbeans.call4help.entity.Position;
+import com.solidbeans.call4help.entities.Endpoint;
+import com.solidbeans.call4help.entities.Position;
 import com.solidbeans.call4help.exception.NotAcceptedException;
 import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.repository.EndpointsRepository;
@@ -41,7 +41,7 @@ public class AmazonSNSServiceImpl implements AmazonSNSService{
 
 
     @Override
-    public Endpoints createAwsSnsEndpoint(Position position) {
+    public Endpoint createAwsSnsEndpoint(Position position) {
         var user = userService.getUserByPositionId(position.getId());
 
         if (user.isPresent()){
@@ -51,7 +51,7 @@ public class AmazonSNSServiceImpl implements AmazonSNSService{
             if (result!=null){
 
 
-                  var endpoints = new Endpoints(result, position);
+                  var endpoints = new Endpoint(result, position);
 
                 return endpointsRepository.save(endpoints);
 
@@ -67,9 +67,9 @@ public class AmazonSNSServiceImpl implements AmazonSNSService{
 
 
     @Override
-    public void publishMessage(List<Endpoints> endpointsList, String message){
-        if (endpointsList.size() > 0){
-            for (Endpoints endpoint: endpointsList){
+    public void publishMessage(List<Endpoint> endpointList, String message){
+        if (endpointList.size() > 0){
+            for (Endpoint endpoint: endpointList){
                 publish(endpoint.getArn(), message);
             }
         }

@@ -1,33 +1,19 @@
 package com.solidbeans.call4help.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AppInfo {
-    private String version;
-    private String name;
 
-
-    public AppInfo() {
-    }
-
-    public AppInfo(String version, String name) {
-        this.version = version;
-        this.name = name;
-    }
-
-    //<editor-fold desc="Getter & Setter">
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    //</editor-fold>
+    @Value("${app.version}")
+    private String appVersion;
+    @Value("${app.name}")
+    private String appName;
 }

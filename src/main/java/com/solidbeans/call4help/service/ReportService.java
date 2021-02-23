@@ -1,6 +1,6 @@
 package com.solidbeans.call4help.service;
 
-import com.solidbeans.call4help.dto.ReportDTO;
+import com.solidbeans.call4help.dtos.ReportDTO;
 
 public interface ReportService {
 

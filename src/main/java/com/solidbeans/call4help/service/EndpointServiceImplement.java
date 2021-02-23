@@ -1,6 +1,6 @@
 package com.solidbeans.call4help.service;
 
-import com.solidbeans.call4help.entity.Endpoints;
+import com.solidbeans.call4help.entities.Endpoint;
 import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.repository.EndpointsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +17,12 @@ public class EndpointServiceImplement implements EndpointService{
     private PositionService positionService;
 
     @Override
-    public List<Endpoints> getAllEndpoints() {
-        return (List<Endpoints>) endpointsRepository.findAll();
+    public List<Endpoint> getAllEndpoints() {
+        return (List<Endpoint>) endpointsRepository.findAll();
     }
 
     @Override
-    public List<Endpoints> getEndpointsByPosition(String userId) {
+    public List<Endpoint> getEndpointsByPosition(String userId) {
         var position = positionService.getPositionByUserId(userId);
         if (position.isPresent()){
 

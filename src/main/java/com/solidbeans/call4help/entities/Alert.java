@@ -1,18 +1,15 @@
-package com.solidbeans.call4help.entity;
+package com.solidbeans.call4help.entities;
 
-import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
-@Builder
 @Entity
 public class Alert {
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
@@ -20,12 +17,9 @@ public class Alert {
     @Column(name="alert_date")
     private ZonedDateTime alertDate;
 
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private Users users;
-
-
 
     public Alert(ZonedDateTime alertDate, Users users) {
         this.alertDate = alertDate;

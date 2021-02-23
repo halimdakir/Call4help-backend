@@ -1,6 +1,6 @@
 package com.solidbeans.call4help.repository;
 
-import com.solidbeans.call4help.entity.Users;
+import com.solidbeans.call4help.entities.Users;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
