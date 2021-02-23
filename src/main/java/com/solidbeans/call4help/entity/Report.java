@@ -25,6 +25,12 @@ public class Report {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JsonManagedReference
     @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", nullable = false)
-    private Users users;
+    @JoinColumn(name = "helper_id", nullable = false)
+    private Users helper;
+
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonManagedReference
+    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "sender_id", nullable = false)
+    private Users sender;
 }
