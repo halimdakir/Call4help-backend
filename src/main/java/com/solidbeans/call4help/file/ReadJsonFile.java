@@ -15,7 +15,7 @@ import java.util.Objects;
 public class ReadJsonFile {
 
     @SuppressWarnings("unchecked")
-    public List<Location> GetCities(){
+    public List<Location> GetCities() {
         List<Location> locationList = new ArrayList<>();
 
         //JSON parser object to parse read file
@@ -35,12 +35,9 @@ public class ReadJsonFile {
 
                 locationList.add(new Location(region, city));
             }
-
-
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
         return locationList;
     }
-
 }
