@@ -15,7 +15,9 @@ public class CityController {
     @Autowired
     private CityService cityService;
 
-    @GetMapping("/all")
+    // a get request should return all cities, no need to have the extension "/all" in
+    // order to return all cities because we nothing else than a get all method.
+    @GetMapping
     public ResponseEntity<?> getAllCities() {
      return cityService.allCities();
     }
