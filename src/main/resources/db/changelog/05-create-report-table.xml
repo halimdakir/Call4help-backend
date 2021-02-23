@@ -13,8 +13,20 @@
             <column name="text" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-
+            <column name="helper_id" type="int" />
+            <column name="sender_id" type="int" />
         </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_report2user"
+                                 baseTableName="report"
+                                 baseColumnNames="helper_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint constraintName="fk_report2user"
+                                 baseTableName="report"
+                                 baseColumnNames="sender_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
 
     </changeSet>
 
