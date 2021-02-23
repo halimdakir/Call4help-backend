@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.ZonedDateTime;
 
 @Data
 @NoArgsConstructor
@@ -20,6 +21,9 @@ public class Report {
 
     private String text;
 
+    @Column(name="date_time")
+    private ZonedDateTime dateTime;
+
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JsonManagedReference
     @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
@@ -32,8 +36,9 @@ public class Report {
     @JoinColumn(name = "sender_id", nullable = false)
     private Users sender;
 
-    public Report(String text, Users helper, Users sender) {
+    public Report(String text, ZonedDateTime dateTime, Users helper, Users sender) {
         this.text = text;
+        this.dateTime = dateTime;
         this.helper = helper;
         this.sender = sender;
     }

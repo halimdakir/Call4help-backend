@@ -13,6 +13,9 @@
             <column name="text" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="date_time" type="timestamptz">
+                <constraints nullable="false"/>
+            </column>
             <column name="helper_id" type="int" />
             <column name="sender_id" type="int" />
         </createTable>
