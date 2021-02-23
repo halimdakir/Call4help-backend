@@ -1,8 +1,8 @@
 package com.solidbeans.call4help.service;
 
-import com.solidbeans.call4help.dto.PositionDTO;
-import com.solidbeans.call4help.entity.Position;
-import com.solidbeans.call4help.entity.Users;
+import com.solidbeans.call4help.dtos.PositionDTO;
+import com.solidbeans.call4help.entities.Position;
+import com.solidbeans.call4help.entities.Users;
 import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.exception.RegistrationException;
 import com.solidbeans.call4help.repository.PositionRepository;

@@ -1,10 +1,7 @@
 package com.solidbeans.call4help.util;
 
-import com.solidbeans.call4help.entity.*;
+import com.solidbeans.call4help.entities.*;
 import com.solidbeans.call4help.repository.*;
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.PrecisionModel;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,7 @@
 package com.solidbeans.call4help.service;
 
-import com.solidbeans.call4help.dto.ReportDTO;
-import com.solidbeans.call4help.entity.Report;
+import com.solidbeans.call4help.dtos.ReportDTO;
+import com.solidbeans.call4help.entities.Report;
 import com.solidbeans.call4help.repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

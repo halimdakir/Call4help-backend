@@ -1,12 +1,11 @@
-package com.solidbeans.call4help.dto;
+package com.solidbeans.call4help.dtos;
 
 import lombok.*;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class ReportDTO {
+
     @Setter(value= AccessLevel.NONE)
     private String text;
     private String userId;

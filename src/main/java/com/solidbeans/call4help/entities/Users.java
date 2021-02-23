@@ -1,4 +1,4 @@
-package com.solidbeans.call4help.entity;
+package com.solidbeans.call4help.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
@@ -7,11 +7,8 @@ import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
-@Builder
 @Entity
 public class Users {
 
@@ -48,8 +45,6 @@ public class Users {
     /*@JsonBackReference
     @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "user")
     private Shared shared;*/
-
-
 
     public Users(String userId, String authToken, ZonedDateTime latestCall4HelpDate, ZonedDateTime creationDate, ZonedDateTime tokenUpdateDate) {
         this.userId = userId;

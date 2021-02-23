@@ -1,9 +1,10 @@
-package com.solidbeans.call4help.controller;
+package com.solidbeans.call4help.controllers;
 
-import com.solidbeans.call4help.dto.ReportDTO;
+import com.solidbeans.call4help.dtos.ReportDTO;
 import com.solidbeans.call4help.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/report")
+@RequestMapping(value = "/api/v1/report", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ReportController {
 
     @Autowired
     private ReportService reportService;
 
     @PostMapping
-    public ResponseEntity<ReportDTO> registerReport(@RequestBody ReportDTO reportDTO){
+    public ResponseEntity<?> registerReport(@RequestBody ReportDTO reportDTO){
         var report = reportService.saveReport(reportDTO);
         return new ResponseEntity<>(report, HttpStatus.OK);
     }
