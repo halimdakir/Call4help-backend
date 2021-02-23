@@ -1,21 +1,17 @@
 package com.solidbeans.call4help.service;
 
 import com.solidbeans.call4help.model.AppInfo;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 
 @Service
 public class AppInfoService {
 
-    @Value("${app.version}")
-    private String appVersion;
-    @Value("${app.name}")
-    private String appName;
+    @Autowired
+    private AppInfo appInfo;
 
-
-
-    public AppInfo getAppInfo(){
-        return new AppInfo(appVersion, appName);
+    public ResponseEntity<?> getAppInfo() {
+        return ResponseEntity.ok(appInfo.getAppVersion() + appInfo.getAppName());
     }
 }
