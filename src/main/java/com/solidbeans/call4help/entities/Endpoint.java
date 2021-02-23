@@ -1,30 +1,25 @@
-package com.solidbeans.call4help.entity;
+package com.solidbeans.call4help.entities;
 
 import lombok.*;
 
 import javax.persistence.*;
 
+@Data
 @NoArgsConstructor
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
 @Entity
-@ToString
-@EqualsAndHashCode
-public class Endpoints {
+public class Endpoint {
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    private String arn;
 
+    private String arn;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "position_id", nullable = false)
     private Position position;
 
-
-    public Endpoints(String arn, Position position) {
+    public Endpoint(String arn, Position position) {
         this.arn = arn;
         this.position = position;
     }

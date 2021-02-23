@@ -1,13 +1,12 @@
 package com.solidbeans.call4help.service;
 
-import com.solidbeans.call4help.entity.Endpoints;
-import org.springframework.http.ResponseEntity;
+import com.solidbeans.call4help.entities.Endpoint;
 
 import java.util.List;
 
 public interface EndpointService {
 
-    List<Endpoints> getAllEndpoints();
+    List<Endpoint> getAllEndpoints();
 
-    List<Endpoints> getEndpointsByPosition(String city);
+    List<Endpoint> getEndpointsByPosition(String city);
 }

@@ -1,7 +1,7 @@
 package com.solidbeans.call4help.service;
 
-import com.solidbeans.call4help.dto.UserDTO;
-import com.solidbeans.call4help.entity.Users;
+import com.solidbeans.call4help.dtos.UserDTO;
+import com.solidbeans.call4help.entities.Users;
 
 import java.util.List;
 import java.util.Optional;

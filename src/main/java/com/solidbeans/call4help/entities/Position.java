@@ -1,24 +1,18 @@
-package com.solidbeans.call4help.entity;
+package com.solidbeans.call4help.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.sun.istack.NotNull;
 import lombok.*;
-import org.locationtech.jts.geom.Point;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 
+@Data
 @NoArgsConstructor
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
 @Entity
-@ToString
-@EqualsAndHashCode
 public class Position {
+
     @EqualsAndHashCode.Exclude
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +33,7 @@ public class Position {
 
     @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "position")
-    private Endpoints endpoints;
+    private Endpoint endpoint;
 
     public Position(ZonedDateTime dateTime, String municipality, Users users) {
         this.dateTime = dateTime;

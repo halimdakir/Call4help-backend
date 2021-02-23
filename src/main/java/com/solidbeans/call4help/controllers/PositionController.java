@@ -1,6 +1,6 @@
 package com.solidbeans.call4help.controllers;
 
-import com.solidbeans.call4help.dto.PositionDTO;
+import com.solidbeans.call4help.dtos.PositionDTO;
 import com.solidbeans.call4help.notification.AmazonSNSService;
 import com.solidbeans.call4help.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;

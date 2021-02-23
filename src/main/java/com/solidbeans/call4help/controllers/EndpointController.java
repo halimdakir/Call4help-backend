@@ -15,7 +15,7 @@ public class EndpointController {
 
     // use parameters when searching.
     // for example localhost:8080/api/v1/arn returns all cities and
-    // localhost:8080/api/v1/arn?city=stockholm should return the endpoints for Stockholm
+    // localhost:8080/api/v1/arn?city=stockholm should return the endpoint for Stockholm
     @GetMapping
     public ResponseEntity<?> getEndpointsByCity(@RequestParam(required = false) String city) {
         if (city.isEmpty()) return ResponseEntity.ok(endpointService.getAllEndpoints());

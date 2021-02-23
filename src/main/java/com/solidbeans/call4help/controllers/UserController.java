@@ -1,6 +1,6 @@
 package com.solidbeans.call4help.controllers;
 
-import com.solidbeans.call4help.dto.UserDTO;
+import com.solidbeans.call4help.dtos.UserDTO;
 import com.solidbeans.call4help.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
