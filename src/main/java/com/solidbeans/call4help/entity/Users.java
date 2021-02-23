@@ -38,6 +38,10 @@ public class Users {
     private Position position;
 
     @JsonBackReference
+    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
+    private Report report;
+
+    @JsonBackReference
     @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Alert> alertSet;
 
