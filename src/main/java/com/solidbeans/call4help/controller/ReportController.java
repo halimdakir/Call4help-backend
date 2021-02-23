@@ -18,8 +18,8 @@ public class ReportController {
     private ReportService reportService;
 
     @PostMapping
-    public ResponseEntity<ReportDTO> registerReport(Long userId, @RequestBody String text){
-        var report = reportService.saveReport(userId, text);
+    public ResponseEntity<ReportDTO> registerReport(@RequestBody ReportDTO reportDTO){
+        var report = reportService.saveReport(reportDTO);
         return new ResponseEntity<>(report, HttpStatus.OK);
     }
 }

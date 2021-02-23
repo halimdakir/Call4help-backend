@@ -11,13 +11,19 @@ public class ReportServiceImplement implements ReportService {
 
     @Autowired
     ReportRepository reportRepository;
+    @Autowired
+    private UserService userService;
 
     @Override
-    public ReportDTO saveReport(Long userId, String text) {
-        var report = new Report(userId, text);
+    public ReportDTO saveReport(ReportDTO reportDTO) {
+        var helper = userService.findUserByUserId(reportDTO.getUserId());
+        var sender = userService.findUserById(reportDTO.getSenderId());
+        var report = new Report(reportDTO.getText(), helper, sender);
         reportRepository.save(report);
         return ReportDTO.builder()
-                .text(text)
+                .text(reportDTO.getText())
+                .userId(reportDTO.getUserId())
+                .senderId(reportDTO.getSenderId())
                 .build();
     }
 

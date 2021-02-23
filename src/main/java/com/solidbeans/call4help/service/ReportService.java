@@ -4,5 +4,5 @@ import com.solidbeans.call4help.dto.ReportDTO;
 
 public interface ReportService {
 
-    ReportDTO saveReport(Long userId, String text);
+    ReportDTO saveReport(ReportDTO reportDTO);
 }

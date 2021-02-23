@@ -33,4 +33,10 @@ public class Report {
     @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "sender_id", nullable = false)
     private Users sender;
+
+    public Report(String text, Users helper, Users sender) {
+        this.text = text;
+        this.helper = helper;
+        this.sender = sender;
+    }
 }
