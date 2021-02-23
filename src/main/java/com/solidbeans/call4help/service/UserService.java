@@ -8,11 +8,18 @@ import java.util.Optional;
 
 
 public interface UserService {
+
     Users createNewUser(UserDTO user);
+
     Users updateToken(String token, String newToken);
+
     Users findUserById(Long id);
+
     Users findUserByUserId(String userId);
+
     List<Users> getAllUsers();
+
     void deleteUser(Long id);
+
     Optional<Users> getUserByPositionId(Long id);
 }
