@@ -1,4 +1,4 @@
-package com.solidbeans.call4help.controller;
+package com.solidbeans.call4help.controllers;
 
 import com.solidbeans.call4help.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;

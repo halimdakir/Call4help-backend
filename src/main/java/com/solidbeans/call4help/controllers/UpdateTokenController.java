@@ -1,4 +1,4 @@
-package com.solidbeans.call4help.controller;
+package com.solidbeans.call4help.controllers;
 
 import com.solidbeans.call4help.dto.TokenDTO;
 import com.solidbeans.call4help.service.UserService;
