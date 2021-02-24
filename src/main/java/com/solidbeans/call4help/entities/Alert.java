@@ -19,6 +19,8 @@ public class Alert {
     @Column(name="alert_date")
     private ZonedDateTime alertDate;
 
+    private String location;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private Users users;
@@ -27,8 +29,9 @@ public class Alert {
     @OneToMany(mappedBy = "alert", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Report> reports;
 
-    public Alert(ZonedDateTime alertDate, Users users) {
+    public Alert(ZonedDateTime alertDate, String location, Users users) {
         this.alertDate = alertDate;
+        this.location = location;
         this.users = users;
     }
 }

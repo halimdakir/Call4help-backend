@@ -18,14 +18,29 @@ public class AlertServiceImplement implements AlertService{
     private AlertRepository alertRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private PositionService positionService;
 
 
     @Override
     public Alert registerHelpAlert(String userId) {
+
         Users user = userService.findUserByUserId(userId);
+
         if (user!=null){
 
-            return alertRepository.save(new Alert(ZonedDateTime.now(ZoneId.of("UTC")), user));
+            //Get actual location
+            var position = positionService.getPositionByUserId(user.getUserId());
+
+            if (position.isPresent()){
+
+                return alertRepository.save(new Alert(ZonedDateTime.now(ZoneId.of("UTC")), position.get().getMunicipality(), user));
+
+            }else {
+
+                throw new NotFoundException("Position with user id :"+userId+" is not found!");
+
+            }
 
         }else {
 
