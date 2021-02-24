@@ -2,6 +2,7 @@ package com.solidbeans.call4help.service;
 
 import com.solidbeans.call4help.dtos.ReportDTO;
 import com.solidbeans.call4help.entities.Report;
+import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public class ReportServiceImplement implements ReportService {
     private ReportRepository reportRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private AlertService alertService;
+
 
     @Override
     public ReportDTO saveReport(ReportDTO reportDTO) {
@@ -23,17 +27,29 @@ public class ReportServiceImplement implements ReportService {
         //Find user who has reported
         var helper = userService.findUserByUserId(reportDTO.getUserId());
 
-        //Find user to whom has reported
-        var sender = userService.findUserById(reportDTO.getSenderId());
+        //Find alert to whom has reported
+        var alert = alertService.findAlertById(reportDTO.getAlertId());
 
-        var report = new Report(reportDTO.getText(), Instant.now().atZone(ZoneOffset.UTC), helper, sender);
-        reportRepository.save(report);
+        if (alert.isPresent() && helper != null){
 
-        return ReportDTO.builder()
-                .text(reportDTO.getText())
-                .userId(reportDTO.getUserId())
-                .senderId(reportDTO.getSenderId())
-                .build();
+            var report = new Report(reportDTO.getText(), Instant.now().atZone(ZoneOffset.UTC), helper, alert.get());
+            reportRepository.save(report);
+
+            return ReportDTO.builder()
+                    .text(reportDTO.getText())
+                    .userId(reportDTO.getUserId())
+                    .alertId(reportDTO.getAlertId())
+                    .build();
+
+        }else {
+
+            throw new NotFoundException("Helper and/or Alert not found with the given id!");
+
+        }
+
+
+
+
     }
 
 }
