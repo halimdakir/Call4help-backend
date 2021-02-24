@@ -8,5 +8,5 @@ public interface EndpointService {
 
     List<Endpoint> getAllEndpoints();
 
-    List<Endpoint> getEndpointsByPosition(String city);
+    List<Endpoint> getEndpointsByLocation(String city);
 }

@@ -19,7 +19,7 @@ public class AlertServiceImplement implements AlertService{
     @Autowired
     private UserService userService;
     @Autowired
-    private PositionService positionService;
+    private LocationService locationService;
 
 
     @Override
@@ -30,7 +30,7 @@ public class AlertServiceImplement implements AlertService{
         if (user!=null){
 
             //Get actual location
-            var position = positionService.getPositionByUserId(user.getUserId());
+            var position = locationService.getLocationByUserId(user.getUserId());
 
             if (position.isPresent()){
 

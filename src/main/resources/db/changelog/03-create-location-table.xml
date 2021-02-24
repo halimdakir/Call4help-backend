@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
     <changeSet  id="1" author="AD Halim">
-        <createTable tableName="position"
+        <createTable tableName="location"
                      remarks="A table to contain all users coordinates">
             <column name="id" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
@@ -19,8 +19,8 @@
             <column name="user_id" type="int" />
         </createTable>
 
-        <addForeignKeyConstraint constraintName="fk_position2user"
-                                 baseTableName="position"
+        <addForeignKeyConstraint constraintName="fk_location2user"
+                                 baseTableName="location"
                                  baseColumnNames="user_id"
                                  referencedTableName="users"
                                  referencedColumnNames="id"/>

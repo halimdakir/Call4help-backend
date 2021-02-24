@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface EndpointsRepository extends CrudRepository<Endpoint, Long> {
-    List<Endpoint> findAllByPosition_Municipality(String city);
+    List<Endpoint> findAllByLocation_Municipality(String city);
 }

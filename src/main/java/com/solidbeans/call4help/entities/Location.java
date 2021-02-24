@@ -11,7 +11,7 @@ import java.time.ZonedDateTime;
 @Data
 @NoArgsConstructor
 @Entity
-public class Position {
+public class Location {
 
     @EqualsAndHashCode.Exclude
     @Id
@@ -32,10 +32,10 @@ public class Position {
     private Users users;
 
     @JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "position")
+    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "location")
     private Endpoint endpoint;
 
-    public Position(ZonedDateTime dateTime, String municipality, Users users) {
+    public Location(ZonedDateTime dateTime, String municipality, Users users) {
         this.dateTime = dateTime;
         this.municipality = municipality;
         this.users = users;

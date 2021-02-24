@@ -19,6 +19,6 @@ public class EndpointController {
     @GetMapping
     public ResponseEntity<?> getEndpointsByCity(@RequestParam(required = false) String city) {
         if (city.isEmpty()) return ResponseEntity.ok(endpointService.getAllEndpoints());
-        else return ResponseEntity.ok(endpointService.getEndpointsByPosition(city));
+        else return ResponseEntity.ok(endpointService.getEndpointsByLocation(city));
     }
 }

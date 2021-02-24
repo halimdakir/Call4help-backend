@@ -32,7 +32,7 @@ public class SenderController {
         alertService.registerHelpAlert(userId);
 
         //Publish message to the nearest users
-        amazonSNSService.publishMessage(endpointService.getEndpointsByPosition(userId), "I need help!");
+        amazonSNSService.publishMessage(endpointService.getEndpointsByLocation(userId), "I need help!");
 
         return ResponseEntity.ok("Message has successfully sent!");
     }

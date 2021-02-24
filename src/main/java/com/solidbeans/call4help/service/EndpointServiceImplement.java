@@ -14,7 +14,7 @@ public class EndpointServiceImplement implements EndpointService{
     private EndpointsRepository endpointsRepository;
 
     @Autowired
-    private PositionService positionService;
+    private LocationService locationService;
 
     @Override
     public List<Endpoint> getAllEndpoints() {
@@ -22,14 +22,18 @@ public class EndpointServiceImplement implements EndpointService{
     }
 
     @Override
-    public List<Endpoint> getEndpointsByPosition(String userId) {
-        var position = positionService.getPositionByUserId(userId);
-        if (position.isPresent()){
+    public List<Endpoint> getEndpointsByLocation(String userId) {
 
-            return endpointsRepository.findAllByPosition_Municipality(position.get().getMunicipality());
+        var location = locationService.getLocationByUserId(userId);
+
+        if (location.isPresent()){
+
+            return endpointsRepository.findAllByLocation_Municipality(location.get().getMunicipality());
 
         }else {
+
             throw new NotFoundException("There no user with id :"+ userId);
+
         }
 
     }
