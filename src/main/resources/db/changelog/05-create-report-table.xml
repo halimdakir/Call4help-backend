@@ -25,10 +25,11 @@
                                  baseColumnNames="helper_id"
                                  referencedTableName="users"
                                  referencedColumnNames="id"/>
-        <addForeignKeyConstraint constraintName="fk_report2user"
+
+        <addForeignKeyConstraint constraintName="fk_report2alert"
                                  baseTableName="report"
                                  baseColumnNames="sender_id"
-                                 referencedTableName="users"
+                                 referencedTableName="alert"
                                  referencedColumnNames="id"/>
 
     </changeSet>

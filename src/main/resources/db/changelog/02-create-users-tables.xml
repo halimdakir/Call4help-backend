@@ -21,8 +21,6 @@
 
             <column name="auth_token" type="varchar(255)"/>
 
-            <column name="latest_call_for_help_date" type="timestamptz"/>
-
             <column name="creation_date" type="timestamptz"/>
 
             <column name="token_update_date" type="timestamptz"/>
