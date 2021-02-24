@@ -1,7 +1,9 @@
 package com.solidbeans.call4help.controllers;
 
+import com.solidbeans.call4help.dtos.ReportDTO;
 import com.solidbeans.call4help.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +19,8 @@ public class ReportController {
     private ReportService reportService;
 
     @PostMapping
-    public ResponseEntity<?> registerReport(Long userId, @RequestBody String text) {
-        return ResponseEntity.ok(reportService.saveReport(userId, text));
+    public ResponseEntity<?> registerReport(@RequestBody ReportDTO reportDTO){
+        var report = reportService.saveReport(reportDTO);
+        return new ResponseEntity<>(report, HttpStatus.OK);
     }
 }

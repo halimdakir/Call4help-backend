@@ -18,10 +18,10 @@ public class SetUpDatabase {
             if (userRepository.count() ==0 && positionRepository.count()==0 && alertRepository.count()==0 ){
 
 
-                var user1 = new Users("100MA100", "QWERTYUIOP0123456", null, ZonedDateTime.now(ZoneId.of("UTC")), null);
-                var user2 = new Users("100MA200", "QWERTYUIOP0123488", null, ZonedDateTime.now(ZoneId.of("UTC")), null);
-                var user3 = new Users("100MA300", "QWERTYUIOP0123499", null, ZonedDateTime.now(ZoneId.of("UTC")), null);
-                var user4 = new Users("100MA400", "QWERTYUIOP0123500", null, ZonedDateTime.now(ZoneId.of("UTC")), null);
+                var user1 = new Users("100MA100", "QWERTYUIOP0123456", ZonedDateTime.now(ZoneId.of("UTC")), null);
+                var user2 = new Users("100MA200", "QWERTYUIOP0123488", ZonedDateTime.now(ZoneId.of("UTC")), null);
+                var user3 = new Users("100MA300", "QWERTYUIOP0123499", ZonedDateTime.now(ZoneId.of("UTC")), null);
+                var user4 = new Users("100MA400", "QWERTYUIOP0123500", ZonedDateTime.now(ZoneId.of("UTC")), null);
 
                 /*
                 userRepository.save(user1);
@@ -48,7 +48,7 @@ public class SetUpDatabase {
                 positionRepository.save(position4);
 
 
-                var alert = new Alert( ZonedDateTime.now(ZoneId.of("UTC")), user1);
+                var alert = new Alert( ZonedDateTime.now(ZoneId.of("UTC")),position1.getMunicipality(), user1);
 
                 alertRepository.save(alert);
 

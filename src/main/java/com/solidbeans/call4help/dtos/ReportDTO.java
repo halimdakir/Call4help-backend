@@ -8,4 +8,6 @@ public class ReportDTO {
 
     @Setter(value= AccessLevel.NONE)
     private String text;
+    private String userId;
+    private Long alertId;
 }
