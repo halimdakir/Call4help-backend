@@ -48,7 +48,6 @@ public class UserServiceImplement implements UserService{
                 user.setAuthToken(userDTO.getAuthToken());
 
                 user.setCreationDate(Instant.now().atZone(ZoneOffset.UTC));
-                user.setLatestCall4HelpDate(null);
             }
 
             userRepository.save(user);
