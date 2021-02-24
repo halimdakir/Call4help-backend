@@ -39,6 +39,10 @@ public class Users {
     @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Alert> alertSet;
 
+    @JsonBackReference
+    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
+    private Position position;
+
     /*@JsonBackReference
     @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "user")
     private Shared shared;*/

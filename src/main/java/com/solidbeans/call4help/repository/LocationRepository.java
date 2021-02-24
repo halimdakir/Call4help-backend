@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface LocationRepository extends CrudRepository<Location, Long>, PagingAndSortingRepository<Location, Long> {
+public interface LocationRepository extends CrudRepository<Location, Long>{
 
     Optional<Location> findById(Long id);
 
@@ -22,9 +22,4 @@ public interface LocationRepository extends CrudRepository<Location, Long>, Pagi
     @Query("SELECT DISTINCT l FROM Location l")
     List<Location> findAllLocations();
 
-    /*
-    String query ="SELECT position.id, ST_Distance_Spheroid(geometry(position.coordinates), geometry(shared.coordinates), 'SPHEROID[\"WGS 84\",6378137,298.257223563]') AS distance FROM position, shared WHERE shared.id = :id and shared.user_id <> position.user_id";
-    @Query(nativeQuery = true, value = query)
-    List<DistanceDTO> findNearestPersonList(Long id);
-     */
 }
