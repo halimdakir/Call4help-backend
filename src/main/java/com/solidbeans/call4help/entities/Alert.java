@@ -1,9 +1,11 @@
 package com.solidbeans.call4help.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -20,6 +22,10 @@ public class Alert {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private Users users;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "alert", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Report> reports;
 
     public Alert(ZonedDateTime alertDate, Users users) {
         this.alertDate = alertDate;

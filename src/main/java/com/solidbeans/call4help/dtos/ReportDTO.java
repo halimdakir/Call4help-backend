@@ -9,5 +9,5 @@ public class ReportDTO {
     @Setter(value= AccessLevel.NONE)
     private String text;
     private String userId;
-    private Long senderId;
+    private Long alertId;
 }

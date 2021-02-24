@@ -30,16 +30,14 @@ public class Report {
     @JoinColumn(name = "helper_id", nullable = false)
     private Users helper;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JsonManagedReference
-    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "sender_id", nullable = false)
-    private Users sender;
+    private Alert alert;
 
-    public Report(String text, ZonedDateTime dateTime, Users helper, Users sender) {
+    public Report(String text, ZonedDateTime dateTime, Users helper, Alert alert) {
         this.text = text;
         this.dateTime = dateTime;
         this.helper = helper;
-        this.sender = sender;
+        this.alert = alert;
     }
 }
