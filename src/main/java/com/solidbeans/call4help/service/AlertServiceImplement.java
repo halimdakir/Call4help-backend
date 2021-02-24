@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Optional;
 
 @Service
 public class AlertServiceImplement implements AlertService{
@@ -30,5 +31,10 @@ public class AlertServiceImplement implements AlertService{
 
             throw new NotFoundException("User with id :"+userId+" is not found");
         }
+    }
+
+    @Override
+    public Optional<Alert> findAlertById(Long id) {
+        return alertRepository.findById(id);
     }
 }
