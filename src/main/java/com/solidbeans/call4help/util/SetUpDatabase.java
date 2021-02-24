@@ -48,7 +48,7 @@ public class SetUpDatabase {
                 positionRepository.save(position4);
 
 
-                var alert = new Alert( ZonedDateTime.now(ZoneId.of("UTC")), user1);
+                var alert = new Alert( ZonedDateTime.now(ZoneId.of("UTC")),position1.getMunicipality(), user1);
 
                 alertRepository.save(alert);
 

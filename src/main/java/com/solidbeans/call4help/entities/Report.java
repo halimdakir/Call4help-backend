@@ -28,16 +28,16 @@ public class Report {
     @JsonManagedReference
     @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "helper_id", nullable = false)
-    private Users helper;
+    private Users users;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "sender_id", nullable = false)
     private Alert alert;
 
-    public Report(String text, ZonedDateTime dateTime, Users helper, Alert alert) {
+    public Report(String text, ZonedDateTime dateTime, Users users, Alert alert) {
         this.text = text;
         this.dateTime = dateTime;
-        this.helper = helper;
+        this.users = users;
         this.alert = alert;
     }
 }
