@@ -13,9 +13,9 @@ import java.time.ZonedDateTime;
 public class SetUpDatabase {
 
     @Bean
-    CommandLineRunner initDatabase(UserRepository userRepository, LocationRepository locationRepository, AlertRepository alertRepository) {
+    CommandLineRunner initDatabase(UserRepository userRepository, LocationRepository locationRepository, AlertRepository alertRepository, ReportRepository reportRepository) {
         return args -> {
-            if (userRepository.count() ==0 && locationRepository.count()==0 && alertRepository.count()==0 ){
+            if (userRepository.count() ==0 && locationRepository.count()==0 && alertRepository.count()==0 && reportRepository.count()==0){
 
 
                 var user1 = new Users("100MA100", "QWERTYUIOP0123456", ZonedDateTime.now(ZoneId.of("UTC")), null);
@@ -38,7 +38,7 @@ public class SetUpDatabase {
                 var location1 = new Location(ZonedDateTime.now(ZoneId.of("UTC")), "Göteborg", user1);
                 var location2 = new Location( ZonedDateTime.now(ZoneId.of("UTC")), "Göteborg", user2);
                 var location3 = new Location(ZonedDateTime.now(ZoneId.of("UTC")), "Stockholm", user3);
-                var location4 = new Location(ZonedDateTime.now(ZoneId.of("UTC")), "Malmö", user4);
+                var location4 = new Location(ZonedDateTime.now(ZoneId.of("UTC")), "Göteborg", user4);
 
 
 
@@ -53,6 +53,12 @@ public class SetUpDatabase {
                 alertRepository.save(alert);
 
 
+                var report1 = new Report("Action A", ZonedDateTime.now(ZoneId.of("UTC")), user4, alert);
+                var report2 = new Report("Action B", ZonedDateTime.now(ZoneId.of("UTC")), user2, alert);
+
+
+                reportRepository.save(report1);
+                reportRepository.save(report2);
 
             }
         };

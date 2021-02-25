@@ -1,5 +1,6 @@
 package com.solidbeans.call4help.service;
 
+import com.solidbeans.call4help.dtos.ReporterQuantityByAlert;
 import com.solidbeans.call4help.entities.Alert;
 import com.solidbeans.call4help.entities.Users;
 import com.solidbeans.call4help.exception.NotFoundException;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,11 +32,11 @@ public class AlertServiceImplement implements AlertService{
         if (user!=null){
 
             //Get actual location
-            var position = locationService.getLocationByUserId(user.getUserId());
+            var location = locationService.getLocationByUserId(user.getUserId());
 
-            if (position.isPresent()){
+            if (location.isPresent()){
 
-                return alertRepository.save(new Alert(ZonedDateTime.now(ZoneId.of("UTC")), position.get().getMunicipality(), user));
+                return alertRepository.save(new Alert(ZonedDateTime.now(ZoneId.of("UTC")), location.get().getMunicipality(), user));
 
             }else {
 
@@ -51,5 +53,11 @@ public class AlertServiceImplement implements AlertService{
     @Override
     public Optional<Alert> findAlertById(Long id) {
         return alertRepository.findById(id);
+    }
+
+
+    @Override
+    public List<ReporterQuantityByAlert> getReporterQuantityByAlertAndUser(String userId) {
+        return alertRepository.reporterQuantityByAlertAndUser(userId);
     }
 }

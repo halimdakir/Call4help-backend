@@ -7,16 +7,14 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class ReadJsonFile {
 
     @SuppressWarnings("unchecked")
-    public List<Location> GetCities() {
-        List<Location> locationList = new ArrayList<>();
+    public List<Area> GetCities() {
+        List<Area> locationList = new ArrayList<>();
 
         //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
@@ -33,7 +31,7 @@ public class ReadJsonFile {
                 String region = (String) object.get("region");
                 String city = (String) object.get("city");
 
-                locationList.add(new Location(region, city));
+                locationList.add(new Area(region, city));
             }
         } catch (IOException | ParseException e) {
             e.printStackTrace();

@@ -1,19 +1,18 @@
 package com.solidbeans.call4help.file;
 
 
-public class Location {
+public class Area {
     private String region;
     private String city;
 
 
-    public Location() {
+    public Area() {
     }
 
-    public Location(String region, String city) {
+    public Area(String region, String city) {
         this.region = region;
         this.city = city;
     }
-
 
     public String getRegion() {
         return region;
