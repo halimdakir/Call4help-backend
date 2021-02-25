@@ -49,17 +49,16 @@ public class SetUpDatabase {
 
 
                 var alert = new Alert( ZonedDateTime.now(ZoneId.of("UTC")),location1.getMunicipality(), user1);
-
                 alertRepository.save(alert);
 
-
+/*
                 var report1 = new Report("Action A", ZonedDateTime.now(ZoneId.of("UTC")), user4, alert);
                 var report2 = new Report("Action B", ZonedDateTime.now(ZoneId.of("UTC")), user2, alert);
 
 
                 reportRepository.save(report1);
                 reportRepository.save(report2);
-
+*/
             }
         };
     }
