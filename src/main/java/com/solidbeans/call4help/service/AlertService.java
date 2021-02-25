@@ -11,4 +11,5 @@ public interface AlertService {
     Optional<Alert> findAlertById(Long id);
     List<ReporterQuantityByAlert> getReporterQuantityByAlertAndUser(String userId);
 
+    List<Alert> getAllAlerts();
 }

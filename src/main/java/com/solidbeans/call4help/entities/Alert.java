@@ -34,4 +34,9 @@ public class Alert {
         this.location = location;
         this.users = users;
     }
+
+    public Alert(ZonedDateTime alertDate, String location) {
+        this.alertDate = alertDate;
+        this.location = location;
+    }
 }

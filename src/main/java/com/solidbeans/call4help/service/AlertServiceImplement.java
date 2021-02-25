@@ -60,4 +60,9 @@ public class AlertServiceImplement implements AlertService{
     public List<ReporterQuantityByAlert> getReporterQuantityByAlertAndUser(String userId) {
         return alertRepository.reporterQuantityByAlertAndUser(userId);
     }
+
+    @Override
+    public List<Alert> getAllAlerts() {
+        return (List<Alert>) alertRepository.findAll();
+    }
 }
