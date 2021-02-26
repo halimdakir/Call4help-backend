@@ -35,6 +35,10 @@ public class Location {
     @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "location")
     private Endpoint endpoint;
 
+    @JsonBackReference
+    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "location")
+    private Position position;
+
     public Location(ZonedDateTime dateTime, String municipality, Users users) {
         this.dateTime = dateTime;
         this.municipality = municipality;

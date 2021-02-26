@@ -39,13 +39,10 @@ public class Users {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "users")
     private Set<Alert> alertSet;
 
-    @JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
-    private Position position;
-
     /*@JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "user")
-    private Shared shared;*/
+    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
+    private Position position;*/
+
 
     public Users(String userId, String authToken, ZonedDateTime creationDate, ZonedDateTime tokenUpdateDate) {
         this.userId = userId;
