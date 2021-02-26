@@ -25,11 +25,11 @@ public class Report {
     private ZonedDateTime dateTime;
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JsonManagedReference
-    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "helper_id", nullable = false)
     private Users users;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "sender_id", nullable = false)
     private Alert alert;

@@ -32,11 +32,11 @@ public class Users {
     private Location location;
 
     @JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
-    private Report report;
+    @OneToMany(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
+    private Set<Report> reportSet;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "users")
     private Set<Alert> alertSet;
 
     @JsonBackReference

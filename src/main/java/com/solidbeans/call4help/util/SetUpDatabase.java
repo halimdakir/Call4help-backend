@@ -48,17 +48,20 @@ public class SetUpDatabase {
                 locationRepository.save(location4);
 
 
-                var alert = new Alert( ZonedDateTime.now(ZoneId.of("UTC")),location1.getMunicipality(), user1);
-                alertRepository.save(alert);
+                var alert1 = new Alert( ZonedDateTime.now(ZoneId.of("UTC")),location1.getMunicipality(), user1);
+                var alert2 = new Alert( ZonedDateTime.now(ZoneId.of("UTC")),location3.getMunicipality(), user3);
 
-/*
-                var report1 = new Report("Action A", ZonedDateTime.now(ZoneId.of("UTC")), user4, alert);
-                var report2 = new Report("Action B", ZonedDateTime.now(ZoneId.of("UTC")), user2, alert);
+                alertRepository.save(alert1);
+                alertRepository.save(alert2);
+
+
+                var report1 = new Report("Action A", ZonedDateTime.now(ZoneId.of("UTC")), user4, alert1);
+                var report2 = new Report("Action B", ZonedDateTime.now(ZoneId.of("UTC")), user2, alert1);
 
 
                 reportRepository.save(report1);
                 reportRepository.save(report2);
-*/
+
             }
         };
     }

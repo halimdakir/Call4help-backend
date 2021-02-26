@@ -19,7 +19,7 @@ public class ReporterQuantityByAlertController {
 
 
     @GetMapping("userId/{userId}")
-    public ResponseEntity<?> getAlertAndCountReporters(@PathVariable String userId){
+    public ResponseEntity<?> getReporterQuantityByAlert(@PathVariable String userId){
         return new ResponseEntity<>( alertService.getReporterQuantityByAlertAndUser(userId), HttpStatus.OK);
     }
 }

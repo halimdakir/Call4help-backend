@@ -1,18 +1,20 @@
 package com.solidbeans.call4help.dtos;
 
-import java.time.ZonedDateTime;
+import com.solidbeans.call4help.entities.Report;
 
+import java.time.ZonedDateTime;
+import java.util.Set;
 
 public class ReporterQuantityByAlert {
     private Long id;
     private ZonedDateTime alertDate;
     private String location;
-    private Long reporter;
+    private long reporter;
 
     public ReporterQuantityByAlert() {
     }
 
-    public ReporterQuantityByAlert(Long id, ZonedDateTime alertDate, String location, Long reporter) {
+    public ReporterQuantityByAlert(Long id, ZonedDateTime alertDate, String location, long reporter) {
         this.id = id;
         this.alertDate = alertDate;
         this.location = location;
@@ -43,11 +45,11 @@ public class ReporterQuantityByAlert {
         this.location = location;
     }
 
-    public Long getReporter() {
+    public long getReporter() {
         return reporter;
     }
 
-    public void setReporter(Long reporter) {
+    public void setReporter(long reporter) {
         this.reporter = reporter;
     }
 }
