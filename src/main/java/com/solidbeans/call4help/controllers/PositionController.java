@@ -1,15 +1,11 @@
 package com.solidbeans.call4help.controllers;
 
-import com.solidbeans.call4help.dtos.LocationDTO;
 import com.solidbeans.call4help.dtos.PositionDTO;
 import com.solidbeans.call4help.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -24,5 +20,17 @@ public class PositionController {
     @PostMapping(value = "/create")
     public ResponseEntity<?> registerUserLocation(@Valid @RequestBody PositionDTO positionDTO) {
         return ResponseEntity.ok(positionService.savePosition(positionDTO));
+    }
+    
+    @GetMapping("/id/{id}")
+    public ResponseEntity<?> getDistanceBetweenUsers(@PathVariable Long id){
+        return ResponseEntity.ok(positionService.getDistanceBetweenUsers(id));
+    }
+
+
+    //TODO IT'S ONLY FOR TEST
+    @GetMapping
+    public ResponseEntity<?> GetAllPositions(){
+        return ResponseEntity.ok(positionService.getAllPositions());
     }
 }

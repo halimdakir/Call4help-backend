@@ -26,16 +26,19 @@ public class Position {
     private org.locationtech.jts.geom.Point coordinates;
 
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    /*@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JsonManagedReference
     @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
-    private Users users;
+    private Users users;*/
 
+    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "location_id", nullable = false)
+    private Location location;
 
-    public Position(ZonedDateTime time, Point coordinates, Users users) {
+    public Position(ZonedDateTime time, Point coordinates, Location location) {
         this.time = time;
         this.coordinates = coordinates;
-        this.users = users;
+        this.location = location;
     }
 }
