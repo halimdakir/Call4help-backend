@@ -22,6 +22,8 @@ public class Alert {
 
     private String location;
 
+    private org.locationtech.jts.geom.Point coordinates;
+
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
@@ -35,10 +37,5 @@ public class Alert {
         this.alertDate = alertDate;
         this.location = location;
         this.users = users;
-    }
-
-    public Alert(ZonedDateTime alertDate, String location) {
-        this.alertDate = alertDate;
-        this.location = location;
     }
 }
