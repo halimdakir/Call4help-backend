@@ -4,6 +4,7 @@ package com.solidbeans.call4help.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import org.locationtech.jts.geom.Point;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -32,4 +33,9 @@ public class Position {
     private Users users;
 
 
+    public Position(ZonedDateTime time, Point coordinates, Users users) {
+        this.time = time;
+        this.coordinates = coordinates;
+        this.users = users;
+    }
 }

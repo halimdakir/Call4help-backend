@@ -46,10 +46,10 @@ public class LocationServiceImplement implements LocationService{
 
                 locationRepository.save(location);
 
-                //entityManager.detach(position);
+                entityManager.detach(location);
 
 
-                return locationRepository.save(location);
+                return location;
 
             }else {
 
