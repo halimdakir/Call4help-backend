@@ -13,9 +13,9 @@ import java.time.ZonedDateTime;
 public class SetUpDatabase {
 
     @Bean
-    CommandLineRunner initDatabase(UserRepository userRepository, PositionRepository positionRepository, AlertRepository alertRepository) {
+    CommandLineRunner initDatabase(UserRepository userRepository, LocationRepository locationRepository, AlertRepository alertRepository, ReportRepository reportRepository) {
         return args -> {
-            if (userRepository.count() ==0 && positionRepository.count()==0 && alertRepository.count()==0 ){
+            if (userRepository.count() ==0 && locationRepository.count()==0 && alertRepository.count()==0 && reportRepository.count()==0){
 
 
                 var user1 = new Users("100MA100", "QWERTYUIOP0123456", ZonedDateTime.now(ZoneId.of("UTC")), null);
@@ -35,24 +35,32 @@ public class SetUpDatabase {
                 var position3 = new Position(ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.707617, 11.967883)));
                 var position4 = new Position(ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.707015, 11.968140)));*/
 
-                var position1 = new Position(ZonedDateTime.now(ZoneId.of("UTC")), "Göteborg", user1);
-                var position2 = new Position( ZonedDateTime.now(ZoneId.of("UTC")), "Göteborg", user2);
-                var position3 = new Position(ZonedDateTime.now(ZoneId.of("UTC")), "Stockholm", user3);
-                var position4 = new Position(ZonedDateTime.now(ZoneId.of("UTC")), "Malmö", user4);
+                var location1 = new Location(ZonedDateTime.now(ZoneId.of("UTC")), "Göteborg", user1);
+                var location2 = new Location( ZonedDateTime.now(ZoneId.of("UTC")), "Göteborg", user2);
+                var location3 = new Location(ZonedDateTime.now(ZoneId.of("UTC")), "Stockholm", user3);
+                var location4 = new Location(ZonedDateTime.now(ZoneId.of("UTC")), "Göteborg", user4);
 
 
 
-                positionRepository.save(position1);
-                positionRepository.save(position2);
-                positionRepository.save(position3);
-                positionRepository.save(position4);
+                locationRepository.save(location1);
+                locationRepository.save(location2);
+                locationRepository.save(location3);
+                locationRepository.save(location4);
 
 
-                var alert = new Alert( ZonedDateTime.now(ZoneId.of("UTC")),position1.getMunicipality(), user1);
+                var alert1 = new Alert( ZonedDateTime.now(ZoneId.of("UTC")),location1.getMunicipality(), user1);
+                var alert2 = new Alert( ZonedDateTime.now(ZoneId.of("UTC")),location3.getMunicipality(), user3);
 
-                alertRepository.save(alert);
+                alertRepository.save(alert1);
+                alertRepository.save(alert2);
 
 
+                var report1 = new Report("Action A", ZonedDateTime.now(ZoneId.of("UTC")), user4, alert1);
+                var report2 = new Report("Action B", ZonedDateTime.now(ZoneId.of("UTC")), user2, alert1);
+
+
+                reportRepository.save(report1);
+                reportRepository.save(report2);
 
             }
         };

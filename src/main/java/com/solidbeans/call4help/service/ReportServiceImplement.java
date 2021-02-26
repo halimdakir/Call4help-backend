@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.ZoneOffset;
+import java.util.List;
 
 @Service
 public class ReportServiceImplement implements ReportService {
@@ -50,6 +51,11 @@ public class ReportServiceImplement implements ReportService {
 
 
 
+    }
+
+    @Override
+    public List<Report> getReportsByAlert(String userId) {
+        return (List<Report>) reportRepository.findAllByAlert_Users_UserId(userId);
     }
 
 }

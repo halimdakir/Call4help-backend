@@ -4,6 +4,7 @@ import com.solidbeans.call4help.notification.AmazonSNSService;
 import com.solidbeans.call4help.service.AlertService;
 import com.solidbeans.call4help.service.EndpointService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +33,13 @@ public class SenderController {
         alertService.registerHelpAlert(userId);
 
         //Publish message to the nearest users
-        amazonSNSService.publishMessage(endpointService.getEndpointsByPosition(userId), "I need help!");
+        amazonSNSService.publishMessage(endpointService.getEndpointsByLocation(userId), "I need help!");
 
         return ResponseEntity.ok("Message has successfully sent!");
+    }
+
+    @GetMapping("/alerts")
+    public ResponseEntity<?> getALLAlerts(){
+        return new ResponseEntity<>(alertService.getAllAlerts(), HttpStatus.OK);
     }
 }

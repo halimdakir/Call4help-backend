@@ -1,6 +1,7 @@
 package com.solidbeans.call4help.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class Alert {
 
     private String location;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private Users users;
@@ -33,5 +35,10 @@ public class Alert {
         this.alertDate = alertDate;
         this.location = location;
         this.users = users;
+    }
+
+    public Alert(ZonedDateTime alertDate, String location) {
+        this.alertDate = alertDate;
+        this.location = location;
     }
 }

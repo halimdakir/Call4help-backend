@@ -1,11 +1,11 @@
 package com.solidbeans.call4help.service;
 
-import com.solidbeans.call4help.dtos.PositionDTO;
-import com.solidbeans.call4help.entities.Position;
+import com.solidbeans.call4help.dtos.LocationDTO;
+import com.solidbeans.call4help.entities.Location;
 import com.solidbeans.call4help.entities.Users;
 import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.exception.RegistrationException;
-import com.solidbeans.call4help.repository.PositionRepository;
+import com.solidbeans.call4help.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
@@ -17,10 +17,10 @@ import java.util.Optional;
 
 
 @Service
-public class PositionServiceImplement implements PositionService{
+public class LocationServiceImplement implements LocationService{
 
     @Autowired
-    private PositionRepository positionRepository;
+    private LocationRepository locationRepository;
     @Autowired
     private UserService userService;
     @PersistenceContext
@@ -31,29 +31,29 @@ public class PositionServiceImplement implements PositionService{
 
 
     @Override
-    public Position createUserPosition(PositionDTO positionDTO) {
-        if (positionDTO.getMunicipality() == null || positionDTO.getMunicipality().equals("") &&  positionDTO.getUserId() == null || positionDTO.getUserId().equals("")){
+    public Location createUserLocation(LocationDTO locationDTO) {
+        if (locationDTO.getMunicipality() == null || locationDTO.getMunicipality().equals("") &&  locationDTO.getUserId() == null || locationDTO.getUserId().equals("")){
 
             throw new RegistrationException("All fields are required!");
 
         }else{
 
-            Users user = userService.findUserByUserId(positionDTO.getUserId());
+            Users user = userService.findUserByUserId(locationDTO.getUserId());
 
             if (user!=null){
 
-                Position position = new Position(Instant.now().atZone(ZoneOffset.UTC), positionDTO.getMunicipality(), user);
+                Location location = new Location(Instant.now().atZone(ZoneOffset.UTC), locationDTO.getMunicipality(), user);
 
-                positionRepository.save(position);
+                locationRepository.save(location);
 
                 //entityManager.detach(position);
 
 
-                return positionRepository.save(position);
+                return locationRepository.save(location);
 
             }else {
 
-                throw new NotFoundException("User with id :"+positionDTO.getUserId()+" is not found");
+                throw new NotFoundException("User with id :"+ locationDTO.getUserId()+" is not found");
             }
         }
 
@@ -61,11 +61,11 @@ public class PositionServiceImplement implements PositionService{
 
 
     @Override
-    public Position updateUserPosition(String city, String userId) {
-        return positionRepository.findPositionByUserId(userId)
+    public Location updateUserLocation(String city, String userId) {
+        return locationRepository.findLocationByUserId(userId)
                 .map(position -> {
                     position.setMunicipality(city);
-                    return positionRepository.save(position);
+                    return locationRepository.save(position);
                 })
                 .orElseThrow(() -> new NotFoundException("Position not found with user id :" + userId)
                 );
@@ -73,13 +73,13 @@ public class PositionServiceImplement implements PositionService{
 
 
     @Override
-    public List<Position> getAllPositions() {
-        return positionRepository.findAllPosition();
+    public List<Location> getAllLocations() {
+        return locationRepository.findAllLocations();
     }
 
     @Override
-    public Optional<Position> getPositionByUserId(String userId) {
-        return positionRepository.findPositionByUserId(userId);
+    public Optional<Location> getLocationByUserId(String userId) {
+        return locationRepository.findLocationByUserId(userId);
     }
 
 

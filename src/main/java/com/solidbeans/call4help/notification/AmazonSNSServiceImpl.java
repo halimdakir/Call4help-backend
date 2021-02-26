@@ -4,7 +4,7 @@ import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.model.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.solidbeans.call4help.entities.Endpoint;
-import com.solidbeans.call4help.entities.Position;
+import com.solidbeans.call4help.entities.Location;
 import com.solidbeans.call4help.exception.NotAcceptedException;
 import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.repository.EndpointsRepository;
@@ -41,8 +41,8 @@ public class AmazonSNSServiceImpl implements AmazonSNSService{
 
 
     @Override
-    public Endpoint createAwsSnsEndpoint(Position position) {
-        var user = userService.getUserByPositionId(position.getId());
+    public Endpoint createAwsSnsEndpoint(Location location) {
+        var user = userService.getUserByPositionId(location.getId());
 
         if (user.isPresent()){
 
@@ -51,7 +51,7 @@ public class AmazonSNSServiceImpl implements AmazonSNSService{
             if (result!=null){
 
 
-                  var endpoints = new Endpoint(result, position);
+                  var endpoints = new Endpoint(result, location);
 
                 return endpointsRepository.save(endpoints);
 

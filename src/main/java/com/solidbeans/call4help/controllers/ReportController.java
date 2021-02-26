@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/v1/report", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -22,5 +19,12 @@ public class ReportController {
     public ResponseEntity<?> registerReport(@RequestBody ReportDTO reportDTO){
         var report = reportService.saveReport(reportDTO);
         return new ResponseEntity<>(report, HttpStatus.OK);
+    }
+
+
+    //TODO GET REPORTS BY ALERT, AND THIS ENDPOINT WONT BE AVAILABLE TO USERS.
+    @GetMapping("userId/{userId}")
+    public ResponseEntity<?> getReportsByAlarm(@PathVariable String userId){
+        return new ResponseEntity<>(reportService.getReportsByAlert(userId), HttpStatus.OK);
     }
 }
