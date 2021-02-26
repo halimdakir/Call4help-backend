@@ -9,5 +9,5 @@ public interface ReportService {
 
     ReportDTO saveReport(ReportDTO reportDTO);
 
-    List<Report> allReports();
+    List<Report> getReportsByAlert(String userId);
 }

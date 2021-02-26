@@ -54,8 +54,8 @@ public class ReportServiceImplement implements ReportService {
     }
 
     @Override
-    public List<Report> allReports() {
-        return (List<Report>) reportRepository.findAll();
+    public List<Report> getReportsByAlert(String userId) {
+        return (List<Report>) reportRepository.findAllByAlert_Users_UserId(userId);
     }
 
 }

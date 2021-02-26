@@ -21,8 +21,10 @@ public class ReportController {
         return new ResponseEntity<>(report, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<?> getAllReports(){
-        return new ResponseEntity<>(reportService.allReports(), HttpStatus.OK);
+
+    //TODO GET REPORTS BY ALERT, AND THIS ENDPOINT WONT BE AVAILABLE TO USERS.
+    @GetMapping("userId/{userId}")
+    public ResponseEntity<?> getReportsByAlarm(@PathVariable String userId){
+        return new ResponseEntity<>(reportService.getReportsByAlert(userId), HttpStatus.OK);
     }
 }
