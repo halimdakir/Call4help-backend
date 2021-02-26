@@ -106,8 +106,13 @@ public class UserServiceImplement implements UserService{
     }
 
     @Override
-    public Optional<Users> getUserByPositionId(Long id) {
+    public Optional<Users> getUserByLocationId(Long id) {
         return userRepository.findUsersByLocationId(id);
+    }
+
+    @Override
+    public Optional<Users> findUserByPositionId(Long id) {
+        return userRepository.findUsersByLocation_Position_Id(id);
     }
 
 }

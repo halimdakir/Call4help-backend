@@ -21,5 +21,7 @@ public interface UserService {
 
     void deleteUser(Long id);
 
-    Optional<Users> getUserByPositionId(Long id);
+    Optional<Users> getUserByLocationId(Long id);
+
+    Optional<Users> findUserByPositionId(Long id);
 }
