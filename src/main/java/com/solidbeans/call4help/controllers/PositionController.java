@@ -24,7 +24,7 @@ public class PositionController {
     
     @GetMapping("/id/{id}")
     public ResponseEntity<?> getDistanceBetweenUsers(@PathVariable Long id){
-        return ResponseEntity.ok(positionService.getDistanceBetweenUsers(id));
+        return ResponseEntity.ok(positionService.getNearestUsers(id));
     }
 
 

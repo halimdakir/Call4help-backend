@@ -1,8 +1,6 @@
 package com.solidbeans.call4help.service;
 
-import com.solidbeans.call4help.dtos.DistanceDTO;
-import com.solidbeans.call4help.dtos.DistanceToMeters;
-import com.solidbeans.call4help.dtos.PositionDTO;
+import com.solidbeans.call4help.dtos.*;
 import com.solidbeans.call4help.entities.Location;
 import com.solidbeans.call4help.entities.Position;
 import com.solidbeans.call4help.entities.Users;
@@ -80,17 +78,26 @@ public class PositionServiceImplement implements PositionService{
 
     //DISTANCE TO METRES AND DISTANCE LESS OR EQUAL THAN 500 METRES <RADIUS>
     @Override
-    public List<DistanceToMeters> getDistanceBetweenUsers(Long id) {
+    public List<NotificationMessageDTO> getNearestUsers(Long id) {
+
         List<DistanceDTO> unfilteredList = positionRepository.findNearestPersonList(id);
 
-        List<DistanceToMeters> filteredList = new ArrayList<>();
+
+        List<NotificationMessageDTO> nearestUsers = new ArrayList<>();
 
         for (DistanceDTO distanceDTO : unfilteredList){
+
             if (distanceDTO.getDistance() <= 500){
-                filteredList.add(new DistanceToMeters(distanceDTO.getId(), distanceDTO.getDistance()));
+
+                var user = userService.findUserByPositionId(distanceDTO.getId());
+
+                user.ifPresent(users -> nearestUsers.add(new NotificationMessageDTO(users.getId(), users.getUserId(), (int) Math.round(distanceDTO.getDistance()))));
+
+
             }
         }
-        return filteredList;
+
+        return nearestUsers;
     }
 
     @Override
