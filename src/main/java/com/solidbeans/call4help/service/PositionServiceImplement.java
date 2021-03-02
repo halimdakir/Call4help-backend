@@ -27,6 +27,8 @@ public class PositionServiceImplement implements PositionService{
     private PositionRepository positionRepository;
     @Autowired
     private LocationService locationService;
+    @Autowired
+    private AlertService alertService;
     private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26910);
 
     @Override
@@ -82,22 +84,33 @@ public class PositionServiceImplement implements PositionService{
 
         List<DistanceDTO> unfilteredList = positionRepository.findNearestPersonList(id);
 
+        var alert = alertService.findAlertById(id);
 
-        List<NotificationMessageDTO> nearestUsers = new ArrayList<>();
-
-        for (DistanceDTO distanceDTO : unfilteredList){
-
-            if (distanceDTO.getDistance() <= 500){
-
-                var user = userService.findUserByPositionId(distanceDTO.getId());
-
-                user.ifPresent(users -> nearestUsers.add(new NotificationMessageDTO(users.getId(), users.getUserId(), (int) Math.round(distanceDTO.getDistance()))));
+        if (alert.isPresent()){
 
 
-            }
+                List<NotificationMessageDTO> nearestUsers = new ArrayList<>();
+
+                for (DistanceDTO distanceDTO : unfilteredList){
+
+                    if (distanceDTO.getDistance() <= 500){
+
+                        var user = userService.findUserByPositionId(distanceDTO.getId());
+
+                        user.ifPresent(users -> nearestUsers.add(new NotificationMessageDTO(users.getId(), (int) Math.round(distanceDTO.getDistance()), alert.get().getUsers().getId())));
+
+
+                    }
+                }
+
+                return nearestUsers;
+
+        }else {
+
+            throw new NotFoundException("Alert with id:"+id+" not found!");
+
         }
 
-        return nearestUsers;
     }
 
     @Override
