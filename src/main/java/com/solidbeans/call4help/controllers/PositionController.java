@@ -21,7 +21,8 @@ public class PositionController {
     public ResponseEntity<?> registerUserLocation(@Valid @RequestBody PositionDTO positionDTO) {
         return ResponseEntity.ok(positionService.savePosition(positionDTO));
     }
-    
+
+    //Get Nearest users and distance by alert id
     @GetMapping("/id/{id}")
     public ResponseEntity<?> getDistanceBetweenUsers(@PathVariable Long id){
         return ResponseEntity.ok(positionService.getNearestUsers(id));
