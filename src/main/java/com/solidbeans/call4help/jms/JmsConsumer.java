@@ -11,14 +11,14 @@ import java.util.List;
 @Component
 public class JmsConsumer {
 
-    public static List<MessageObject> list = new ArrayList<>();
+    public static List<MessageObject> Jms_Message_List = new ArrayList<>();
     private static final Logger LOGGER = LoggerFactory.getLogger(JmsConsumer.class);
 
 
     @JmsListener(destination = JmsConfig.JMS_QUEUE)
     public void messageListener(MessageObject message) {
         LOGGER.info("Message received! {}", message);
-        list.add(message);
+        Jms_Message_List.add(message);
     }
 
 }

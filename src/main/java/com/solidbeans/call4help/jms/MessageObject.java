@@ -11,7 +11,7 @@ import java.util.UUID;
 @Setter
 @ToString
 public class MessageObject {
-    private UUID uuid = UUID.randomUUID();;
+    private UUID uuid = UUID.randomUUID();
     private Long helper_id;
     private int distance;
     private Long sender_id;
