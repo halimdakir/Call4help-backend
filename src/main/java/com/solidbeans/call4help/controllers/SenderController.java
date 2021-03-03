@@ -31,7 +31,10 @@ public class SenderController {
     @Autowired
     private PositionService positionService;
 
+
+
     //TODO Language of the MESSAGE depending on the language used on the phone
+    //TODO Delete published messages after 24 hours
 
     @PostMapping("create")
     public ResponseEntity<?> sendHelpRequest(@RequestBody PositionDTO positionDTO) {
@@ -40,7 +43,6 @@ public class SenderController {
 
         //Push notification
         amazonSNSService.publishMessage(endpointService.getEndpointsByLocation(positionDTO.getUserId()), "Someone needs help!");
-
 
         //Publish message
         jmsService.publishMessage(positionService.getNearestUsers(alert.getId()));
@@ -53,4 +55,5 @@ public class SenderController {
     public ResponseEntity<?> getALLAlerts(){
         return new ResponseEntity<>(alertService.getAllAlerts(), HttpStatus.OK);
     }
+
 }

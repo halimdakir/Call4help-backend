@@ -34,7 +34,7 @@ public class ReportController {
 
         UUID stringToUuid = UUID.fromString(uuid);
 
-        //Find message and deleted
+        //Find message and delete it
         var message = JmsConsumer.Jms_Message_List.stream()
                 .filter(e -> e.getUuid().equals(stringToUuid))
                 .collect(Collectors.toList());
@@ -52,7 +52,7 @@ public class ReportController {
 
         UUID stringToUuid = UUID.fromString(uuid);
 
-        //Find message and deleted
+        //Find message and delete it
         var message = JmsConsumer.Jms_Message_List.stream()
                 .filter(e -> e.getUuid().equals(stringToUuid))
                 .collect(Collectors.toList());

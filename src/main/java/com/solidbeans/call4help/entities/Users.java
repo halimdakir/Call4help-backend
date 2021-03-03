@@ -18,6 +18,7 @@ public class Users {
 
     @NotNull
     private String userId;
+
     private String authToken;
 
     @Column(name="creation_date")
@@ -26,6 +27,7 @@ public class Users {
     @Column(name="token_update_date")
     private ZonedDateTime tokenUpdateDate;
 
+    //private String locale;
 
     @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
@@ -50,4 +52,5 @@ public class Users {
         this.creationDate = creationDate;
         this.tokenUpdateDate = tokenUpdateDate;
     }
+
 }
