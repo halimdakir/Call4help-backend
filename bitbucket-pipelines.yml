@@ -18,7 +18,8 @@ pipelines:
           - artemis
           - postgres
           - docker
-  
+
+
 definitions:
   services:
     docker:

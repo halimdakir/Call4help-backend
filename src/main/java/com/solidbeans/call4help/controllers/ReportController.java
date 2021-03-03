@@ -47,7 +47,7 @@ public class ReportController {
 
 
     //REFUSE TO REPORT
-    @PostMapping("/done")
+    @PostMapping("/refuse")
     public ResponseEntity<?> refuseReport(@RequestBody String uuid){
 
         UUID stringToUuid = UUID.fromString(uuid);
