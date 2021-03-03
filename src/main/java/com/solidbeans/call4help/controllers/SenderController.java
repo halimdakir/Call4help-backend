@@ -1,16 +1,16 @@
 package com.solidbeans.call4help.controllers;
 
+import com.solidbeans.call4help.dtos.PositionDTO;
+import com.solidbeans.call4help.jms.JmsService;
 import com.solidbeans.call4help.notification.AmazonSNSService;
 import com.solidbeans.call4help.service.AlertService;
 import com.solidbeans.call4help.service.EndpointService;
+import com.solidbeans.call4help.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/v1/sender", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -25,21 +25,35 @@ public class SenderController {
     @Autowired
     private AmazonSNSService amazonSNSService;
 
+    @Autowired
+    private JmsService jmsService;
+
+    @Autowired
+    private PositionService positionService;
+
+
+
     //TODO Language of the MESSAGE depending on the language used on the phone
+    //TODO Delete published messages after 24 hours
 
-    @GetMapping("userId/{userId}")
-    public ResponseEntity<?> sendHelpRequest(@PathVariable String userId) {
+    @PostMapping("create")
+    public ResponseEntity<?> sendHelpRequest(@RequestBody PositionDTO positionDTO) {
 
-        alertService.registerHelpAlert(userId);
+        var alert = alertService.registerHelpAlert(positionDTO);
 
-        //Publish message to the nearest users
-        amazonSNSService.publishMessage(endpointService.getEndpointsByLocation(userId), "I need help!");
+        //Push notification
+        amazonSNSService.publishMessage(endpointService.getEndpointsByLocation(positionDTO.getUserId()), "Someone needs help!");
 
-        return ResponseEntity.ok("Message has successfully sent!");
+        //Publish message
+        jmsService.publishMessage(positionService.getNearestUsers(alert.getId()));
+
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/alerts")
     public ResponseEntity<?> getALLAlerts(){
         return new ResponseEntity<>(alertService.getAllAlerts(), HttpStatus.OK);
     }
+
 }

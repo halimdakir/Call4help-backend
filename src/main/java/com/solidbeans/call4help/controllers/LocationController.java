@@ -21,17 +21,17 @@ public class LocationController {
     private AmazonSNSService amazonSNSService;
 
     @PostMapping(value = "/create")
-    public ResponseEntity<?> registerUserPosition(@Valid @RequestBody LocationDTO locationDTO) {
+    public ResponseEntity<?> registerUserLocation(@Valid @RequestBody LocationDTO locationDTO) {
         return ResponseEntity.ok(amazonSNSService.createAwsSnsEndpoint(locationService.createUserLocation(locationDTO)));
     }
 
     @GetMapping(value = "/all")
-    public ResponseEntity<?> getAllPositions() {
+    public ResponseEntity<?> getAllLocations() {
         return ResponseEntity.ok(locationService.getAllLocations());
     }
 
     @PutMapping("/userId/{userId}")
-    public ResponseEntity<?> updateUserPosition(@RequestBody String city, @PathVariable String userId) {
+    public ResponseEntity<?> updateUserLocation(@RequestBody String city, @PathVariable String userId) {
         return ResponseEntity.ok(locationService.updateUserLocation(city, userId));
     }
 }

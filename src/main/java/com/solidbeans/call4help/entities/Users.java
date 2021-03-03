@@ -18,6 +18,7 @@ public class Users {
 
     @NotNull
     private String userId;
+
     private String authToken;
 
     @Column(name="creation_date")
@@ -26,6 +27,7 @@ public class Users {
     @Column(name="token_update_date")
     private ZonedDateTime tokenUpdateDate;
 
+    //private String locale;
 
     @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
@@ -39,13 +41,10 @@ public class Users {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "users")
     private Set<Alert> alertSet;
 
-    @JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
-    private Position position;
-
     /*@JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "user")
-    private Shared shared;*/
+    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
+    private Position position;*/
+
 
     public Users(String userId, String authToken, ZonedDateTime creationDate, ZonedDateTime tokenUpdateDate) {
         this.userId = userId;
@@ -53,4 +52,5 @@ public class Users {
         this.creationDate = creationDate;
         this.tokenUpdateDate = tokenUpdateDate;
     }
+
 }

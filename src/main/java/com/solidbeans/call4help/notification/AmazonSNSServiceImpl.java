@@ -42,7 +42,7 @@ public class AmazonSNSServiceImpl implements AmazonSNSService{
 
     @Override
     public Endpoint createAwsSnsEndpoint(Location location) {
-        var user = userService.getUserByPositionId(location.getId());
+        var user = userService.getUserByLocationId(location.getId());
 
         if (user.isPresent()){
 
