@@ -14,9 +14,9 @@ pipelines:
           - export TESTCONTAINERS_RYUK_DISABLED=true
           - mvn -B verify # -B batch mode makes Maven less verbose
         services:
+          - artemis
           - postgres
           - docker
-          - artemis
 
 definitions:
   services:
