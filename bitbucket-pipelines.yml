@@ -17,14 +17,11 @@ pipelines:
           - postgres
           - docker
           - artemis
-
-options:
-  docker: true
   
 definitions:
   services:
     docker:
-      memory: 7128
+      memory: 3072
     postgres:
       image: timescale/timescaledb-postgis:2.0.0-pg12
       variables:
