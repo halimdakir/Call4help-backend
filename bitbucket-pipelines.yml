@@ -13,15 +13,16 @@ pipelines:
         script: # Modify the commands below to build your repository.
           - export TESTCONTAINERS_RYUK_DISABLED=true
           - mvn -B verify # -B batch mode makes Maven less verbose
+        size: 2x
         services:
+          - artemis
           - postgres
           - docker
-          - artemis
   
 definitions:
   services:
     docker:
-      memory: 3072
+      memory: 2048
     postgres:
       image: timescale/timescaledb-postgis:2.0.0-pg12
       variables:
