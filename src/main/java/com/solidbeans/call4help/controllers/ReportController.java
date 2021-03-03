@@ -38,7 +38,7 @@ public class ReportController {
         var message = JmsConsumer.Jms_Message_List.stream()
                 .filter(e -> e.getUuid().equals(stringToUuid))
                 .collect(Collectors.toList());
-        if (!message.isEmpty()){
+        if (message.size() > 0){
             JmsConsumer.Jms_Message_List.remove(message.get(0));
         }
 
@@ -46,8 +46,22 @@ public class ReportController {
     }
 
 
-    //TODO I DO NOT WANT TO REPORT
+    //REFUSE TO REPORT
+    @PostMapping("/done")
+    public ResponseEntity<?> refuseReport(@RequestBody String uuid){
 
+        UUID stringToUuid = UUID.fromString(uuid);
+
+        //Find message and deleted
+        var message = JmsConsumer.Jms_Message_List.stream()
+                .filter(e -> e.getUuid().equals(stringToUuid))
+                .collect(Collectors.toList());
+        if (message.size() == 1){
+            JmsConsumer.Jms_Message_List.remove(message.get(0));
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     //TODO GET REPORTS BY ALERT, AND THIS ENDPOINT WONT BE AVAILABLE TO USERS.
     @GetMapping("userId/{userId}")
