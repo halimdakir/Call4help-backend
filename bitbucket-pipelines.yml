@@ -21,7 +21,7 @@ pipelines:
 definitions:
   services:
     docker:
-      memory: 5120
+      memory: 10240
     postgres:
       image: timescale/timescaledb-postgis:2.0.0-pg12
       variables:
