@@ -28,6 +28,7 @@ definitions:
         POSTGRES_DB: call4help
         POSTGRES_PASSWORD: "1234"
     artemis:
+      image: vromero/activemq-artemis:latest
       variables:
         ARTEMIS_USERNAME: call4help
         ARTEMIS_PASSWORD: "1234"
