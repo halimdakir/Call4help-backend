@@ -1,1 +1,1 @@
-docker run --name=artemis -d -p 8161:8161 -p 33333:61616 -e ARTEMIS_USERNAME=call4help -e ARTEMIS_PASSWORD=1234 vromero/activemq-artemis
+docker run --name=artemis -d -p 8161:8161 -p 61616:61616 -e ARTEMIS_USERNAME=call4help -e ARTEMIS_PASSWORD=1234 vromero/activemq-artemis

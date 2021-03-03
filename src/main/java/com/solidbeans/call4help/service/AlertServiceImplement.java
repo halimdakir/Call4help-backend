@@ -12,6 +12,8 @@ import org.locationtech.jts.geom.PrecisionModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -26,6 +28,9 @@ public class AlertServiceImplement implements AlertService{
     private UserService userService;
     @Autowired
     private LocationService locationService;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26910);
 
@@ -42,7 +47,12 @@ public class AlertServiceImplement implements AlertService{
 
             if (location.isPresent()){
 
-                return alertRepository.save(new Alert(ZonedDateTime.now(ZoneId.of("UTC")), location.get().getMunicipality(), geometryFactory.createPoint(new Coordinate(positionDTO.getCoordinates().getLng(), positionDTO.getCoordinates().getLat())), user));
+                Alert alert = new Alert(ZonedDateTime.now(ZoneId.of("UTC")), location.get().getMunicipality(), geometryFactory.createPoint(new Coordinate(positionDTO.getCoordinates().getLng(), positionDTO.getCoordinates().getLat())), user);
+
+                alertRepository.save(alert);
+                entityManager.detach(alert);
+
+                return alert;
 
             }else {
 
