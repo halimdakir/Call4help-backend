@@ -16,6 +16,7 @@ pipelines:
         services:
           - postgres
           - docker
+          - artemis
 
 definitions:
   services:
@@ -26,3 +27,7 @@ definitions:
       variables:
         POSTGRES_DB: call4help
         POSTGRES_PASSWORD: "1234"
+    artemis:
+      variables:
+        ARTEMIS_USERNAME: call4help
+        ARTEMIS_PASSWORD: "1234"
