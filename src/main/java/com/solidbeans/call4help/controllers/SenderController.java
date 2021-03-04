@@ -51,6 +51,7 @@ public class SenderController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    //TODO THIS IS ONLY FOR TEST
     @GetMapping("/alerts")
     public ResponseEntity<?> getALLAlerts(){
         return new ResponseEntity<>(alertService.getAllAlerts(), HttpStatus.OK);
