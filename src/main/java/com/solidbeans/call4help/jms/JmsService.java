@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface JmsService {
     String publishMessage(List<NotificationMessageDTO> list);
+    List<MessageObject> messagesList(Long helperId);
+    boolean findMessageByUuidAndRemove(String uuid);
 }

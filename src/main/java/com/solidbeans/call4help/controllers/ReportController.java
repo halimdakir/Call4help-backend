@@ -2,6 +2,7 @@ package com.solidbeans.call4help.controllers;
 
 import com.solidbeans.call4help.dtos.ReportDTO;
 import com.solidbeans.call4help.jms.JmsConsumer;
+import com.solidbeans.call4help.jms.JmsService;
 import com.solidbeans.call4help.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,10 @@ public class ReportController {
     @Autowired
     private ReportService reportService;
 
+    @Autowired
+    private JmsService jmsService;
+
+
     @PostMapping
     public ResponseEntity<?> registerReport(@RequestBody ReportDTO reportDTO){
         var report = reportService.saveReport(reportDTO);
@@ -32,15 +37,8 @@ public class ReportController {
 
         var report = reportService.saveReport(reportDTO);
 
-        UUID stringToUuid = UUID.fromString(uuid);
-
         //Find message and delete it
-        var message = JmsConsumer.Jms_Message_List.stream()
-                .filter(e -> e.getUuid().equals(stringToUuid))
-                .collect(Collectors.toList());
-        if (message.size() > 0){
-            JmsConsumer.Jms_Message_List.remove(message.get(0));
-        }
+        jmsService.findMessageByUuidAndRemove(uuid);
 
         return new ResponseEntity<>(report, HttpStatus.OK);
     }
@@ -50,15 +48,8 @@ public class ReportController {
     @PostMapping("/refuse")
     public ResponseEntity<?> refuseReport(@RequestBody String uuid){
 
-        UUID stringToUuid = UUID.fromString(uuid);
-
         //Find message and delete it
-        var message = JmsConsumer.Jms_Message_List.stream()
-                .filter(e -> e.getUuid().equals(stringToUuid))
-                .collect(Collectors.toList());
-        if (message.size() == 1){
-            JmsConsumer.Jms_Message_List.remove(message.get(0));
-        }
+        jmsService.findMessageByUuidAndRemove(uuid);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
