@@ -1,1194 +1,1194 @@
 [
     {
-        "region": "Stockholm",
+        "id": 1,
         "city": "Stockholm"
     },
     {
-        "region": "Västra Götaland",
+        "id": 2,
         "city": "Gothenburg"
     },
     {
-        "region": "Skåne",
+        "id": 3,
         "city": "Malmö"
     },
     {
-        "region": "Uppsala",
+        "id": 4,
         "city": "Uppsala"
     },
     {
-        "region": "Stockholm",
+        "id": 5,
         "city": "Uppsala"
     },
     {
-        "region": "Västmanland",
+        "id": 6,
         "city": "Västerås"
     },
     {
-        "region": "Örebro",
+        "id": 7,
         "city": "Örebro"
     },
     {
-        "region": "Östergötland",
+        "id": 8,
         "city": "Linköping"
     },
     {
-        "region": "Skåne",
+        "id": 9,
         "city": "Helsingborg"
     },
     {
-        "region": "Jönköping",
+        "id": 10,
         "city": "Jönköping"
     },
     {
-        "region": "Västerbotten",
+        "id": 11,
         "city": "Umeå"
     },
     {
-        "region": "Östergötland",
+        "id": 12,
         "city": "Norrköping"
     },
     {
-        "region": "Värmland",
+        "id": 13,
         "city": "Karlstad"
     },
     {
-        "region": "Västernorrland",
+        "id": 14,
         "city": "Sundsvall"
     },
     {
-        "region": "Gävleborg",
+        "id": 15,
         "city": "Gävle"
     },
     {
-        "region": "Västra Götaland",
+        "id": 16,
         "city": "Borås"
     },
     {
-        "region": "Kronoberg",
+        "id": 17,
         "city": "Växjö"
     },
     {
-        "region": "Halland",
+        "id": 18,
         "city": "Halmstad"
     },
     {
-        "region": "Norrbotten",
+        "id": 19,
         "city": "Luleå"
     },
     {
-        "region": "Jämtland",
+        "id": 20,
         "city": "Östersund"
     },
     {
-        "region": "Västra Götaland",
+        "id": 21,
         "city": "Trollhättan"
     },
     {
-        "region": "Kalmar",
+        "id": 22,
         "city": "Kalmar"
     },
     {
-        "region": "Dalarna",
+        "id": 23,
         "city": "Borlänge"
     },
     {
-        "region": "Västra Götaland",
+        "id": 24,
         "city": "Mölndal"
     },
     {
-        "region": "Dalarna",
+        "id": 25,
         "city": "Falun"
     },
     {
-        "region": "Blekinge",
+        "id": 26,
         "city": "Karlskrona"
     },
     {
-        "region": "Södermanland",
+        "id": 27,
         "city": "Nyköping"
     },
     {
-        "region": "Skåne",
+        "id": 28,
         "city": "Kristianstad"
     },
     {
-        "region": "Västerbotten",
+        "id": 29,
         "city": "Skellefteå"
     },
     {
-        "region": "Västernorrland",
+        "id": 30,
         "city": "Örnsköldsvik"
     },
     {
-        "region": "Gotland",
+        "id": 31,
         "city": "Visby"
     },
     {
-        "region": "Jönköping",
+        "id": 32,
         "city": "Huskvarna"
     },
     {
-        "region": "Västra Götaland",
+        "id": 33,
         "city": "Vänersborg"
     },
     {
-        "region": "Västernorrland",
+        "id": 34,
         "city": "Härnösand"
     },
     {
-        "region": "Norrbotten",
+        "id": 35,
         "city": "Kiruna"
     },
     {
-        "region": "Skåne",
+        "id": 36,
         "city": "Höganäs"
     },
     {
-        "region": "Västra Götaland",
+        "id": 37,
         "city": "Kinna"
     },
     {
-        "region": "Västra Götaland",
+        "id": 38,
         "city": "Mariestad"
     },
     {
-        "region": "Östergötland",
+        "id": 39,
         "city": "Mjölby"
     },
     {
-        "region": "Gävleborg",
+        "id": 40,
         "city": "Bollnäs"
     },
     {
-        "region": "Dalarna",
+        "id": 41,
         "city": "Mora"
     },
     {
-        "region": "Västra Götaland",
+        "id": 42,
         "city": "Ulricehamn"
     },
     {
-        "region": "Västra Götaland",
+        "id": 43,
         "city": "Tibro"
     },
     {
-        "region": "Jönköping",
+        "id": 44,
         "city": "Habo"
     },
     {
-        "region": "Västra Götaland",
+        "id": 45,
         "city": "Tidaholm"
     },
     {
-        "region": "Västra Götaland",
+        "id": 46,
         "city": "Strömstad"
     },
     {
-        "region": "Norrbotten",
+        "id": 47,
         "city": "Haparanda"
     },
     {
-        "region": "Västra Götaland",
+        "id": 48,
         "city": "Hjo"
     },
     {
-        "region": "Västmanland",
+        "id": 49,
         "city": "Kungsör"
     },
     {
-        "region": "Västra Götaland",
+        "id": 50,
         "city": "Vårgårda"
     },
     {
-        "region": "Skåne",
+        "id": 51,
         "city": "Hjärup"
     },
     {
-        "region": "Västra Götaland",
+        "id": 52,
         "city": "Töreboda"
     },
     {
-        "region": "Västra Götaland",
+        "id": 53,
         "city": "Herrljunga"
     },
     {
-        "region": "Östergötland",
+        "id": 54,
         "city": "Kisa"
     },
     {
-        "region": "Västra Götaland",
+        "id": 55,
         "city": "Karlsborg"
     },
     {
-        "region": "Västra Götaland",
+        "id": 56,
         "city": "Svenljunga"
     },
     {
-        "region": "Västra Götaland",
+        "id": 57,
         "city": "Tranemo"
     },
     {
-        "region": "Jämtland",
+        "id": 58,
         "city": "Åre"
     },
     {
-        "region": "Skåne",
+        "id": 59,
         "city": "Glumslöv"
     },
     {
-        "region": "Norrbotten",
+        "id": 60,
         "city": "Övertorneå"
     },
     {
-        "region": "Västra Götaland",
+        "id": 61,
         "city": "Gullspång"
     },
     {
-        "region": "Norrbotten",
+        "id": 62,
         "city": "Hortlax"
     },
     {
-        "region": "Södermanland",
+        "id": 63,
         "city": "Sparreholm"
     },
     {
-        "region": "Dalarna",
+        "id": 64,
         "city": "Grangärde"
     },
     {
-        "region": "Stockholm",
+        "id": 65,
         "city": "Sundbyberg"
     },
     {
-        "region": "Stockholm",
+        "id": 66,
         "city": "Solna"
     },
     {
-        "region": "Skåne",
+        "id": 67,
         "city": "Lund"
     },
     {
-        "region": "Skåne",
+        "id": 68,
         "city": "Trelleborg"
     },
     {
-        "region": "Halland",
+        "id": 69,
         "city": "Kungsbacka"
     },
     {
-        "region": "Stockholm",
+        "id": 70,
         "city": "Lidingö"
     },
     {
-        "region": "Stockholm",
+        "id": 71,
         "city": "Jakobsberg"
     },
     {
-        "region": "Stockholm",
+        "id": 72,
         "city": "Sollentuna"
     },
     {
-        "region": "Halland",
+        "id": 73,
         "city": "Varberg"
     },
     {
-        "region": "Stockholm",
+        "id": 74,
         "city": "Djursholm"
     },
     {
-        "region": "Skåne",
+        "id": 75,
         "city": "Ystad"
     },
     {
-        "region": "Stockholm",
+        "id": 76,
         "city": "Nacka"
     },
     {
-        "region": "Halland",
+        "id": 77,
         "city": "Falkenberg"
     },
     {
-        "region": "Stockholm",
+        "id": 78,
         "city": "Täby"
     },
     {
-        "region": "Västra Götaland",
+        "id": 79,
         "city": "Lysekil"
     },
     {
-        "region": "Stockholm",
+        "id": 80,
         "city": "Tumba"
     },
     {
-        "region": "Skåne",
+        "id": 81,
         "city": "Arlöv"
     },
     {
-        "region": "Västra Götaland",
+        "id": 82,
         "city": "Kungälv"
     },
     {
-        "region": "Västra Götaland",
+        "id": 83,
         "city": "Lidköping"
     },
     {
-        "region": "Skåne",
+        "id": 84,
         "city": "Hässleholm"
     },
     {
-        "region": "Södermanland",
+        "id": 85,
         "city": "Eskilstuna"
     },
     {
-        "region": "Skåne",
+        "id": 86,
         "city": "Lomma"
     },
     {
-        "region": "Stockholm",
+        "id": 87,
         "city": "Södertälje"
     },
     {
-        "region": "Kalmar",
+        "id": 88,
         "city": "Borgholm"
     },
     {
-        "region": "Stockholm",
+        "id": 89,
         "city": "Tyresö"
     },
     {
-        "region": "Västra Götaland",
+        "id": 90,
         "city": "Uddevalla"
     },
     {
-        "region": "Stockholm",
+        "id": 91,
         "city": "Huddinge"
     },
     {
-        "region": "Stockholm",
+        "id": 92,
         "city": "Norrtälje"
     },
     {
-        "region": "Kalmar",
+        "id": 93,
         "city": "Oskarshamn"
     },
     {
-        "region": "Västra Götaland",
+        "id": 94,
         "city": "Skövde"
     },
     {
-        "region": "Skåne",
+        "id": 95,
         "city": "Landskrona"
     },
     {
-        "region": "Värmland",
+        "id": 96,
         "city": "Arvika"
     },
     {
-        "region": "Kalmar",
+        "id": 97,
         "city": "Västervik"
     },
     {
-        "region": "Västra Götaland",
+        "id": 98,
         "city": "Mölnlycke"
     },
     {
-        "region": "Dalarna",
+        "id": 99,
         "city": "Avesta"
     },
     {
-        "region": "Skåne",
+        "id": 100,
         "city": "Ängelholm"
     },
     {
-        "region": "Västra Götaland",
+        "id": 101,
         "city": "Partille"
     },
     {
-        "region": "Stockholm",
+        "id": 102,
         "city": "Nynäshamn"
     },
     {
-        "region": "Västra Götaland",
+        "id": 103,
         "city": "Stenungsund"
     },
     {
-        "region": "Västra Götaland",
+        "id": 104,
         "city": "Öckerö"
     },
     {
-        "region": "Uppsala",
+        "id": 105,
         "city": "Bålsta"
     },
     {
-        "region": "Skåne",
+        "id": 106,
         "city": "Åstorp"
     },
     {
-        "region": "Stockholm",
+        "id": 107,
         "city": "Märsta"
     },
     {
-        "region": "Stockholm",
+        "id": 108,
         "city": "Ekerö"
     },
     {
-        "region": "Uppsala",
+        "id": 109,
         "city": "Enköping"
     },
     {
-        "region": "Kronoberg",
+        "id": 110,
         "city": "Älmhult"
     },
     {
-        "region": "Gävleborg",
+        "id": 111,
         "city": "Söderhamn"
     },
     {
-        "region": "Västra Götaland",
+        "id": 112,
         "city": "Skara"
     },
     {
-        "region": "Skåne",
+        "id": 113,
         "city": "Staffanstorp"
     },
     {
-        "region": "Södermanland",
+        "id": 114,
         "city": "Oxelösund"
     },
     {
-        "region": "Stockholm",
+        "id": 115,
         "city": "Rönninge"
     },
     {
-        "region": "Västra Götaland",
+        "id": 116,
         "city": "Lerum"
     },
     {
-        "region": "Östergötland",
+        "id": 117,
         "city": "Motala"
     },
     {
-        "region": "Kronoberg",
+        "id": 118,
         "city": "Ljungby"
     },
     {
-        "region": "Västra Götaland",
+        "id": 119,
         "city": "Falköping"
     },
     {
-        "region": "Skåne",
+        "id": 120,
         "city": "Kävlinge"
     },
     {
-        "region": "Värmland",
+        "id": 121,
         "city": "Skoghall"
     },
     {
-        "region": "Skåne",
+        "id": 122,
         "city": "Skurup"
     },
     {
-        "region": "Stockholm",
+        "id": 123,
         "city": "Upplands Väsby"
     },
     {
-        "region": "Stockholm",
+        "id": 124,
         "city": "Åkersberga"
     },
     {
-        "region": "Kalmar",
+        "id": 125,
         "city": "Emmaboda"
     },
     {
-        "region": "Uppsala",
+        "id": 126,
         "city": "Knivsta"
     },
     {
-        "region": "Stockholm",
+        "id": 127,
         "city": "Gustavsberg"
     },
     {
-        "region": "Västra Götaland",
+        "id": 128,
         "city": "Alingsås"
     },
     {
-        "region": "Stockholm",
+        "id": 129,
         "city": "Kungsängen"
     },
     {
-        "region": "Kalmar",
+        "id": 130,
         "city": "Nybro"
     },
     {
-        "region": "Stockholm",
+        "id": 131,
         "city": "Vallentuna"
     },
     {
-        "region": "Örebro",
+        "id": 132,
         "city": "Kumla"
     },
     {
-        "region": "Skåne",
+        "id": 133,
         "city": "Sjöbo"
     },
     {
-        "region": "Gävleborg",
+        "id": 134,
         "city": "Sandviken"
     },
     {
-        "region": "Jönköping",
+        "id": 135,
         "city": "Nässjö"
     },
     {
-        "region": "Skåne",
+        "id": 136,
         "city": "Eslöv"
     },
     {
-        "region": "Skåne",
+        "id": 137,
         "city": "Vellinge"
     },
     {
-        "region": "Gävleborg",
+        "id": 138,
         "city": "Hudiksvall"
     },
     {
-        "region": "Skåne",
+        "id": 139,
         "city": "Bjuv"
     },
     {
-        "region": "Värmland",
+        "id": 140,
         "city": "Forshaga"
     },
     {
-        "region": "Skåne",
+        "id": 141,
         "city": "Bromölla"
     },
     {
-        "region": "Skåne",
+        "id": 142,
         "city": "Simrishamn"
     },
     {
-        "region": "Västra Götaland",
+        "id": 143,
         "city": "Lilla Edet"
     },
     {
-        "region": "Södermanland",
+        "id": 144,
         "city": "Strängnäs"
     },
     {
-        "region": "Västernorrland",
+        "id": 145,
         "city": "Timrå"
     },
     {
-        "region": "Halland",
+        "id": 146,
         "city": "Laholm"
     },
     {
-        "region": "Västra Götaland",
+        "id": 147,
         "city": "Grästorp"
     },
     {
-        "region": "Stockholm",
+        "id": 148,
         "city": "Västerhaninge"
     },
     {
-        "region": "Skåne",
+        "id": 149,
         "city": "Svedala"
     },
     {
-        "region": "Jönköping",
+        "id": 150,
         "city": "Vetlanda"
     },
     {
-        "region": "Skåne",
+        "id": 151,
         "city": "Båstad"
     },
     {
-        "region": "Kalmar",
+        "id": 152,
         "city": "Hultsfred"
     },
     {
-        "region": "Jönköping",
+        "id": 153,
         "city": "Gislaved"
     },
     {
-        "region": "Jönköping",
+        "id": 154,
         "city": "Värnamo"
     },
     {
-        "region": "Västmanland",
+        "id": 155,
         "city": "Hallstahammar"
     },
     {
-        "region": "Värmland",
+        "id": 156,
         "city": "Säffle"
     },
     {
-        "region": "Västra Götaland",
+        "id": 157,
         "city": "Alafors"
     },
     {
-        "region": "Skåne",
+        "id": 158,
         "city": "Tomelilla"
     },
     {
-        "region": "Dalarna",
+        "id": 159,
         "city": "Ludvika"
     },
     {
-        "region": "Östergötland",
+        "id": 160,
         "city": "Vadstena"
     },
     {
-        "region": "Västmanland",
+        "id": 161,
         "city": "Sala"
     },
     {
-        "region": "Jönköping",
+        "id": 162,
         "city": "Tranås"
     },
     {
-        "region": "Västra Götaland",
+        "id": 163,
         "city": "Skärhamn"
     },
     {
-        "region": "Jönköping",
+        "id": 164,
         "city": "Eksjö"
     },
     {
-        "region": "Värmland",
+        "id": 165,
         "city": "Kristinehamn"
     },
     {
-        "region": "Jönköping",
+        "id": 166,
         "city": "Gnosjö"
     },
     {
-        "region": "Skåne",
+        "id": 167,
         "city": "Klippan"
     },
     {
-        "region": "Västra Götaland",
+        "id": 168,
         "city": "Kungshamn"
     },
     {
-        "region": "Örebro",
+        "id": 169,
         "city": "Hallsberg"
     },
     {
-        "region": "Västra Götaland",
+        "id": 170,
         "city": "Vara"
     },
     {
-        "region": "Västmanland",
+        "id": 171,
         "city": "Köping"
     },
     {
-        "region": "Stockholm",
+        "id": 172,
         "city": "Nykvarn"
     },
     {
-        "region": "Västra Götaland",
+        "id": 173,
         "city": "Henån"
     },
     {
-        "region": "Kronoberg",
+        "id": 174,
         "city": "Lessebo"
     },
     {
-        "region": "Örebro",
+        "id": 175,
         "city": "Karlskoga"
     },
     {
-        "region": "Värmland",
+        "id": 176,
         "city": "Kil"
     },
     {
-        "region": "Gävleborg",
+        "id": 177,
         "city": "Hofors"
     },
     {
-        "region": "Skåne",
+        "id": 178,
         "city": "Höör"
     },
     {
-        "region": "Södermanland",
+        "id": 179,
         "city": "Trosa"
     },
     {
-        "region": "Kalmar",
+        "id": 180,
         "city": "Vimmerby"
     },
     {
-        "region": "Västra Götaland",
+        "id": 181,
         "city": "Mellerud"
     },
     {
-        "region": "Blekinge",
+        "id": 182,
         "city": "Olofström"
     },
     {
-        "region": "Skåne",
+        "id": 183,
         "city": "Hörby"
     },
     {
-        "region": "Skåne",
+        "id": 184,
         "city": "Svalöv"
     },
     {
-        "region": "Västmanland",
+        "id": 185,
         "city": "Surahammar"
     },
     {
-        "region": "Södermanland",
+        "id": 186,
         "city": "Gnesta"
     },
     {
-        "region": "Södermanland",
+        "id": 187,
         "city": "Flen"
     },
     {
-        "region": "Östergötland",
+        "id": 188,
         "city": "Finspång"
     },
     {
-        "region": "Halland",
+        "id": 189,
         "city": "Hyltebruk"
     },
     {
-        "region": "Västmanland",
+        "id": 190,
         "city": "Fagersta"
     },
     {
-        "region": "Skåne",
+        "id": 191,
         "city": "Örkelljunga"
     },
     {
-        "region": "Västra Götaland",
+        "id": 192,
         "city": "Bollebygd"
     },
     {
-        "region": "Skåne",
+        "id": 193,
         "city": "Perstorp"
     },
     {
-        "region": "Uppsala",
+        "id": 194,
         "city": "Skutskär"
     },
     {
-        "region": "Kronoberg",
+        "id": 195,
         "city": "Alvesta"
     },
     {
-        "region": "Västra Götaland",
+        "id": 196,
         "city": "Götene"
     },
     {
-        "region": "Västmanland",
+        "id": 197,
         "city": "Arboga"
     },
     {
-        "region": "Västernorrland",
+        "id": 198,
         "city": "Sollefteå"
     },
     {
-        "region": "Blekinge",
+        "id": 199,
         "city": "Ronneby"
     },
     {
-        "region": "Södermanland",
+        "id": 200,
         "city": "Katrineholm"
     },
     {
-        "region": "Skåne",
+        "id": 201,
         "city": "Broby"
     },
     {
-        "region": "Jönköping",
+        "id": 202,
         "city": "Skillingaryd"
     },
     {
-        "region": "Kalmar",
+        "id": 203,
         "city": "Mönsterås"
     },
     {
-        "region": "Västra Götaland",
+        "id": 204,
         "city": "Nossebro"
     },
     {
-        "region": "Skåne",
+        "id": 205,
         "city": "Osby"
     },
     {
-        "region": "Västernorrland",
+        "id": 206,
         "city": "Kramfors"
     },
     {
-        "region": "Jönköping",
+        "id": 207,
         "city": "Mullsjö"
     },
     {
-        "region": "Kronoberg",
+        "id": 208,
         "city": "Markaryd"
     },
     {
-        "region": "Jönköping",
+        "id": 209,
         "city": "Sävsjö"
     },
     {
-        "region": "Västra Götaland",
+        "id": 210,
         "city": "Munkedal"
     },
     {
-        "region": "Jämtland",
+        "id": 211,
         "city": "Krokom"
     },
     {
-        "region": "Västra Götaland",
+        "id": 212,
         "city": "Bengtsfors"
     },
     {
-        "region": "Södermanland",
+        "id": 213,
         "city": "Vingåker"
     },
     {
-        "region": "Kalmar",
+        "id": 214,
         "city": "Mörbylånga"
     },
     {
-        "region": "Värmland",
+        "id": 215,
         "city": "Munkfors"
     },
     {
-        "region": "Kronoberg",
+        "id": 216,
         "city": "Tingsryd"
     },
     {
-        "region": "Västra Götaland",
+        "id": 217,
         "city": "Åmål"
     },
     {
-        "region": "Dalarna",
+        "id": 218,
         "city": "Hedemora"
     },
     {
-        "region": "Örebro",
+        "id": 219,
         "city": "Degerfors"
     },
     {
-        "region": "Östergötland",
+        "id": 220,
         "city": "Söderköping"
     },
     {
-        "region": "Jönköping",
+        "id": 221,
         "city": "Aneby"
     },
     {
-        "region": "Västra Götaland",
+        "id": 222,
         "city": "Tanumshede"
     },
     {
-        "region": "Värmland",
+        "id": 223,
         "city": "Charlottenberg"
     },
     {
-        "region": "Uppsala",
+        "id": 224,
         "city": "Heby"
     },
     {
-        "region": "Örebro",
+        "id": 225,
         "city": "Laxå"
     },
     {
-        "region": "Örebro",
+        "id": 226,
         "city": "Askersund"
     },
     {
-        "region": "Stockholm",
+        "id": 227,
         "city": "Vaxholm"
     },
     {
-        "region": "Örebro",
+        "id": 228,
         "city": "Fjugesta"
     },
     {
-        "region": "Värmland",
+        "id": 229,
         "city": "Årjäng"
     },
     {
-        "region": "Dalarna",
+        "id": 230,
         "city": "Säter"
     },
     {
-        "region": "Dalarna",
+        "id": 231,
         "city": "Gagnef"
     },
     {
-        "region": "Örebro",
+        "id": 232,
         "city": "Lindesberg"
     },
     {
-        "region": "Västra Götaland",
+        "id": 233,
         "city": "Färgelanda"
     },
     {
-        "region": "Dalarna",
+        "id": 234,
         "city": "Smedjebacken"
     },
     {
-        "region": "Norrbotten",
+        "id": 235,
         "city": "Boden"
     },
     {
-        "region": "Örebro",
+        "id": 236,
         "city": "Nora"
     },
     {
-        "region": "Värmland",
+        "id": 237,
         "city": "Sunne"
     },
     {
-        "region": "Östergötland",
+        "id": 238,
         "city": "Åtvidaberg"
     },
     {
-        "region": "Västerbotten",
+        "id": 239,
         "city": "Vännäs"
     },
     {
-        "region": "Värmland",
+        "id": 240,
         "city": "Grums"
     },
     {
-        "region": "Norrbotten",
+        "id": 241,
         "city": "Kalix"
     },
     {
-        "region": "Kalmar",
+        "id": 242,
         "city": "Torsås"
     },
     {
-        "region": "Värmland",
+        "id": 243,
         "city": "Torsby"
     },
     {
-        "region": "Västra Götaland",
+        "id": 244,
         "city": "Hova"
     },
     {
-        "region": "Västmanland",
+        "id": 245,
         "city": "Norberg"
     },
     {
-        "region": "Norrbotten",
+        "id": 246,
         "city": "Piteå"
     },
     {
-        "region": "Uppsala",
+        "id": 247,
         "city": "Östhammar"
     },
     {
-        "region": "Kronoberg",
+        "id": 248,
         "city": "Åseda"
     },
     {
-        "region": "Uppsala",
+        "id": 249,
         "city": "Tierp"
     },
     {
-        "region": "Dalarna",
+        "id": 250,
         "city": "Leksand"
     },
     {
-        "region": "Kalmar",
+        "id": 251,
         "city": "Högsby"
     },
     {
-        "region": "Östergötland",
+        "id": 252,
         "city": "Ödeshög"
     },
     {
-        "region": "Värmland",
+        "id": 253,
         "city": "Storfors"
     },
     {
-        "region": "Östergötland",
+        "id": 254,
         "city": "Boxholm"
     },
     {
-        "region": "Östergötland",
+        "id": 255,
         "city": "Valdemarsvik"
     },
     {
-        "region": "Örebro",
+        "id": 256,
         "city": "Hällefors"
     },
     {
-        "region": "Örebro",
+        "id": 257,
         "city": "Kopparberg"
     },
     {
-        "region": "Gävleborg",
+        "id": 258,
         "city": "Bergsjö"
     },
     {
-        "region": "Gävleborg",
+        "id": 259,
         "city": "Edsbyn"
     },
     {
-        "region": "Västmanland",
+        "id": 260,
         "city": "Skinnskatteberg"
     },
     {
-        "region": "Värmland",
+        "id": 261,
         "city": "Filipstad"
     },
     {
-        "region": "Västra Götaland",
+        "id": 262,
         "city": "Ed"
     },
     {
-        "region": "Värmland",
+        "id": 263,
         "city": "Hagfors"
     },
     {
-        "region": "Västerbotten",
+        "id": 264,
         "city": "Nordmaling"
     },
     {
-        "region": "Gävleborg",
+        "id": 265,
         "city": "Ockelbo"
     },
     {
-        "region": "Gävleborg",
+        "id": 266,
         "city": "Ljusdal"
     },
     {
-        "region": "Västerbotten",
+        "id": 267,
         "city": "Robertsfors"
     },
     {
-        "region": "Östergötland",
+        "id": 268,
         "city": "Österbymo"
     },
     {
-        "region": "Norrbotten",
+        "id": 269,
         "city": "Älvsbyn"
     },
     {
-        "region": "Dalarna",
+        "id": 270,
         "city": "Vansbro"
     },
     {
-        "region": "Dalarna",
+        "id": 271,
         "city": "Orsa"
     },
     {
-        "region": "Dalarna",
+        "id": 272,
         "city": "Malung"
     },
     {
-        "region": "Jämtland",
+        "id": 273,
         "city": "Svenstavik"
     },
     {
-        "region": "Jämtland",
+        "id": 274,
         "city": "Hammarstrand"
     },
     {
-        "region": "Västernorrland",
+        "id": 275,
         "city": "Ånge"
     },
     {
-        "region": "Jämtland",
+        "id": 276,
         "city": "Strömsund"
     },
     {
-        "region": "Jämtland",
+        "id": 277,
         "city": "Bräcke"
     },
     {
-        "region": "Västerbotten",
+        "id": 278,
         "city": "Norsjö"
     },
     {
-        "region": "Jämtland",
+        "id": 279,
         "city": "Järpen"
     },
     {
-        "region": "Västerbotten",
+        "id": 280,
         "city": "Lycksele"
     },
     {
-        "region": "Västerbotten",
+        "id": 281,
         "city": "Vindeln"
     },
     {
-        "region": "Dalarna",
+        "id": 282,
         "city": "Älvdalen"
     },
     {
-        "region": "Västerbotten",
+        "id": 283,
         "city": "Malå"
     },
     {
-        "region": "Västerbotten",
+        "id": 284,
         "city": "Bjurholm"
     },
     {
-        "region": "Norrbotten",
+        "id": 285,
         "city": "Överkalix"
     },
     {
-        "region": "Västerbotten",
+        "id": 286,
         "city": "Storuman"
     },
     {
-        "region": "Norrbotten",
+        "id": 287,
         "city": "Arvidsjaur"
     },
     {
-        "region": "Jämtland",
+        "id": 288,
         "city": "Sveg"
     },
     {
-        "region": "Västerbotten",
+        "id": 289,
         "city": "Dorotea"
     },
     {
-        "region": "Västerbotten",
+        "id": 290,
         "city": "Vilhelmina"
     },
     {
-        "region": "Norrbotten",
+        "id": 291,
         "city": "Gällivare"
     },
     {
-        "region": "Norrbotten",
+        "id": 292,
         "city": "Pajala"
     },
     {
-        "region": "Västerbotten",
+        "id": 293,
         "city": "Åsele"
     },
     {
-        "region": "Norrbotten",
+        "id": 294,
         "city": "Jokkmokk"
     },
     {
-        "region": "Västerbotten",
+        "id": 295,
         "city": "Sorsele"
     },
     {
-        "region": "Blekinge",
+        "id": 296,
         "city": "Sölvesborg"
     },
     {
-        "region": "Norrbotten",
+        "id": 297,
         "city": "Arjeplog"
     },
     {
-        "region": "Dalarna",
+        "id": 298,
         "city": "Rättvik"
     }
 ]

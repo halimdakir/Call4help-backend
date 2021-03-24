@@ -18,11 +18,11 @@ public class PositionController {
 
 
     @PostMapping(value = "/create")
-    public ResponseEntity<?> registerUserLocation(@Valid @RequestBody PositionDTO positionDTO) {
+    public ResponseEntity<?> saveOrUpdatePosition(@Valid @RequestBody PositionDTO positionDTO) {
         return ResponseEntity.ok(positionService.savePosition(positionDTO));
     }
 
-    //TODO IT'S ONLY FOR TEST
+    //TODO THIS IS ONLY FOR TEST
     @GetMapping
     public ResponseEntity<?> GetAllPositions(){
         return ResponseEntity.ok(positionService.getAllPositions());

@@ -12,6 +12,6 @@ public class AppInfoService {
     private AppInfo appInfo;
 
     public ResponseEntity<?> getAppInfo() {
-        return ResponseEntity.ok(appInfo.getAppVersion() + appInfo.getAppName());
+        return ResponseEntity.ok(new AppInfo(appInfo.getAppVersion(), appInfo.getAppName()));
     }
 }

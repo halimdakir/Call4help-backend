@@ -21,13 +21,13 @@ public class JsmServiceImpl implements JmsService{
 
 
     @Override
-    public String publishMessage(List<NotificationMessageDTO> list) {
-
+    public Object publishMessage(List<NotificationMessageDTO> list) {
+        MessageObject messageObject = new MessageObject();
         try {
 
             for (NotificationMessageDTO object:list){
                 
-                MessageObject messageObject = new MessageObject();
+
                 messageObject.setHelper_id(object.getHelper_id());
                 messageObject.setDistance(object.getDistance());
                 messageObject.setSender_id(object.getSender_id());
@@ -36,7 +36,7 @@ public class JsmServiceImpl implements JmsService{
                 jmsTemplate.convertAndSend(JmsConfig.JMS_QUEUE, messageObject);
 
             }
-            return "Successfully sent!";
+            return messageObject;
 
         } catch (Exception e) {
 

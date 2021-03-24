@@ -45,12 +45,13 @@ public class SenderController {
         amazonSNSService.publishMessage(endpointService.getEndpointsByLocation(positionDTO.getUserId()), "Someone needs help!");
 
         //Publish message
-        jmsService.publishMessage(positionService.getNearestUsers(alert.getId()));
+        var message = jmsService.publishMessage(positionService.getNearestUsers(alert.getId()));
 
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
+    //TODO THIS IS ONLY FOR TEST
     @GetMapping("/alerts")
     public ResponseEntity<?> getALLAlerts(){
         return new ResponseEntity<>(alertService.getAllAlerts(), HttpStatus.OK);

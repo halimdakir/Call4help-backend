@@ -25,13 +25,14 @@ public class LocationController {
         return ResponseEntity.ok(amazonSNSService.createAwsSnsEndpoint(locationService.createUserLocation(locationDTO)));
     }
 
-    @GetMapping(value = "/all")
-    public ResponseEntity<?> getAllLocations() {
-        return ResponseEntity.ok(locationService.getAllLocations());
-    }
-
     @PutMapping("/userId/{userId}")
     public ResponseEntity<?> updateUserLocation(@RequestBody String city, @PathVariable String userId) {
         return ResponseEntity.ok(locationService.updateUserLocation(city, userId));
+    }
+
+    //TODO THIS IS ONLY FOR TEST
+    @GetMapping(value = "/all")
+    public ResponseEntity<?> getAllLocations() {
+        return ResponseEntity.ok(locationService.getAllLocations());
     }
 }
