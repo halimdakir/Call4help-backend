@@ -8,6 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Area {
-    private String region;
+    private Long id;
     private String city;
 }

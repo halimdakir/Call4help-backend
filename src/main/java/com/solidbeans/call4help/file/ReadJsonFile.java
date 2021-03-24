@@ -28,10 +28,10 @@ public class ReadJsonFile {
 
             for (JSONObject object : (Iterable<JSONObject>) list) {
 
-                String region = (String) object.get("region");
+                Long id = (Long) object.get("id");
                 String city = (String) object.get("city");
 
-                locationList.add(new Area(region, city));
+                locationList.add(new Area(id, city));
             }
         } catch (IOException | ParseException e) {
             e.printStackTrace();
