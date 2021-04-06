@@ -27,12 +27,12 @@ public class SetUpDatabase {
                 var user3 = new Users("100MA300", "QWERTYUIOP0123499", ZonedDateTime.now(ZoneId.of("UTC")), null);
                 var user4 = new Users("100MA400", "QWERTYUIOP0123500", ZonedDateTime.now(ZoneId.of("UTC")), null);
 
-                /*
-                userRepository.save(user1);
-                userRepository.save(user2);
-                userRepository.save(user3);
-                userRepository.save(user4);
-                 */
+
+                //userRepository.save(user1);
+                //userRepository.save(user2);
+                //userRepository.save(user3);
+                //userRepository.save(user4);
+
 
 
 
@@ -80,3 +80,4 @@ public class SetUpDatabase {
         };
     }
 }
+

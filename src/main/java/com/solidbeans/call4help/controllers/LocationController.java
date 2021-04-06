@@ -25,9 +25,16 @@ public class LocationController {
         return ResponseEntity.ok(amazonSNSService.createAwsSnsEndpoint(locationService.createUserLocation(locationDTO)));
     }
 
-    @PutMapping("/userId/{userId}")
-    public ResponseEntity<?> updateUserLocation(@RequestBody String city, @PathVariable String userId) {
+    @PutMapping("update")
+    public ResponseEntity<?> updateUserLocation(@RequestHeader("X-Auth-Token") String token,@RequestHeader("X-Auth-User") String userId, @RequestBody String city) {
         return ResponseEntity.ok(locationService.updateUserLocation(city, userId));
+    }
+
+    @PutMapping("auth/userId")
+    public ResponseEntity<?> getUserLocation(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId) {
+        //return ResponseEntity.ok(locationService.getLocationByUserId(userId));
+        var location = locationService.getLocationByUserId(userId);
+        return ResponseEntity.ok(location.get().getMunicipality());
     }
 
     //TODO THIS IS ONLY FOR TEST
