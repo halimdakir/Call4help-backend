@@ -26,8 +26,7 @@ public class AlertServiceImplement implements AlertService{
     private AlertRepository alertRepository;
     @Autowired
     private UserService userService;
-    @Autowired
-    private LocationService locationService;
+
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -36,33 +35,25 @@ public class AlertServiceImplement implements AlertService{
 
 
     @Override
-    public Alert registerHelpAlert(PositionDTO positionDTO) {
+    public Alert registerHelpAlert(String userId, PositionDTO positionDTO) {
 
-        Users user = userService.findUserByUserId(positionDTO.getUserId());
+        Users user = userService.findUserByUserId(userId);
 
         if (user!=null){
 
-            //Get actual location
-            var location = locationService.getLocationByUserId(user.getUserId());
 
-            if (location.isPresent()){
-
-                Alert alert = new Alert(ZonedDateTime.now(ZoneId.of("UTC")), location.get().getMunicipality(), geometryFactory.createPoint(new Coordinate(positionDTO.getCoordinates().getLng(), positionDTO.getCoordinates().getLat())), user);
+                Alert alert = new Alert(ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(positionDTO.getCoordinates().getLng(), positionDTO.getCoordinates().getLat())), user);
 
                 alertRepository.save(alert);
                 entityManager.detach(alert);
 
                 return alert;
 
-            }else {
 
-                throw new NotFoundException("Position with user id :"+positionDTO.getUserId()+" is not found!");
-
-            }
 
         }else {
 
-            throw new NotFoundException("User with id :"+positionDTO.getUserId()+" is not found");
+            throw new NotFoundException("User with id :"+userId+" is not found");
         }
     }
 
@@ -71,11 +62,6 @@ public class AlertServiceImplement implements AlertService{
         return alertRepository.findById(id);
     }
 
-
-    @Override
-    public List<ReporterQuantityByAlert> getReporterQuantityByAlertAndUser(String userId) {
-        return alertRepository.reporterQuantityByAlertAndUser(userId);
-    }
 
     @Override
     public List<Alert> getAllAlerts() {

@@ -13,9 +13,6 @@
             <column name="alert_date" type="timestamptz">
                 <constraints nullable="false"/>
             </column>
-            <column name="location" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
             <column name="coordinates" type="geometry">
                 <constraints nullable="false"/>
             </column>

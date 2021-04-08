@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/v1/sender", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/auth/sender", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SenderController {
 
     @Autowired
@@ -37,12 +37,12 @@ public class SenderController {
     //TODO Delete published messages after 24 hours
 
     @PostMapping("create")
-    public ResponseEntity<?> sendHelpRequest(@RequestBody PositionDTO positionDTO) {
+    public ResponseEntity<?> sendHelpRequest(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId, @RequestBody PositionDTO positionDTO) {
 
-        var alert = alertService.registerHelpAlert(positionDTO);
+        var alert = alertService.registerHelpAlert(userId, positionDTO);
 
         //Push notification
-        amazonSNSService.publishMessage(endpointService.getEndpointsByLocation(positionDTO.getUserId()), "Someone needs help!");
+        amazonSNSService.publishMessage(endpointService.getAllEndpoints(), "Någon ropar på hjälp!");
 
         //Publish message
         var message = jmsService.publishMessage(positionService.getNearestUsers(alert.getId()));

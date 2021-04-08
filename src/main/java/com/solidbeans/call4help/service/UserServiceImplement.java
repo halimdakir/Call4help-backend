@@ -4,6 +4,7 @@ import com.solidbeans.call4help.dtos.UserDTO;
 import com.solidbeans.call4help.entities.Users;
 import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.exception.RegistrationException;
+import com.solidbeans.call4help.notification.AmazonSNSService;
 import com.solidbeans.call4help.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,10 @@ public class UserServiceImplement implements UserService{
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    private ProfileService profileService;
+    @Autowired
+    private AmazonSNSService amazonSNSService;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -28,6 +33,7 @@ public class UserServiceImplement implements UserService{
 
     @Override
     public Users createNewUser(UserDTO userDTO) {
+
         Users user = new Users();
 
         if (userDTO.getUserId() == null || userDTO.getUserId().isBlank() && userDTO.getAuthToken().isEmpty()){
@@ -44,6 +50,7 @@ public class UserServiceImplement implements UserService{
                 user.setAuthToken(userDTO.getAuthToken());
 
             } else {                                       //Create new user
+
                 user.setUserId(userDTO.getUserId());
                 user.setAuthToken(userDTO.getAuthToken());
 
@@ -52,6 +59,12 @@ public class UserServiceImplement implements UserService{
 
             userRepository.save(user);
             entityManager.detach(user);
+
+            //Create Profile
+            profileService.saveUserInfos(user.getUserId());
+
+            //Create Endpoint
+            amazonSNSService.createAwsSnsEndpoint(user.getUserId());
 
             return user;
         }
@@ -105,14 +118,10 @@ public class UserServiceImplement implements UserService{
         }
     }
 
-    @Override
-    public Optional<Users> getUserByLocationId(Long id) {
-        return userRepository.findUsersByLocationId(id);
-    }
 
     @Override
     public Optional<Users> findUserByPositionId(Long id) {
-        return userRepository.findUsersByLocation_Position_Id(id);
+        return userRepository.findUsersByProfile_Position_Id(id);
     }
 
 }

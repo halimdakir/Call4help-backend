@@ -17,13 +17,13 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="location_id" type="int" />
+            <column name="profile_id" type="int" />
         </createTable>
 
-        <addForeignKeyConstraint constraintName="fk_position2location"
+        <addForeignKeyConstraint constraintName="fk_position2profile"
                                  baseTableName="position"
-                                 baseColumnNames="location_id"
-                                 referencedTableName="location"
+                                 baseColumnNames="profile_id"
+                                 referencedTableName="profile"
                                  referencedColumnNames="id"/>
 
 

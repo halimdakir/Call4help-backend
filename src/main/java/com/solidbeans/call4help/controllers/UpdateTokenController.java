@@ -8,14 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/v1/update", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/auth/token", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UpdateTokenController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("/token")
-    public ResponseEntity<?> updateToken(@RequestHeader("X-Auth-Token") String token, @RequestBody TokenDTO newToken) {
+    @PostMapping("/update")
+    public ResponseEntity<?> updateToken(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId, @RequestBody TokenDTO newToken) {
         return ResponseEntity.ok(userService.updateToken(token, newToken.getToken()));
     }
 }

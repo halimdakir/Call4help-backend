@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ReportService {
 
-    ReportDTO saveReport(ReportDTO reportDTO);
+    ReportDTO saveReport(String userId, ReportDTO reportDTO);
 
     List<Report> getReportsByAlert(String userId);
 }

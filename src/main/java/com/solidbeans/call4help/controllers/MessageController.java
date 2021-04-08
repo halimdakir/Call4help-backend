@@ -6,22 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/v1/message", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/auth/notification", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MessageController {
 
     @Autowired
     private JmsService jmsService;
 
 
-    @GetMapping("helperId/{helper_id}")
-    public ResponseEntity<?> getMessageByHelperId(@PathVariable Long helper_id){
-        return new ResponseEntity<>(jmsService.messagesList(helper_id), HttpStatus.OK);
+    @GetMapping("/message")
+    public ResponseEntity<?> getMessageByHelperId(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId){
+        return new ResponseEntity<>(jmsService.messagesList(userId), HttpStatus.OK);
     }
 
 }

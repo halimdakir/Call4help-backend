@@ -23,10 +23,10 @@ public class ReportServiceImplement implements ReportService {
 
 
     @Override
-    public ReportDTO saveReport(ReportDTO reportDTO) {
+    public ReportDTO saveReport(String userId, ReportDTO reportDTO) {
 
         //Find user who has reported
-        var helper = userService.findUserByUserId(reportDTO.getUserId());
+        var helper = userService.findUserByUserId(userId);
 
         //Find alert to whom has reported
         var alert = alertService.findAlertById(reportDTO.getAlertId());
@@ -38,7 +38,6 @@ public class ReportServiceImplement implements ReportService {
 
             return ReportDTO.builder()
                     .text(reportDTO.getText())
-                    .userId(reportDTO.getUserId())
                     .alertId(reportDTO.getAlertId())
                     .build();
 

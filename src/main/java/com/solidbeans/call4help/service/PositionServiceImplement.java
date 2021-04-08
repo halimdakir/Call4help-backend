@@ -1,9 +1,7 @@
 package com.solidbeans.call4help.service;
 
 import com.solidbeans.call4help.dtos.*;
-import com.solidbeans.call4help.entities.Location;
 import com.solidbeans.call4help.entities.Position;
-import com.solidbeans.call4help.entities.Users;
 import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.exception.RegistrationException;
 import com.solidbeans.call4help.repository.PositionRepository;
@@ -26,27 +24,28 @@ public class PositionServiceImplement implements PositionService{
     @Autowired
     private PositionRepository positionRepository;
     @Autowired
-    private LocationService locationService;
-    @Autowired
     private AlertService alertService;
+    @Autowired
+    private ProfileService profileService;
+
     private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26910);
 
     @Override
-    public Position savePosition(PositionDTO positionDTO) {
+    public Position savePosition(String userId, PositionDTO positionDTO) {
 
-        if (positionDTO.getCoordinates() == null || positionDTO.getUserId() == null) {
+        if (positionDTO.getCoordinates() == null || userId == null) {
 
             throw new RegistrationException("All fields are required!");
 
         } else {
 
             // Find user by userId
-            var foundUser = userService.findUserByUserId(positionDTO.getUserId());
+            var foundUser = userService.findUserByUserId(userId);
 
             if (foundUser != null) {
 
                 //Check if This user has already position
-                var position = positionRepository.findPositionByLocation_Users_UserId(foundUser.getUserId());
+                var position = positionRepository.findPositionByProfile_Users_UserId(foundUser.getUserId());
 
                 if (position.isPresent()){  //If position exist
 
@@ -57,21 +56,21 @@ public class PositionServiceImplement implements PositionService{
 
                 }else {  //if position does not exist
 
-                    var location = locationService.getLocationByUserId(foundUser.getUserId());
+                    var profile = profileService.findProfileByUserId(foundUser.getUserId());
 
-                    if (location.isPresent()){
-                        var newPosition = new Position(Instant.now().atZone(ZoneOffset.UTC), geometryFactory.createPoint(new Coordinate(positionDTO.getCoordinates().getLng(), positionDTO.getCoordinates().getLat())), location.get());
+                    if (profile.isPresent()){
+                        var newPosition = new Position(Instant.now().atZone(ZoneOffset.UTC), geometryFactory.createPoint(new Coordinate(positionDTO.getCoordinates().getLng(), positionDTO.getCoordinates().getLat())), profile.get());
 
                         return positionRepository.save(newPosition);
                     }else {
 
-                        throw new NotFoundException("Location with user id :" + foundUser.getUserId() + " is not found");
+                        throw new NotFoundException("Profile with user id :" + foundUser.getUserId() + " is not found");
                     }
                 }
 
             } else {
 
-                throw new NotFoundException("User with id :" + positionDTO.getUserId() + " is not found");
+                throw new NotFoundException("User with id :" + userId + " is not found");
 
             }
 
@@ -93,14 +92,14 @@ public class PositionServiceImplement implements PositionService{
 
                 for (DistanceDTO distanceDTO : unfilteredList){
 
-                    if (distanceDTO.getDistance() <= 500){
+                    //if (distanceDTO.getDistance() <= 50000000){ //TODO THE DISTANCE
 
                         var user = userService.findUserByPositionId(distanceDTO.getId());
 
-                        user.ifPresent(users -> nearestUsers.add(new NotificationMessageDTO(users.getId(), (int) Math.round(distanceDTO.getDistance()), alert.get().getUsers().getId())));
+                        user.ifPresent(users -> nearestUsers.add(new NotificationMessageDTO(users.getId(), Math.round(distanceDTO.getDistance())+" meter bort!", alert.get().getUsers().getId())));
 
 
-                    }
+                    //}
                 }
 
                 return nearestUsers;

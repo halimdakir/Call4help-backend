@@ -6,5 +6,4 @@ import lombok.Data;
 @Data
 public class PositionDTO {
     private Coordinates coordinates;
-    private String userId;
 }

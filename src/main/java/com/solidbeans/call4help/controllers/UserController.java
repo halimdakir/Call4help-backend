@@ -22,8 +22,11 @@ public class UserController {
         return ResponseEntity.ok(userService.createNewUser(userDTO));
     }
 
+
+
     // use parameters when searching.
     // for example localhost:8080/api/v1/users should automatically return all users
+    //TODO THOSE BELLOW ARE ONLY FOR TEST
     @GetMapping
     public ResponseEntity<?> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());

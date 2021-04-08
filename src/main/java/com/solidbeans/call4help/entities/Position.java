@@ -1,8 +1,6 @@
 package com.solidbeans.call4help.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.locationtech.jts.geom.Point;
 
@@ -26,19 +24,13 @@ public class Position {
     private org.locationtech.jts.geom.Point coordinates;
 
 
-    /*@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JsonManagedReference
-    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", nullable = false)
-    private Users users;*/
-
     @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.DETACH)
-    @JoinColumn(name = "location_id", nullable = false)
-    private Location location;
+    @JoinColumn(name = "profile_id", nullable = false)
+    private Profile profile;
 
-    public Position(ZonedDateTime time, Point coordinates, Location location) {
+    public Position(ZonedDateTime time, Point coordinates, Profile profile) {
         this.time = time;
         this.coordinates = coordinates;
-        this.location = location;
+        this.profile = profile;
     }
 }
