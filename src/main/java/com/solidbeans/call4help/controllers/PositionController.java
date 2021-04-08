@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(value = "/api/v1/position", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/auth/position", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PositionController {
 
     @Autowired
@@ -18,8 +18,8 @@ public class PositionController {
 
 
     @PostMapping(value = "/create")
-    public ResponseEntity<?> saveOrUpdatePosition(@Valid @RequestBody PositionDTO positionDTO) {
-        return ResponseEntity.ok(positionService.savePosition(positionDTO));
+    public ResponseEntity<?> saveOrUpdatePosition(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId, @RequestBody PositionDTO positionDTO) {
+        return ResponseEntity.ok(positionService.savePosition(userId, positionDTO));
     }
 
     //TODO THIS IS ONLY FOR TEST

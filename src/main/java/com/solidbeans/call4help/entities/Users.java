@@ -31,7 +31,7 @@ public class Users {
 
     @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
-    private Location location;
+    private Profile profile;
 
     @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
@@ -40,10 +40,6 @@ public class Users {
     @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "users")
     private Set<Alert> alertSet;
-
-    /*@JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
-    private Position position;*/
 
 
     public Users(String userId, String authToken, ZonedDateTime creationDate, ZonedDateTime tokenUpdateDate) {

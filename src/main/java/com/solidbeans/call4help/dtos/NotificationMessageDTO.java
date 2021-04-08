@@ -7,6 +7,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class NotificationMessageDTO {
     private Long helper_id;
-    private int distance;
+    private String distance;
     private Long sender_id;
 }

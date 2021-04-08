@@ -7,6 +7,4 @@ import java.util.List;
 public interface EndpointService {
 
     List<Endpoint> getAllEndpoints();
-
-    List<Endpoint> getEndpointsByLocation(String city);
 }

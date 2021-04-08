@@ -13,13 +13,13 @@
             <column name="arn" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="location_id" type="int" />
+            <column name="profile_id" type="int" />
         </createTable>
 
-        <addForeignKeyConstraint constraintName="fk_endpoints2location"
+        <addForeignKeyConstraint constraintName="fk_endpoints2profile"
                                  baseTableName="endpoint"
-                                 baseColumnNames="location_id"
-                                 referencedTableName="location"
+                                 baseColumnNames="profile_id"
+                                 referencedTableName="profile"
                                  referencedColumnNames="id"/>
 
 

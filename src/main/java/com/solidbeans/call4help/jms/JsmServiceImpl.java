@@ -2,6 +2,7 @@ package com.solidbeans.call4help.jms;
 
 import com.solidbeans.call4help.dtos.NotificationMessageDTO;
 import com.solidbeans.call4help.exception.NotFoundException;
+import com.solidbeans.call4help.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ public class JsmServiceImpl implements JmsService{
 
     @Autowired
     private JmsTemplate jmsTemplate;
+    @Autowired
+    private UserService userService;
 
 
 
@@ -46,14 +49,26 @@ public class JsmServiceImpl implements JmsService{
     }
 
     @Override
-    public List<MessageObject> messagesList(Long helper_Id) {
-        return JmsConsumer.Jms_Message_List.stream()
-                .filter(e -> e.getHelper_id().equals(helper_Id))
-                .collect(Collectors.toList());
+    public List<MessageObject> messagesList(String userId) {
+
+        var user = userService.findUserByUserId(userId);
+
+        if (user != null){
+            return JmsConsumer.Jms_Message_List.stream()
+                    .filter(e -> e.getHelper_id().equals(user.getId()))
+                    .collect(Collectors.toList());
+
+        }else {
+
+            throw new NotFoundException("Users with id: "+userId+" not found!");
+
+        }
+
     }
 
     @Override
     public boolean findMessageByUuidAndRemove(String uuid) {
+
         UUID stringToUuid = UUID.fromString(uuid);
         var message = JmsConsumer.Jms_Message_List.stream()
                 .filter(e -> e.getUuid().equals(stringToUuid))

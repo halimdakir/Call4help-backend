@@ -21,8 +21,6 @@ public class Alert {
     @Column(name="alert_date")
     private ZonedDateTime alertDate;
 
-    private String location;
-
     private org.locationtech.jts.geom.Point coordinates;
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -34,9 +32,8 @@ public class Alert {
     @OneToMany(mappedBy = "alert", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Report> reports;
 
-    public Alert(ZonedDateTime alertDate, String location, Point coordinates, Users users) {
+    public Alert(ZonedDateTime alertDate, Point coordinates, Users users) {
         this.alertDate = alertDate;
-        this.location = location;
         this.coordinates = coordinates;
         this.users = users;
     }

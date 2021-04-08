@@ -6,7 +6,7 @@
 
     <include file="changelog/01-init.xml" relativeToChangelogFile="true"/>
     <include file="changelog/02-create-users-tables.xml" relativeToChangelogFile="true"/>
-    <include file="changelog/03-create-location-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/03-create-profile-table.xml" relativeToChangelogFile="true"/>
     <include file="changelog/04-create-alert-table.xml" relativeToChangelogFile="true"/>
     <include file="changelog/05-create-report-table.xml" relativeToChangelogFile="true"/>
     <include file="changelog/06-create-endpoint-table.xml" relativeToChangelogFile="true"/>

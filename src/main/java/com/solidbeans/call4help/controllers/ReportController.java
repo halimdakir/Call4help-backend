@@ -14,7 +14,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/api/v1/report", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/auth/report", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ReportController {
 
     @Autowired
@@ -25,17 +25,17 @@ public class ReportController {
 
 
     @PostMapping
-    public ResponseEntity<?> registerReport(@RequestBody ReportDTO reportDTO){
-        var report = reportService.saveReport(reportDTO);
+    public ResponseEntity<?> registerReport(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId, @RequestBody ReportDTO reportDTO){
+        var report = reportService.saveReport(userId, reportDTO);
         return new ResponseEntity<>(report, HttpStatus.OK);
     }
 
 
     //IT'S DONE REPORTING ... SO WE NEED TO DELETE MESSAGE AND CLOSE
     @PostMapping("/done")
-    public ResponseEntity<?> registerReportAndClose(@RequestBody ReportDTO reportDTO, @RequestBody String uuid){
+    public ResponseEntity<?> registerReportAndClose(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId, @RequestBody ReportDTO reportDTO, @RequestBody String uuid){
 
-        var report = reportService.saveReport(reportDTO);
+        var report = reportService.saveReport(userId, reportDTO);
 
         //Find message and delete it
         jmsService.findMessageByUuidAndRemove(uuid);
@@ -53,6 +53,8 @@ public class ReportController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
 
     //TODO GET REPORTS BY ALERT, AND THIS ENDPOINT WONT BE AVAILABLE TO USERS.
     @GetMapping("userId/{userId}")
