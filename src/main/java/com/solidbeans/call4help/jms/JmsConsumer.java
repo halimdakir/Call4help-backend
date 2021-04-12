@@ -7,12 +7,22 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class JmsConsumer {
 
     public static List<MessageObject> Jms_Message_List = new ArrayList<>();
     private static final Logger LOGGER = LoggerFactory.getLogger(JmsConsumer.class);
+
+    JmsConsumer(){
+        String uuid1 = "c024c94d-d39e-488f-bd1e-9cd2badb1cbb";
+        UUID stringToUuid1 = UUID.fromString(uuid1);
+        String uuid2 = "c024c94d-d39e-488f-bd1e-9cd2badb1cbb";
+        UUID stringToUuid2 = UUID.fromString(uuid2);
+        Jms_Message_List.add(new MessageObject(stringToUuid1, 5L, "55 meter bort", 1L));
+        Jms_Message_List.add(new MessageObject(stringToUuid2, 5L, "252 meter bort", 3L));
+    }
 
 
     @JmsListener(destination = JmsConfig.JMS_QUEUE)

@@ -7,6 +7,9 @@ import com.solidbeans.call4help.exception.RegistrationException;
 import com.solidbeans.call4help.notification.AmazonSNSService;
 import com.solidbeans.call4help.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -49,22 +52,26 @@ public class UserServiceImplement implements UserService{
                 user = userFound;
                 user.setAuthToken(userDTO.getAuthToken());
 
+
+                userRepository.save(user);
+                entityManager.detach(user);
+
             } else {                                       //Create new user
 
                 user.setUserId(userDTO.getUserId());
                 user.setAuthToken(userDTO.getAuthToken());
 
                 user.setCreationDate(Instant.now().atZone(ZoneOffset.UTC));
+
+                userRepository.save(user);
+                entityManager.detach(user);
+
+                //Create Profile
+                profileService.saveUserInfos(user.getUserId());
+
+                //Create Endpoint
+                amazonSNSService.createAwsSnsEndpoint(user.getUserId());
             }
-
-            userRepository.save(user);
-            entityManager.detach(user);
-
-            //Create Profile
-            profileService.saveUserInfos(user.getUserId());
-
-            //Create Endpoint
-            amazonSNSService.createAwsSnsEndpoint(user.getUserId());
 
             return user;
         }
@@ -122,6 +129,18 @@ public class UserServiceImplement implements UserService{
     @Override
     public Optional<Users> findUserByPositionId(Long id) {
         return userRepository.findUsersByProfile_Position_Id(id);
+    }
+
+    @Override
+    public Optional<UserDetails> findUserByToken(String authToken) {
+        Optional<Users> user = userRepository.findUsersByAuthToken(authToken);
+        if (user.isPresent()) {
+            Users authenticatedUser = user.get();
+            User springUser = new User(authenticatedUser.getUserId(), authenticatedUser.getAuthToken(), true, true, true, true,
+                    AuthorityUtils.createAuthorityList("USER"));
+            return Optional.of(springUser);
+        }
+        return Optional.empty();
     }
 
 }

@@ -25,7 +25,7 @@ public class ReportController {
 
 
     @PostMapping
-    public ResponseEntity<?> registerReport(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId, @RequestBody ReportDTO reportDTO){
+    public ResponseEntity<?> saveReport(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId, @RequestBody ReportDTO reportDTO){
         var report = reportService.saveReport(userId, reportDTO);
         return new ResponseEntity<>(report, HttpStatus.OK);
     }
