@@ -1,7 +1,6 @@
 package com.solidbeans.call4help.controllers;
 
 import com.solidbeans.call4help.dtos.ReportDTO;
-import com.solidbeans.call4help.jms.JmsConsumer;
 import com.solidbeans.call4help.jms.JmsService;
 import com.solidbeans.call4help.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 @RestController
-@RequestMapping(value = "/api/v1/auth/report", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ReportController {
 
     @Autowired
@@ -24,7 +20,7 @@ public class ReportController {
     private JmsService jmsService;
 
 
-    @PostMapping
+    @PostMapping("/auth/report")
     public ResponseEntity<?> saveReport(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId, @RequestBody ReportDTO reportDTO){
         var report = reportService.saveReport(userId, reportDTO);
         return new ResponseEntity<>(report, HttpStatus.OK);
@@ -61,4 +57,12 @@ public class ReportController {
     public ResponseEntity<?> getReportsByAlarm(@PathVariable String userId){
         return new ResponseEntity<>(reportService.getReportsByAlert(userId), HttpStatus.OK);
     }
+
+
+    //TODO ONLY FOR TEST
+    @GetMapping("/report/all")
+    public ResponseEntity<?> getAllReports(){
+        return new ResponseEntity<>(reportService.getAllReports(), HttpStatus.OK);
+    }
+
 }

@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/v1/auth/sender", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SenderController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class SenderController {
     //TODO Language of the MESSAGE depending on the language used on the phone
     //TODO Delete published messages after 24 hours
 
-    @PostMapping("create")
+    @PostMapping("/auth/sender/create")
     public ResponseEntity<?> sendHelpRequest(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId, @RequestBody PositionDTO positionDTO) {
 
         var alert = alertService.registerHelpAlert(userId, positionDTO);
