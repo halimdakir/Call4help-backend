@@ -12,6 +12,7 @@ import java.util.UUID;
 @ToString
 public class MessageObject {
     private UUID uuid = UUID.randomUUID();
+    private Long alert_id;
     private Long helper_id;
     private String distance;
     private Long sender_id;

@@ -100,7 +100,7 @@ public class PositionServiceImplement implements PositionService{
 
                         var user = userService.findUserByPositionId(distanceDTO.getId());
 
-                        user.ifPresent(users -> nearestUsers.add(new NotificationMessageDTO(users.getId(), Math.round(distanceDTO.getDistance())+" meter bort!", alert.get().getUsers().getId())));
+                        user.ifPresent(users -> nearestUsers.add(new NotificationMessageDTO(alert.get().getId(), users.getId(), Math.round(distanceDTO.getDistance())+" meter bort!", alert.get().getUsers().getId())));
 
 
                     //}

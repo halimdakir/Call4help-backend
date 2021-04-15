@@ -29,8 +29,8 @@ public class JsmServiceImpl implements JmsService{
         try {
 
             for (NotificationMessageDTO object:list){
-                
 
+                messageObject.setAlert_id(object.getAlert_id());
                 messageObject.setHelper_id(object.getHelper_id());
                 messageObject.setDistance(object.getDistance());
                 messageObject.setSender_id(object.getSender_id());

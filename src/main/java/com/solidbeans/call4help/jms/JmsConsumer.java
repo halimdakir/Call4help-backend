@@ -16,12 +16,8 @@ public class JmsConsumer {
     private static final Logger LOGGER = LoggerFactory.getLogger(JmsConsumer.class);
 
     JmsConsumer(){
-        String uuid1 = "c024c94d-d39e-488f-bd1e-9cd2badb1cbb";
-        UUID stringToUuid1 = UUID.fromString(uuid1);
-        String uuid2 = "c024c94d-d39e-488f-bd1e-9cd2badb1cbb";
-        UUID stringToUuid2 = UUID.fromString(uuid2);
-        Jms_Message_List.add(new MessageObject(stringToUuid1, 5L, "55 meter bort", 1L));
-        Jms_Message_List.add(new MessageObject(stringToUuid2, 5L, "252 meter bort", 3L));
+        Jms_Message_List.add(new MessageObject(UUID.fromString("c024c94d-d39e-488f-bd1e-9cd2badb1cb2"), 1L, 5L, "55 meter bort", 1L));
+        Jms_Message_List.add(new MessageObject(UUID.fromString("c024c94d-d39e-488f-bd1e-9cd2badb1cb1"), 2L, 5L, "252 meter bort", 3L));
     }
 
 

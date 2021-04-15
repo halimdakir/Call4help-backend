@@ -1,6 +1,7 @@
 package com.solidbeans.call4help.service;
 
 import com.solidbeans.call4help.dtos.ReportDTO;
+import com.solidbeans.call4help.dtos.ReportModel;
 import com.solidbeans.call4help.entities.Report;
 import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.repository.ReportRepository;
@@ -26,14 +27,14 @@ public class ReportServiceImplement implements ReportService {
     public ReportDTO saveReport(String userId, ReportDTO reportDTO) {
 
         //Find user who has reported
-        var helper = userService.findUserByUserId(userId);
+        var reporter = userService.findUserByUserId(userId);
 
         //Find alert to whom has reported
         var alert = alertService.findAlertById(reportDTO.getAlertId());
 
-        if (alert.isPresent() && helper != null){
+        if (alert.isPresent() && reporter != null){
 
-            var report = new Report(reportDTO.getText(), Instant.now().atZone(ZoneOffset.UTC), helper, alert.get());
+            var report = new Report(reportDTO.getText(), Instant.now().atZone(ZoneOffset.UTC), reporter, alert.get());
             reportRepository.save(report);
 
             return ReportDTO.builder()
@@ -54,7 +55,12 @@ public class ReportServiceImplement implements ReportService {
 
     @Override
     public List<Report> getReportsByAlert(String userId) {
-        return (List<Report>) reportRepository.findAllByAlert_Users_UserId(userId);
+        return reportRepository.findAllByAlert_Users_UserId(userId);
+    }
+
+    @Override
+    public List<ReportModel> getAllReports() {
+        return reportRepository.allReports();
     }
 
 }

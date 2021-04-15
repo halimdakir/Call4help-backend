@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/v1/auth/report", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ReportController {
 
     private final ReportService reportService;
@@ -21,7 +21,7 @@ public class ReportController {
         this.jmsService = jmsService;
     }
 
-    @PostMapping
+    @PostMapping("/auth/report")
     public ResponseEntity<?> saveReport(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId, @RequestBody ReportDTO reportDTO){
         var report = reportService.saveReport(userId, reportDTO);
         return new ResponseEntity<>(report, HttpStatus.OK);
@@ -58,4 +58,12 @@ public class ReportController {
     public ResponseEntity<?> getReportsByAlarm(@PathVariable String userId){
         return new ResponseEntity<>(reportService.getReportsByAlert(userId), HttpStatus.OK);
     }
+
+
+    //TODO ONLY FOR TEST
+    @GetMapping("/report/all")
+    public ResponseEntity<?> getAllReports(){
+        return new ResponseEntity<>(reportService.getAllReports(), HttpStatus.OK);
+    }
+
 }
