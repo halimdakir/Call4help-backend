@@ -1,6 +1,8 @@
 package com.solidbeans.call4help.entities;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 

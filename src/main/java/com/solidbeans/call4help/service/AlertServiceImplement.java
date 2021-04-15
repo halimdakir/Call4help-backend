@@ -1,7 +1,6 @@
 package com.solidbeans.call4help.service;
 
 import com.solidbeans.call4help.dtos.PositionDTO;
-import com.solidbeans.call4help.dtos.ReporterQuantityByAlert;
 import com.solidbeans.call4help.entities.Alert;
 import com.solidbeans.call4help.entities.Users;
 import com.solidbeans.call4help.exception.NotFoundException;
@@ -9,7 +8,6 @@ import com.solidbeans.call4help.repository.AlertRepository;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.PrecisionModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -22,10 +20,8 @@ import java.util.Optional;
 @Service
 public class AlertServiceImplement implements AlertService{
 
-    @Autowired
-    private AlertRepository alertRepository;
-    @Autowired
-    private UserService userService;
+    private final AlertRepository alertRepository;
+    private final UserService userService;
 
 
     @PersistenceContext
@@ -33,6 +29,10 @@ public class AlertServiceImplement implements AlertService{
 
     private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26910);
 
+    public AlertServiceImplement(AlertRepository alertRepository, UserService userService) {
+        this.alertRepository = alertRepository;
+        this.userService = userService;
+    }
 
     @Override
     public Alert registerHelpAlert(String userId, PositionDTO positionDTO) {
@@ -42,7 +42,7 @@ public class AlertServiceImplement implements AlertService{
         if (user!=null){
 
 
-                Alert alert = new Alert(ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(positionDTO.getCoordinates().getLng(), positionDTO.getCoordinates().getLat())), user);
+                Alert alert = new Alert(ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(positionDTO.getLng(), positionDTO.getLat())), user);
 
                 alertRepository.save(alert);
                 entityManager.detach(alert);
