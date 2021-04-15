@@ -1,17 +1,21 @@
 package com.solidbeans.call4help.controllers;
 
 import com.solidbeans.call4help.service.EndpointService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/api/v1/arn", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EndpointController {
 
-    @Autowired
-    private EndpointService endpointService;
+    private final EndpointService endpointService;
+
+    public EndpointController(EndpointService endpointService) {
+        this.endpointService = endpointService;
+    }
 
     // use parameters when searching.
     // for example localhost:8080/api/v1/arn returns all cities and

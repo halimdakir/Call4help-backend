@@ -2,7 +2,9 @@ package com.solidbeans.call4help.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Set;
