@@ -1,9 +1,6 @@
 package com.solidbeans.call4help.dtos;
 
-import com.solidbeans.call4help.entities.Report;
-
 import java.time.ZonedDateTime;
-import java.util.Set;
 
 public class ReporterQuantityByAlert {
     private Long id;

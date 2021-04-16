@@ -12,15 +12,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/v1", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProfileController {
 
-    @Autowired
+   @Autowired
     private ProfileService profileService;
 
+
     @GetMapping(value = "/auth/profile/get")
-    public ResponseEntity<?> getProfile(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId){
+    public ResponseEntity<?> getProfile(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId) {
         return new ResponseEntity<>(profileService.findProfileList(userId), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/auth/profile/update")
+
+    @PutMapping( value = "/auth/profile/update")
     public ResponseEntity<?> updateProfile(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId, @RequestBody ProfileDTO profile){
         var result = profileService.updateUserInfos(userId, profile);
         return new ResponseEntity<>(result, HttpStatus.OK);

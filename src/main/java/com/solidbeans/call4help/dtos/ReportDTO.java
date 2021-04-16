@@ -1,6 +1,9 @@
 package com.solidbeans.call4help.dtos;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Setter;
 
 @Data
 @Builder

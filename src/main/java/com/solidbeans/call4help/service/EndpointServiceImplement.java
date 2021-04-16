@@ -1,12 +1,10 @@
 package com.solidbeans.call4help.service;
 
 import com.solidbeans.call4help.entities.Endpoint;
-import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.repository.EndpointsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

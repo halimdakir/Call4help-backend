@@ -3,7 +3,6 @@ package com.solidbeans.call4help.controllers;
 import com.solidbeans.call4help.dtos.ReportDTO;
 import com.solidbeans.call4help.jms.JmsService;
 import com.solidbeans.call4help.service.ReportService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +12,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/v1", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ReportController {
 
-    @Autowired
-    private ReportService reportService;
+    private final ReportService reportService;
 
-    @Autowired
-    private JmsService jmsService;
+    private final JmsService jmsService;
 
+    public ReportController(ReportService reportService, JmsService jmsService) {
+        this.reportService = reportService;
+        this.jmsService = jmsService;
+    }
 
     @PostMapping("/auth/report")
     public ResponseEntity<?> saveReport(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId, @RequestBody ReportDTO reportDTO){

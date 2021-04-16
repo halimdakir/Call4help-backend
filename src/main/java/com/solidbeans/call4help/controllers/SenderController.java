@@ -6,7 +6,6 @@ import com.solidbeans.call4help.notification.AmazonSNSService;
 import com.solidbeans.call4help.service.AlertService;
 import com.solidbeans.call4help.service.EndpointService;
 import com.solidbeans.call4help.service.PositionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,24 +15,22 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/v1", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SenderController {
 
-    @Autowired
-    private AlertService alertService;
+    private final AlertService alertService;
+    private final EndpointService endpointService;
+    private final AmazonSNSService amazonSNSService;
+    private final JmsService jmsService;
+    private final PositionService positionService;
 
-    @Autowired
-    private EndpointService endpointService;
+    public SenderController(AlertService alertService, EndpointService endpointService,
+                            AmazonSNSService amazonSNSService, JmsService jmsService, PositionService positionService) {
+        this.alertService = alertService;
+        this.endpointService = endpointService;
+        this.amazonSNSService = amazonSNSService;
+        this.jmsService = jmsService;
+        this.positionService = positionService;
+    }
 
-    @Autowired
-    private AmazonSNSService amazonSNSService;
-
-    @Autowired
-    private JmsService jmsService;
-
-    @Autowired
-    private PositionService positionService;
-
-
-
-    //TODO Language of the MESSAGE depending on the language used on the phone
+//TODO Language of the MESSAGE depending on the language used on the phone
     //TODO Delete published messages after 24 hours
 
     @PostMapping("/auth/sender/create")

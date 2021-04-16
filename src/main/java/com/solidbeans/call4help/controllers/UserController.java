@@ -2,7 +2,6 @@ package com.solidbeans.call4help.controllers;
 
 import com.solidbeans.call4help.dtos.UserDTO;
 import com.solidbeans.call4help.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +12,11 @@ import javax.validation.Valid;
 @RequestMapping(value = "/api/v1/users", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     // put the user register in this class instead of a separate class.
     @PostMapping(value = "/create")

@@ -1,6 +1,8 @@
 package com.solidbeans.call4help.service;
 
-import com.solidbeans.call4help.dtos.*;
+import com.solidbeans.call4help.dtos.DistanceDTO;
+import com.solidbeans.call4help.dtos.NotificationMessageDTO;
+import com.solidbeans.call4help.dtos.PositionDTO;
 import com.solidbeans.call4help.entities.Position;
 import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.exception.RegistrationException;
@@ -8,7 +10,6 @@ import com.solidbeans.call4help.repository.PositionRepository;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.PrecisionModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -19,21 +20,24 @@ import java.util.List;
 @Service
 public class PositionServiceImplement implements PositionService{
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private PositionRepository positionRepository;
-    @Autowired
-    private AlertService alertService;
-    @Autowired
-    private ProfileService profileService;
+    private final UserService userService;
+    private final PositionRepository positionRepository;
+    private final AlertService alertService;
+    private final ProfileService profileService;
 
     private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26910);
+
+    public PositionServiceImplement(UserService userService, PositionRepository positionRepository, AlertService alertService, ProfileService profileService) {
+        this.userService = userService;
+        this.positionRepository = positionRepository;
+        this.alertService = alertService;
+        this.profileService = profileService;
+    }
 
     @Override
     public Position savePosition(String userId, PositionDTO positionDTO) {
 
-        if (positionDTO.getCoordinates() == null || userId == null) {
+        if (positionDTO == null || userId == null) {
 
             throw new RegistrationException("All fields are required!");
 
@@ -50,7 +54,7 @@ public class PositionServiceImplement implements PositionService{
                 if (position.isPresent()){  //If position exist
 
                     position.get().setTime(Instant.now().atZone(ZoneOffset.UTC));
-                    position.get().setCoordinates(geometryFactory.createPoint(new Coordinate(positionDTO.getCoordinates().getLng(), positionDTO.getCoordinates().getLat())));
+                    position.get().setCoordinates(geometryFactory.createPoint(new Coordinate(positionDTO.getLng(), positionDTO.getLat())));
 
                     return positionRepository.save(position.get());
 
@@ -58,8 +62,9 @@ public class PositionServiceImplement implements PositionService{
 
                     var profile = profileService.findProfileByUserId(foundUser.getUserId());
 
-                    if (profile != null){
-                        var newPosition = new Position(Instant.now().atZone(ZoneOffset.UTC), geometryFactory.createPoint(new Coordinate(positionDTO.getCoordinates().getLng(), positionDTO.getCoordinates().getLat())), profile);
+
+                    if (profile!= null){
+                        var newPosition = new Position(Instant.now().atZone(ZoneOffset.UTC), geometryFactory.createPoint(new Coordinate(positionDTO.getLng(), positionDTO.getLat())), profile);
 
                         return positionRepository.save(newPosition);
                     }else {
