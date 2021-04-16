@@ -62,8 +62,9 @@ public class PositionServiceImplement implements PositionService{
 
                     var profile = profileService.findProfileByUserId(foundUser.getUserId());
 
-                    if (profile.isPresent()){
-                        var newPosition = new Position(Instant.now().atZone(ZoneOffset.UTC), geometryFactory.createPoint(new Coordinate(positionDTO.getLng(), positionDTO.getLat())), profile.get());
+
+                    if (profile!= null){
+                        var newPosition = new Position(Instant.now().atZone(ZoneOffset.UTC), geometryFactory.createPoint(new Coordinate(positionDTO.getLng(), positionDTO.getLat())), profile);
 
                         return positionRepository.save(newPosition);
                     }else {

@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ProfileDTO {
-    private boolean isAnonymous;
+    private boolean anonymous;
     private String fullName;
     private String email;
     private String phoneNumber;

@@ -16,7 +16,7 @@ http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <description>Backend project for call4help application</description>
 
     <properties>
-        <java.version>15</java.version>
+        <java.version>16</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -48,7 +48,8 @@ http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <version>1.18.20</version>
+            <scope>provided</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers -->
         <dependency>

@@ -52,14 +52,14 @@ public class AmazonSNSServiceImpl implements AmazonSNSService{
 
             var profile = profileService.findProfileByUserId(user.getUserId());
 
-            if (profile.isPresent()){
+            if (profile != null){
 
                 var result =  createDeviceEndpoint(user.getAuthToken(), platform_App_Arn);
 
                 if (result!=null){
 
 
-                    var endpoints = new Endpoint(result, profile.get());
+                    var endpoints = new Endpoint(result, profile);
 
                     endpointsRepository.save(endpoints);
 
