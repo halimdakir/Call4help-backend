@@ -13,7 +13,9 @@ public interface ReportRepository extends CrudRepository<Report, Long> {
 
     List<Report> findAllByAlert_Users_UserId(String userId);
 
-    String query ="SELECT report.id, report.text, report.date_time, report.helper_id FROM report";
+    String query ="SELECT report.id, report.text, report.date_time, report.helper_id, report.alert_id  FROM report";
     @Query(nativeQuery = true, value = query)
     List<ReportModel> allReports();
+
+    List<Report> findAllByAlert_Id(Long id);
 }

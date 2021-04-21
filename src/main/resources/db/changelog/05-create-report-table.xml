@@ -17,7 +17,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="helper_id" type="int" />
-            <column name="sender_id" type="int" />
+            <column name="alert_id" type="int" />
         </createTable>
 
         <addForeignKeyConstraint constraintName="fk_report2user"
@@ -28,7 +28,7 @@
 
         <addForeignKeyConstraint constraintName="fk_report2alert"
                                  baseTableName="report"
-                                 baseColumnNames="sender_id"
+                                 baseColumnNames="alert_id"
                                  referencedTableName="alert"
                                  referencedColumnNames="id"/>
 
