@@ -31,7 +31,7 @@ public class SenderController {
     }
 
 //TODO Language of the MESSAGE depending on the language used on the phone
-    //TODO Delete published messages after 24 hours
+    //TODO Delete published messages after an hour
 
     @PostMapping("/auth/sender/create")
     public ResponseEntity<?> sendHelpRequest(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId, @RequestBody PositionDTO positionDTO) {
@@ -42,10 +42,10 @@ public class SenderController {
         amazonSNSService.publishMessage(endpointService.getAllEndpoints(), "Någon ropar på hjälp!");
 
         //Publish message
-        var message = jmsService.publishMessage(positionService.getNearestUsers(alert.getId()));
+        jmsService.publishMessage(positionService.getNearestUsers(alert.getId()));
 
 
-        return new ResponseEntity<>(message, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //TODO THIS IS ONLY FOR TEST

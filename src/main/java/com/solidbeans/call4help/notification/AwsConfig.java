@@ -5,7 +5,6 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.sns.AmazonSNSClient;
 import com.amazonaws.services.sns.AmazonSNSClientBuilder;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -13,12 +12,12 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 public class AwsConfig {
 
-    @Value("${cloud.aws.credentials.access-key}")
-    private String accessKey;
-    @Value("${cloud.aws.credentials.secret-key}")
-    private String secretKey;
-    @Value("${cloud.aws.region.static}")
-    private String region;
+    //@Value("${cloud.aws.credentials.access-key}")
+    private final String accessKey = "AKIAVJR6HP6GKDEYXYNA";
+    //@Value("${cloud.aws.credentials.secret-key}")
+    private final String secretKey = "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";
+    //@Value("${cloud.aws.region.static}")
+    private final String region = "EU_WEST_1";
 
     @Primary
     @Bean
