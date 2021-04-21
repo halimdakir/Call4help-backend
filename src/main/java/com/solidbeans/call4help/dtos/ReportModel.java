@@ -5,5 +5,7 @@ public interface ReportModel {
         String getText();
         String getDate_time();
         Long getHelper_id();
+        Long getAlert_id();
+
 
 }

@@ -30,7 +30,7 @@ public class Report {
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "sender_id", nullable = false)
+    @JoinColumn(name = "alert_id", nullable = false)
     private Alert alert;
 
     public Report(String text, ZonedDateTime dateTime, Users users, Alert alert) {
