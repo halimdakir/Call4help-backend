@@ -104,7 +104,7 @@ public class AmazonSNSServiceImpl implements AmazonSNSService{
         PublishRequest request = new PublishRequest();
         request.setMessageStructure("json");
         Map<String, String> msgMap = new HashMap<>();
-        msgMap.put("FCM", message);
+        msgMap.put("GCM", message);
 
         String sendMsg = jsonify(msgMap);
         request.setTargetArn(arn);
