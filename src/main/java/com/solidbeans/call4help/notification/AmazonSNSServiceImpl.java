@@ -10,7 +10,6 @@ import com.solidbeans.call4help.repository.EndpointsRepository;
 import com.solidbeans.call4help.service.ProfileService;
 import com.solidbeans.call4help.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -21,8 +20,7 @@ import java.util.Map;
 @Service
 public class AmazonSNSServiceImpl implements AmazonSNSService{
 
-    @Value("${cloud.aws.platform.app.arn}")
-    private String platform_App_Arn;
+    private final String platform_App_Arn = "arn:aws:sns:eu-west-1:364128993164:app/GCM/call4help";
 
     @Autowired
     private EndpointsRepository endpointsRepository;
@@ -85,7 +83,9 @@ public class AmazonSNSServiceImpl implements AmazonSNSService{
     public void publishMessage(List<Endpoint> endpointList, String message){
         if (endpointList.size() > 0){
             for (Endpoint endpoint: endpointList){
-                publish(endpoint.getArn(), message);
+                if (endpoint.getArn() != null){
+                    publish(endpoint.getArn(), message);
+                }
             }
         }
     }
@@ -104,14 +104,13 @@ public class AmazonSNSServiceImpl implements AmazonSNSService{
         PublishRequest request = new PublishRequest();
         request.setMessageStructure("json");
         Map<String, String> msgMap = new HashMap<>();
-        msgMap.put("FCM", message);
+        msgMap.put("GCM", message);
 
         String sendMsg = jsonify(msgMap);
         request.setTargetArn(arn);
         request.setMessage(sendMsg);
         snsClient.publish(request);
     }
-
 
     public static String jsonify(Object message) {
         try {

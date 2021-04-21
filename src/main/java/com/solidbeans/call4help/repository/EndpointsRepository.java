@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EndpointsRepository extends CrudRepository<Endpoint, Long> {
-    Endpoint findEndpointByProfile_Users_UserId(String city);
 }
