@@ -45,7 +45,7 @@ public class SenderController {
         jmsService.publishMessage(positionService.getNearestUsers(alert.getId()));
 
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Done!", HttpStatus.OK);
     }
 
     //TODO THIS IS ONLY FOR TEST
