@@ -7,11 +7,10 @@ import com.solidbeans.call4help.repository.AlertRepository;
 import com.solidbeans.call4help.repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.sql.Date;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 @Service
@@ -34,11 +33,23 @@ public class EvidenceServiceImplement implements EvidenceService{
             for (Alert alert : alerts) {
 
                 List<Report> reportList = reportRepository.findAllByAlert_Id(alert.getId());
+                int countText = 0;
+                int countImage = 0;
+                int countVideo =0;
+
+                for (Report report : reportList){
+                    if (report.getText() != null || !report.getText().equals("")){
+                        countText++;
+                    }
+                    if (report.getImage().length != 0){
+                        countImage++;
+                    }
+                }
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 String formattedString = alert.getAlertDate().format(formatter);
 
-                evidenceList.add(new Evidence(formattedString, reportList.size(), 0, 0));
+                evidenceList.add(new Evidence(formattedString, countText, countImage, 0));
             }
 
 
