@@ -20,6 +20,10 @@ public class Report {
 
     private String text;
 
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] image;
+
     @Column(name="date_time")
     private ZonedDateTime dateTime;
 
@@ -35,6 +39,14 @@ public class Report {
 
     public Report(String text, ZonedDateTime dateTime, Users users, Alert alert) {
         this.text = text;
+        this.dateTime = dateTime;
+        this.users = users;
+        this.alert = alert;
+    }
+
+    public Report(String text, byte[] image, ZonedDateTime dateTime, Users users, Alert alert) {
+        this.text = text;
+        this.image = image;
         this.dateTime = dateTime;
         this.users = users;
         this.alert = alert;

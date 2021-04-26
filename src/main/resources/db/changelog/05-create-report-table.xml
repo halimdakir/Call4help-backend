@@ -13,6 +13,9 @@
             <column name="text" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="image" type="BINARY">
+                <constraints nullable="false"/>
+            </column>
             <column name="date_time" type="timestamptz">
                 <constraints nullable="false"/>
             </column>
