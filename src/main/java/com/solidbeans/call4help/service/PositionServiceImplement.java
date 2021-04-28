@@ -54,7 +54,7 @@ public class PositionServiceImplement implements PositionService{
                 if (position.isPresent()){  //If position exist
 
                     position.get().setTime(Instant.now().atZone(ZoneOffset.UTC));
-                    position.get().setCoordinates(geometryFactory.createPoint(new Coordinate(positionDTO.getLng(), positionDTO.getLat())));
+                    position.get().setCoordinates(geometryFactory.createPoint(new Coordinate(positionDTO.getLat(), positionDTO.getLng())));
 
                     return positionRepository.save(position.get());
 
@@ -64,9 +64,10 @@ public class PositionServiceImplement implements PositionService{
 
 
                     if (profile!= null){
-                        var newPosition = new Position(Instant.now().atZone(ZoneOffset.UTC), geometryFactory.createPoint(new Coordinate(positionDTO.getLng(), positionDTO.getLat())), profile);
+                        var newPosition = new Position(Instant.now().atZone(ZoneOffset.UTC), geometryFactory.createPoint(new Coordinate(positionDTO.getLat(), positionDTO.getLng())), profile);
 
                         return positionRepository.save(newPosition);
+
                     }else {
 
                         throw new NotFoundException("Profile with user id :" + foundUser.getUserId() + " is not found");
