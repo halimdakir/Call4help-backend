@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.Instant;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +44,7 @@ public class AlertServiceImplement implements AlertService{
         if (user!=null){
 
 
-                Alert alert = new Alert(ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(positionDTO.getLng(), positionDTO.getLat())), user);
+                Alert alert = new Alert(Instant.now().atZone(ZoneOffset.UTC), Instant.now().atZone(ZoneOffset.UTC).plusHours(1), geometryFactory.createPoint(new Coordinate(positionDTO.getLat(), positionDTO.getLng())), user);
 
                 alertRepository.save(alert);
                 entityManager.detach(alert);

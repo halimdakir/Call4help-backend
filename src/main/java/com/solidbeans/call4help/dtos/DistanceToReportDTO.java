@@ -1,6 +1,6 @@
 package com.solidbeans.call4help.dtos;
 
-public interface DistanceToReport {
+public interface DistanceToReportDTO {
     Long getId();
     Double getDistance();
 }

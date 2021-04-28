@@ -11,10 +11,10 @@
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
             <column name="text" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="image" type="BINARY">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="date_time" type="timestamptz">
                 <constraints nullable="false"/>

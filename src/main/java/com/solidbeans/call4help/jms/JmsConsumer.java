@@ -17,7 +17,7 @@ public class JmsConsumer {
 
     JmsConsumer(){
         Jms_Message_List.add(new MessageObject(UUID.fromString("c024c94d-d39e-488f-bd1e-9cd2badb1cb2"), 1L, 5L, "55 meter bort", 1L));
-        Jms_Message_List.add(new MessageObject(UUID.fromString("c024c94d-d39e-488f-bd1e-9cd2badb1cb1"), 2L, 6L, "252 meter bort", 3L));
+        //Jms_Message_List.add(new MessageObject(UUID.fromString("c024c94d-d39e-488f-bd1e-9cd2badb1cb1"), 2L, 5L, "252 meter bort", 3L));
     }
 
 

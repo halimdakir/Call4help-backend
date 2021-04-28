@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -20,8 +21,12 @@ public class Report {
 
     private String text;
 
-    @Lob
+    /*@Lob
     @Basic(fetch = FetchType.LAZY)
+    private byte[] image;*/
+
+    @Type(type="org.hibernate.type.BinaryType")
+    @Column(name = "image")
     private byte[] image;
 
     @Column(name="date_time")

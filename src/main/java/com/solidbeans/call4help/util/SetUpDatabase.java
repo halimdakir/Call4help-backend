@@ -42,8 +42,8 @@ public class SetUpDatabase {
                 profileRepository.save(profile4);
 
 
-                var alert1 = new Alert( ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.708116, 11.967694)), user1);
-                var alert2 = new Alert( ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.707617, 11.967883)), user3);
+                var alert1 = new Alert( ZonedDateTime.now(ZoneId.of("UTC")), ZonedDateTime.now(ZoneId.of("UTC")).plusHours(1), geometryFactory.createPoint(new Coordinate(57.708116, 11.967694)), user1);
+                var alert2 = new Alert( ZonedDateTime.now(ZoneId.of("UTC")), ZonedDateTime.now(ZoneId.of("UTC")).plusHours(1), geometryFactory.createPoint(new Coordinate(59.326450, 18.069037)), user3);
 
                 alertRepository.save(alert1);
                 alertRepository.save(alert2);
@@ -53,8 +53,8 @@ public class SetUpDatabase {
                 var report2 = new Report("Action B", ZonedDateTime.now(ZoneId.of("UTC")), user2, alert1);
 
 
-                reportRepository.save(report1);
-                reportRepository.save(report2);
+                //reportRepository.save(report1);
+                //reportRepository.save(report2);
 
 
                 var position1 = new Position(ZonedDateTime.now(ZoneId.of("UTC")), geometryFactory.createPoint(new Coordinate(57.708116, 11.967694)), profile1);

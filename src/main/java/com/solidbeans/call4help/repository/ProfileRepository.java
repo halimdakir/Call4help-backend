@@ -1,6 +1,5 @@
 package com.solidbeans.call4help.repository;
 
-import com.solidbeans.call4help.dtos.ProfileDTO;
 import com.solidbeans.call4help.dtos.ProfileModel;
 import com.solidbeans.call4help.entities.Profile;
 import org.springframework.data.jpa.repository.Query;
