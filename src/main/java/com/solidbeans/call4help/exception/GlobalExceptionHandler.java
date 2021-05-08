@@ -55,4 +55,13 @@ public class GlobalExceptionHandler {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), errorMessageDesc, request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.UNPROCESSABLE_ENTITY);
     }
+
+    //Service Unavailable
+    @ExceptionHandler(ServiceUnavailableException.class)
+    public ResponseEntity<Object> serviceUnavailableExceptionHandling(ServiceUnavailableException exception, WebRequest request){
+        String errorMessageDesc = exception.getLocalizedMessage();
+        if (errorMessageDesc == null) errorMessageDesc=exception.toString();
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), errorMessageDesc, request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.SERVICE_UNAVAILABLE);
+    }
 }

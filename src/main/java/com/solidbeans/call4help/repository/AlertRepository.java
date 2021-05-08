@@ -1,5 +1,6 @@
 package com.solidbeans.call4help.repository;
 
+import com.solidbeans.call4help.dtos.ActiveAlertDTO;
 import com.solidbeans.call4help.entities.Alert;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

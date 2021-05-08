@@ -3,8 +3,8 @@ package com.solidbeans.call4help.service;
 import com.solidbeans.call4help.dtos.PositionDTO;
 import com.solidbeans.call4help.entities.Alert;
 import com.solidbeans.call4help.entities.Users;
-import com.solidbeans.call4help.exception.NotAcceptedException;
 import com.solidbeans.call4help.exception.NotFoundException;
+import com.solidbeans.call4help.exception.ServiceUnavailableException;
 import com.solidbeans.call4help.repository.AlertRepository;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
@@ -53,11 +53,11 @@ public class AlertServiceImplement implements AlertService{
                 String formattedString = activeAlerts.get(activeAlerts.size()-1).getEndAlertDate().format(formatter);
 
 
-                throw  new NotAcceptedException("You still have an active alert until : "+formattedString+". please try after this!");
+                throw  new ServiceUnavailableException("You still have an active alert until : "+formattedString+". please try after this!");
 
             }else {
 
-                Alert alert = new Alert(Instant.now().atZone(ZoneOffset.UTC), Instant.now().atZone(ZoneOffset.UTC).plusHours(1), geometryFactory.createPoint(new Coordinate(positionDTO.getLat(), positionDTO.getLng())), user);
+                Alert alert = new Alert(Instant.now().atZone(ZoneOffset.UTC), Instant.now().atZone(ZoneOffset.UTC).plusMinutes(2), geometryFactory.createPoint(new Coordinate(positionDTO.getLat(), positionDTO.getLng())), user);
 
                 alertRepository.save(alert);
                 entityManager.detach(alert);

@@ -29,10 +29,10 @@ public class SetUpDatabase {
                 var user4 = new Users("100MA400", "QWERTYUIOP0123500", ZonedDateTime.now(ZoneId.of("UTC")), null);
 
 
-                var profile1 = new Profile(true, null, null,null,null, user1);
-                var profile2 = new Profile(true, null, null,null, null, user2);
-                var profile3 = new Profile(false, "Hal Dak", "hal.dak@email.fr", "0722220000", ZonedDateTime.now(ZoneId.of("UTC")), user3);
-                var profile4 = new Profile(true, null, null,null, null, user4);
+                var profile1 = new Profile(true, null, null,null,null, null, null,null, user1);
+                var profile2 = new Profile(true, null, null,null, null, null,null, null,user2);
+                var profile3 = new Profile(false, "Hal Dak", "hal.dak@email.fr", "0722220000", "Rue Stockholm 141", "21200", "Göteborg",  ZonedDateTime.now(ZoneId.of("UTC")), user3);
+                var profile4 = new Profile(true, null, null,null, null, null,null, null, user4);
 
 
 

@@ -24,6 +24,6 @@ public class ActiveAlertController {
     }
     @GetMapping("/active")
     public ResponseEntity<?> getActiveAlert(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId){
-        return new ResponseEntity<>(activeAlertsService.activeAlert(userId), HttpStatus.OK);
+        return new ResponseEntity<>(activeAlertsService.activeAlertDTO(activeAlertsService.activeAlert(userId)), HttpStatus.OK);
     }
 }
