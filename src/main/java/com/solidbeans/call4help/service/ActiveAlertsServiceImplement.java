@@ -9,14 +9,19 @@ import java.time.ZoneOffset;
 import java.util.List;
 
 @Service
-public class AlertDurationServiceImplement implements AlertDurationService {
+public class ActiveAlertsServiceImplement implements ActiveAlertsService {
 
     @Autowired
     private AlertRepository alertRepository;
 
 
     @Override
-    public int getActiveAlerts(String userId) {
-        return alertRepository.findAlertsExceptMine(userId, Instant.now().atZone(ZoneOffset.UTC)).size();
+    public int getActiveAlertsQuantity(String userId) {
+        return alertRepository.findAllActiveAlertsExceptMine(userId, Instant.now().atZone(ZoneOffset.UTC)).size();
+    }
+
+    @Override
+    public List<Alert> activeAlert(String userId) {
+        return alertRepository.findMyActiveAlert(userId, Instant.now().atZone(ZoneOffset.UTC));
     }
 }

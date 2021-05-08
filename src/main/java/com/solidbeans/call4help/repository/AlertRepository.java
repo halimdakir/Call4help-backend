@@ -14,6 +14,9 @@ public interface AlertRepository extends CrudRepository<Alert, Long> {
     List<Alert> findAlertByUsers_UserId(String userId);
 
     @Query("SELECT DISTINCT a FROM Alert a WHERE a.users.userId <> :userId AND a.endAlertDate >= :timeNow AND a.startAlertDate <= :timeNow")
-    List<Alert> findAlertsExceptMine(String userId, ZonedDateTime timeNow);
+    List<Alert> findAllActiveAlertsExceptMine(String userId, ZonedDateTime timeNow);
+
+    @Query("SELECT DISTINCT a FROM Alert a WHERE a.users.userId = :userId AND a.endAlertDate >= :timeNow AND a.startAlertDate <= :timeNow")
+    List<Alert> findMyActiveAlert(String userId, ZonedDateTime timeNow);
 
 }

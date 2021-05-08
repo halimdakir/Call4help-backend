@@ -3,6 +3,7 @@ package com.solidbeans.call4help.service;
 import com.solidbeans.call4help.dtos.PositionDTO;
 import com.solidbeans.call4help.entities.Alert;
 import com.solidbeans.call4help.entities.Users;
+import com.solidbeans.call4help.exception.NotAcceptedException;
 import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.repository.AlertRepository;
 import org.locationtech.jts.geom.Coordinate;
@@ -13,9 +14,8 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.Instant;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +24,7 @@ public class AlertServiceImplement implements AlertService{
 
     private final AlertRepository alertRepository;
     private final UserService userService;
+    private final ActiveAlertsService activeAlertsService;
 
 
     @PersistenceContext
@@ -31,9 +32,10 @@ public class AlertServiceImplement implements AlertService{
 
     private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26910);
 
-    public AlertServiceImplement(AlertRepository alertRepository, UserService userService) {
+    public AlertServiceImplement(AlertRepository alertRepository, UserService userService, ActiveAlertsService activeAlertsService) {
         this.alertRepository = alertRepository;
         this.userService = userService;
+        this.activeAlertsService = activeAlertsService;
     }
 
     @Override
@@ -43,6 +45,17 @@ public class AlertServiceImplement implements AlertService{
 
         if (user!=null){
 
+            List<Alert> activeAlerts = activeAlertsService.activeAlert(user.getUserId());
+
+            if (activeAlerts.size() > 0 ){
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                String formattedString = activeAlerts.get(activeAlerts.size()-1).getEndAlertDate().format(formatter);
+
+
+                throw  new NotAcceptedException("You still have an active alert until : "+formattedString+". please try after this!");
+
+            }else {
 
                 Alert alert = new Alert(Instant.now().atZone(ZoneOffset.UTC), Instant.now().atZone(ZoneOffset.UTC).plusHours(1), geometryFactory.createPoint(new Coordinate(positionDTO.getLat(), positionDTO.getLng())), user);
 
@@ -50,8 +63,7 @@ public class AlertServiceImplement implements AlertService{
                 entityManager.detach(alert);
 
                 return alert;
-
-
+            }
 
         }else {
 

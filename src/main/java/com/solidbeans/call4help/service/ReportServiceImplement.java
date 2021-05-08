@@ -82,20 +82,23 @@ public class ReportServiceImplement implements ReportService {
 
                         var dateNow = Instant.now().atZone(ZoneOffset.UTC);
 
+                        //CHECK IF THE DISTANCE EQUALS 1KM AND ALERTS IS STILL ACTIVE
                         if (distance.getDistance() <= 1000 && dateNow.isBefore(alert.get().getEndAlertDate()) && dateNow.isAfter(alert.get().getStartAlertDate()) ){
 
                             try{
-                                if (!reportDTO.getText().equals("")){
+
+                                if (!reportDTO.getText().equals("")){   //REPORT TYPE: TEXT
 
                                     var report = new Report(reportDTO.getText(), Instant.now().atZone(ZoneOffset.UTC), reporter, alert.get());
                                     reportRepository.save(report);
                                 }
-                                if (extension.equalsIgnoreCase("jpg")){
+
+                                if (extension.equalsIgnoreCase("jpg")){    //REPORT TYPE : IMAGE
 
                                     var image = new Images(reportDTO.getFile().getBytes(), Instant.now().atZone(ZoneOffset.UTC), reporter, alert.get());
                                     imageRepository.save(image);
 
-                                }else if (extension.equalsIgnoreCase("mp4")){
+                                }else if (extension.equalsIgnoreCase("mp4")){  //REPORT TYPE: VIDEO
 
                                     var video = new Videos(reportDTO.getFile().getBytes(),Instant.now().atZone(ZoneOffset.UTC), reporter, alert.get());
                                     videoRepository.save(video);
