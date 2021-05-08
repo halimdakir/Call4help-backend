@@ -8,4 +8,7 @@ public class ProfileDTO {
     private String fullName;
     private String email;
     private String phoneNumber;
+    private String address;
+    private String postCode;
+    private String ort;
 }

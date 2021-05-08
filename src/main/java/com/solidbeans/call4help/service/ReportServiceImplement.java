@@ -4,11 +4,15 @@ import com.solidbeans.call4help.dtos.DistanceToReportDTO;
 import com.solidbeans.call4help.dtos.ReportDTO;
 import com.solidbeans.call4help.dtos.ReportModel;
 import com.solidbeans.call4help.entities.Alert;
+import com.solidbeans.call4help.entities.Images;
 import com.solidbeans.call4help.entities.Report;
+import com.solidbeans.call4help.entities.Videos;
 import com.solidbeans.call4help.exception.FileStorageException;
 import com.solidbeans.call4help.exception.NotFoundException;
+import com.solidbeans.call4help.repository.ImageRepository;
 import com.solidbeans.call4help.repository.PositionRepository;
 import com.solidbeans.call4help.repository.ReportRepository;
+import com.solidbeans.call4help.repository.VideoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +32,10 @@ public class ReportServiceImplement implements ReportService {
     @Autowired
     private ReportRepository reportRepository;
     @Autowired
+    private ImageRepository imageRepository;
+    @Autowired
+    private VideoRepository videoRepository;
+    @Autowired
     private UserService userService;
     @Autowired
     private AlertService alertService;
@@ -39,7 +47,15 @@ public class ReportServiceImplement implements ReportService {
     public void saveReport(String userId, ReportDTO reportDTO) {
         // Normalize file name
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(reportDTO.getFile().getOriginalFilename()));
+        LOGGER.info("The file name! {}", fileName);
+        //File extension
+        String extension = "";
+        int index = fileName.lastIndexOf('.');
+        if(index > 0) {
+            extension = fileName.substring(index + 1);
+        }
 
+        LOGGER.info("The file extension! {}", extension);
 
         //Find user who has reported
         var reporter = userService.findUserByUserId(userId);
@@ -69,10 +85,21 @@ public class ReportServiceImplement implements ReportService {
                         if (distance.getDistance() <= 1000 && dateNow.isBefore(alert.get().getEndAlertDate()) && dateNow.isAfter(alert.get().getStartAlertDate()) ){
 
                             try{
+                                if (!reportDTO.getText().equals("")){
 
-                                    var report = new Report(reportDTO.getText(), reportDTO.getFile().getBytes(),Instant.now().atZone(ZoneOffset.UTC), reporter, alert.get());
-
+                                    var report = new Report(reportDTO.getText(), Instant.now().atZone(ZoneOffset.UTC), reporter, alert.get());
                                     reportRepository.save(report);
+                                }
+                                if (extension.equalsIgnoreCase("jpg")){
+
+                                    var image = new Images(reportDTO.getFile().getBytes(), Instant.now().atZone(ZoneOffset.UTC), reporter, alert.get());
+                                    imageRepository.save(image);
+
+                                }else if (extension.equalsIgnoreCase("mp4")){
+
+                                    var video = new Videos(reportDTO.getFile().getBytes(),Instant.now().atZone(ZoneOffset.UTC), reporter, alert.get());
+                                    videoRepository.save(video);
+                                }
 
 
                             }catch (IOException ex) {

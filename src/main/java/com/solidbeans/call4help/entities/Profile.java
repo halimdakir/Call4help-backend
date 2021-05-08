@@ -23,6 +23,11 @@ public class Profile {
     private String email;
     @Column(name="phone_number")
     private String phoneNumber;
+    private String address;
+    @Column(name="post_code")
+    private String postCode;
+    private String ort;
+
     @Column(name="profile_update_date")
     private ZonedDateTime updateDate;
 
@@ -43,11 +48,15 @@ public class Profile {
     @JoinColumn(name = "user_id", nullable = false)
     private Users users;
 
-    public Profile(boolean isAnonymous, String fullName, String email, String phoneNumber, ZonedDateTime updateDate, Users users) {
+
+    public Profile(boolean isAnonymous, String fullName, String email, String phoneNumber, String address, String postCode, String ort, ZonedDateTime updateDate, Users users) {
         this.isAnonymous = isAnonymous;
         this.fullName = fullName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.postCode = postCode;
+        this.ort = ort;
         this.updateDate = updateDate;
         this.users = users;
     }

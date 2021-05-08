@@ -30,7 +30,7 @@ public class ReportController {
     public ResponseEntity<?> saveReport(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId, @RequestParam("file") MultipartFile file, @RequestParam("text") String text){
         ReportDTO reportDTO = new ReportDTO(text, file);
         reportService.saveReport(userId, reportDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Done!", HttpStatus.OK);
     }
 
 

@@ -35,6 +35,14 @@ public class Alert {
     @OneToMany(mappedBy = "alert", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Report> reports;
 
+    @JsonBackReference
+    @OneToMany(mappedBy = "alert", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Images> images;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "alert", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Videos> videos;
+
     public Alert(ZonedDateTime startAlertDate, ZonedDateTime endAlertDate, Point coordinates, Users users) {
         this.startAlertDate = startAlertDate;
         this.endAlertDate = endAlertDate;

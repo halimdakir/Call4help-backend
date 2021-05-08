@@ -30,6 +30,9 @@ public class ProfileServiceImplement implements ProfileService {
                     profile.setFullName(infos.getFullName());
                     profile.setEmail(infos.getEmail());
                     profile.setPhoneNumber(infos.getPhoneNumber());
+                    profile.setAddress(infos.getAddress());
+                    profile.setPostCode(infos.getPostCode());
+                    profile.setOrt(infos.getOrt());
                     profile.setUpdateDate(ZonedDateTime.now());
                     return profileRepository.save(profile);
 
@@ -49,7 +52,7 @@ public class ProfileServiceImplement implements ProfileService {
         if (profileIsExist.isEmpty()){
             if (user != null){
 
-                Profile newProfile = new Profile(true, null, null,null,null, user);
+                Profile newProfile = new Profile(false, null, null,null,null,null, null, null, user);
                 profileRepository.save(newProfile);
 
             }
