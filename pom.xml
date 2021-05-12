@@ -11,7 +11,7 @@ http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     </parent>
     <groupId>com.solidbeans</groupId>
     <artifactId>call4help</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>call4help</name>
     <description>Backend project for call4help application</description>
 
