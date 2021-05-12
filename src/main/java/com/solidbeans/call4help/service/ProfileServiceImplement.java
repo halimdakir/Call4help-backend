@@ -1,14 +1,13 @@
 package com.solidbeans.call4help.service;
 
 import com.solidbeans.call4help.dtos.ProfileDTO;
-import com.solidbeans.call4help.dtos.ProfileModel;
 import com.solidbeans.call4help.entities.Profile;
 import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.time.ZonedDateTime;
-import java.util.List;
 
 @Service
 public class ProfileServiceImplement implements ProfileService {

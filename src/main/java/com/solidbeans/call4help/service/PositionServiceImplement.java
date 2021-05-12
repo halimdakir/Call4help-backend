@@ -1,7 +1,5 @@
 package com.solidbeans.call4help.service;
 
-import com.solidbeans.call4help.dtos.DistanceDTO;
-import com.solidbeans.call4help.dtos.NotificationMessageDTO;
 import com.solidbeans.call4help.dtos.PositionDTO;
 import com.solidbeans.call4help.entities.Position;
 import com.solidbeans.call4help.exception.NotFoundException;
@@ -11,11 +9,8 @@ import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.PrecisionModel;
 import org.springframework.stereotype.Service;
-
 import java.time.Instant;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class PositionServiceImplement implements PositionService{

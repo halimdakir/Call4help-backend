@@ -2,14 +2,16 @@ package com.solidbeans.call4help.service;
 
 import com.solidbeans.call4help.dtos.DistanceToReportDTO;
 import com.solidbeans.call4help.dtos.ReportDTO;
-import com.solidbeans.call4help.dtos.ReportModel;
 import com.solidbeans.call4help.entities.Alert;
 import com.solidbeans.call4help.entities.Images;
 import com.solidbeans.call4help.entities.Report;
 import com.solidbeans.call4help.entities.Videos;
 import com.solidbeans.call4help.exception.FileStorageException;
 import com.solidbeans.call4help.exception.NotFoundException;
-import com.solidbeans.call4help.repository.*;
+import com.solidbeans.call4help.repository.ImageRepository;
+import com.solidbeans.call4help.repository.PositionRepository;
+import com.solidbeans.call4help.repository.ReportRepository;
+import com.solidbeans.call4help.repository.VideoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +42,6 @@ public class ReportServiceImplement implements ReportService {
     private AlertService alertService;
     @Autowired
     private PositionRepository positionRepository;
-    @Autowired
-    private AlertRepository alertRepository;
 
 
     @Override
@@ -134,15 +134,6 @@ public class ReportServiceImplement implements ReportService {
 
 
 
-    }
-    @Override
-    public List<Report> getReportsByAlert(String userId) {
-        return reportRepository.findAllByAlert_Users_UserId(userId);
-    }
-
-    @Override
-    public List<ReportModel> getAllReports() {
-        return reportRepository.allReports();
     }
 
 
