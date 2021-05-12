@@ -8,6 +8,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 public class Evidence {
+    private String time;
     private String date;
     private int textQuantity;
     private int imageQuantity;

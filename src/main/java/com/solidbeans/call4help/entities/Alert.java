@@ -19,9 +19,11 @@ public class Alert {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="alert_date")
-    private ZonedDateTime alertDate;
+    @Column(name="start_alert_date")
+    private ZonedDateTime startAlertDate;
 
+    @Column(name="end_alert_date")
+    private ZonedDateTime endAlertDate;
     private org.locationtech.jts.geom.Point coordinates;
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -33,8 +35,17 @@ public class Alert {
     @OneToMany(mappedBy = "alert", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Report> reports;
 
-    public Alert(ZonedDateTime alertDate, Point coordinates, Users users) {
-        this.alertDate = alertDate;
+    @JsonBackReference
+    @OneToMany(mappedBy = "alert", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Images> images;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "alert", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Videos> videos;
+
+    public Alert(ZonedDateTime startAlertDate, ZonedDateTime endAlertDate, Point coordinates, Users users) {
+        this.startAlertDate = startAlertDate;
+        this.endAlertDate = endAlertDate;
         this.coordinates = coordinates;
         this.users = users;
     }

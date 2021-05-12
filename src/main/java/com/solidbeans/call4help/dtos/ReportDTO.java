@@ -1,15 +1,12 @@
 package com.solidbeans.call4help.dtos;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ReportDTO {
-
-    @Setter(value= AccessLevel.NONE)
     private String text;
-    private Long alertId;
+    private MultipartFile file;
 }

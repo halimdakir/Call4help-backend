@@ -18,12 +18,7 @@ public class PositionController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<?> saveOrUpdatePosition(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId, @RequestBody PositionDTO positionDTO) {
-        return ResponseEntity.ok(positionService.savePosition(userId, positionDTO));
-    }
-
-    //TODO THIS IS ONLY FOR TEST
-    @GetMapping
-    public ResponseEntity<?> GetAllPositions(){
-        return ResponseEntity.ok(positionService.getAllPositions());
+        positionService.savePosition(userId, positionDTO);
+        return ResponseEntity.ok("Done!");
     }
 }

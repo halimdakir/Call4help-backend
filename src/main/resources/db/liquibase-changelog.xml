@@ -11,4 +11,6 @@
     <include file="changelog/05-create-report-table.xml" relativeToChangelogFile="true"/>
     <include file="changelog/06-create-endpoint-table.xml" relativeToChangelogFile="true"/>
     <include file="changelog/07-create-position-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/08-create-images-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/09-create-videos-table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

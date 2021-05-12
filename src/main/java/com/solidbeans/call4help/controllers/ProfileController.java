@@ -18,7 +18,7 @@ public class ProfileController {
 
     @GetMapping(value = "/auth/profile/get")
     public ResponseEntity<?> getProfile(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId) {
-        return new ResponseEntity<>(profileService.findProfileList(userId), HttpStatus.OK);
+        return new ResponseEntity<>(profileService.findProfileDTO(userId), HttpStatus.OK);
     }
 
 
@@ -26,11 +26,5 @@ public class ProfileController {
     public ResponseEntity<?> updateProfile(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId, @RequestBody ProfileDTO profile){
         var result = profileService.updateUserInfos(userId, profile);
         return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
-    //TODO ONLY FOR TEST
-    @GetMapping(value="profile/all")
-    public ResponseEntity<?> updateProfile(){
-        return new ResponseEntity<>(profileService.allProfiles(), HttpStatus.OK);
     }
 }

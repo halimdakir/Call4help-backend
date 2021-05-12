@@ -1,7 +1,6 @@
 package com.solidbeans.call4help.repository;
 
 import com.solidbeans.call4help.dtos.ProfileDTO;
-import com.solidbeans.call4help.dtos.ProfileModel;
 import com.solidbeans.call4help.entities.Profile;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -14,7 +13,6 @@ public interface ProfileRepository extends CrudRepository<Profile, Long> {
 
     Optional<Profile> findProfileByUsers_UserId(String userId);
 
-    String query ="SELECT profile.anonymous, profile.full_name, profile.email, profile.phone_number FROM profile INNER JOIN users ON profile.user_id = users.id WHERE users.id = :id";
-    @Query(nativeQuery = true, value = query)
-    ProfileModel returnCustomisedProfile(Long id);
+    @Query("SELECT new com.solidbeans.call4help.dtos.ProfileDTO(p.isAnonymous, p.fullName, p.email, p.phoneNumber, p.address, p.postCode, p.ort) FROM Profile p INNER JOIN p.users u WHERE u.id = :id")
+    ProfileDTO returnCustomisedProfile(Long id);
 }

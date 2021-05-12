@@ -13,17 +13,15 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Report {
-
+public class Images {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    private String text;
 
-    /*@Lob
-    @Basic(fetch = FetchType.LAZY)
-    private byte[] image;*/
+    @Type(type="org.hibernate.type.BinaryType")
+    @Column(name = "image")
+    private byte[] image;
 
     @Column(name="date_time")
     private ZonedDateTime dateTime;
@@ -38,8 +36,8 @@ public class Report {
     @JoinColumn(name = "alert_id", nullable = false)
     private Alert alert;
 
-    public Report(String text, ZonedDateTime dateTime, Users users, Alert alert) {
-        this.text = text;
+    public Images(byte[] image, ZonedDateTime dateTime, Users users, Alert alert) {
+        this.image = image;
         this.dateTime = dateTime;
         this.users = users;
         this.alert = alert;

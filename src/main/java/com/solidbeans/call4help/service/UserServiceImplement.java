@@ -11,13 +11,11 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,7 +27,6 @@ public class UserServiceImplement implements UserService{
     private ProfileService profileService;
     @Autowired
     private AmazonSNSService amazonSNSService;
-
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -97,31 +94,6 @@ public class UserServiceImplement implements UserService{
             return user;
         }else {
             throw new NotFoundException("User with id :"+userId+" is not found");
-        }
-    }
-
-    @Override
-    public Users findUserById(Long id) {
-        Users user = userRepository.findUsersById(id);
-        if (user != null){
-            return user;
-        }else {
-            throw new NotFoundException("User with id :"+id+" is not found");
-        }
-    }
-
-    @Override
-    public List<Users> getAllUsers() {
-        return (List<Users>) userRepository.findAll();
-    }
-
-    @Override
-    public void deleteUser(Long id) {
-        var user = userRepository.findUsersById(id);
-        if (user!=null){
-            userRepository.deleteById(id);
-        }else {
-            throw new NotFoundException("User with id :"+id+" is not found");
         }
     }
 

@@ -27,6 +27,18 @@
                 <constraints nullable="true"/>
             </column>
 
+            <column name="address" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="post_code" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="ort" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+
             <column name="profile_update_date" type="timestamptz">
                 <constraints nullable="true"/>
             </column>

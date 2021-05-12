@@ -3,20 +3,14 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+                      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
     <changeSet id="01" author="AD Halim">
-        <createTable tableName="report"
-                     remarks="A table to contain a message from helper">
+        <createTable tableName="images"
+                     remarks="A table to contain a images from helper">
             <column name="id" type="int" autoIncrement="true">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
-            <column name="text" type="varchar(255)">
-                <constraints nullable="true"/>
-            </column>
             <column name="image" type="BINARY">
-                <constraints nullable="true"/>
-            </column>
-            <column name="video" type="BINARY">
                 <constraints nullable="true"/>
             </column>
             <column name="date_time" type="timestamptz">
@@ -26,14 +20,14 @@
             <column name="alert_id" type="int" />
         </createTable>
 
-        <addForeignKeyConstraint constraintName="fk_report2user"
-                                 baseTableName="report"
+        <addForeignKeyConstraint constraintName="fk_images2user"
+                                 baseTableName="images"
                                  baseColumnNames="helper_id"
                                  referencedTableName="users"
                                  referencedColumnNames="id"/>
 
-        <addForeignKeyConstraint constraintName="fk_report2alert"
-                                 baseTableName="report"
+        <addForeignKeyConstraint constraintName="fk_images2alert"
+                                 baseTableName="images"
                                  baseColumnNames="alert_id"
                                  referencedTableName="alert"
                                  referencedColumnNames="id"/>

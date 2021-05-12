@@ -12,6 +12,4 @@ public interface AlertService {
 
     Optional<Alert> findAlertById(Long id);
 
-    List<Alert> getAllAlerts();
-
 }

@@ -1,14 +1,17 @@
 package com.solidbeans.call4help.service;
 
 import com.solidbeans.call4help.entities.Alert;
+import com.solidbeans.call4help.entities.Images;
 import com.solidbeans.call4help.entities.Report;
+import com.solidbeans.call4help.entities.Videos;
 import com.solidbeans.call4help.model.Evidence;
 import com.solidbeans.call4help.repository.AlertRepository;
+import com.solidbeans.call4help.repository.ImageRepository;
 import com.solidbeans.call4help.repository.ReportRepository;
+import com.solidbeans.call4help.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,10 @@ public class EvidenceServiceImplement implements EvidenceService{
     private AlertRepository alertRepository;
     @Autowired
     private ReportRepository reportRepository;
+    @Autowired
+    private ImageRepository imageRepository;
+    @Autowired
+    private VideoRepository videoRepository;
 
 
     //TODO IMPLEMENT REPORT IMAGE AND VIDEO
@@ -33,12 +40,19 @@ public class EvidenceServiceImplement implements EvidenceService{
 
             for (Alert alert : alerts) {
 
-                List<Report> reportList = reportRepository.findAllByAlert_Id(alert.getId());
+                List<Report> textList = reportRepository.findAllByAlert_Id(alert.getId());
+                List<Images> imagesList = imageRepository.findAllByAlert_Id(alert.getId());
+                List<Videos> videosList = videoRepository.findAllByAlert_Id(alert.getId());
 
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                String formattedString = alert.getAlertDate().format(formatter);
 
-                evidenceList.add(new Evidence(formattedString, reportList.size(), 0, 0));
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+                String timeFormattedString = alert.getStartAlertDate().format(timeFormatter);
+
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String dateFormattedString = alert.getStartAlertDate().format(dateFormatter);
+
+
+                evidenceList.add(new Evidence(timeFormattedString, dateFormattedString, textList.size(), imagesList.size(), videosList.size()));
             }
 
 

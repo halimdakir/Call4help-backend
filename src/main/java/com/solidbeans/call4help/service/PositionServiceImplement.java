@@ -1,7 +1,5 @@
 package com.solidbeans.call4help.service;
 
-import com.solidbeans.call4help.dtos.DistanceDTO;
-import com.solidbeans.call4help.dtos.NotificationMessageDTO;
 import com.solidbeans.call4help.dtos.PositionDTO;
 import com.solidbeans.call4help.entities.Position;
 import com.solidbeans.call4help.exception.NotFoundException;
@@ -11,26 +9,21 @@ import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.PrecisionModel;
 import org.springframework.stereotype.Service;
-
 import java.time.Instant;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class PositionServiceImplement implements PositionService{
 
     private final UserService userService;
     private final PositionRepository positionRepository;
-    private final AlertService alertService;
     private final ProfileService profileService;
 
     private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26910);
 
-    public PositionServiceImplement(UserService userService, PositionRepository positionRepository, AlertService alertService, ProfileService profileService) {
+    public PositionServiceImplement(UserService userService, PositionRepository positionRepository, ProfileService profileService) {
         this.userService = userService;
         this.positionRepository = positionRepository;
-        this.alertService = alertService;
         this.profileService = profileService;
     }
 
@@ -54,7 +47,7 @@ public class PositionServiceImplement implements PositionService{
                 if (position.isPresent()){  //If position exist
 
                     position.get().setTime(Instant.now().atZone(ZoneOffset.UTC));
-                    position.get().setCoordinates(geometryFactory.createPoint(new Coordinate(positionDTO.getLng(), positionDTO.getLat())));
+                    position.get().setCoordinates(geometryFactory.createPoint(new Coordinate(positionDTO.getLat(), positionDTO.getLng())));
 
                     return positionRepository.save(position.get());
 
@@ -64,9 +57,10 @@ public class PositionServiceImplement implements PositionService{
 
 
                     if (profile!= null){
-                        var newPosition = new Position(Instant.now().atZone(ZoneOffset.UTC), geometryFactory.createPoint(new Coordinate(positionDTO.getLng(), positionDTO.getLat())), profile);
+                        var newPosition = new Position(Instant.now().atZone(ZoneOffset.UTC), geometryFactory.createPoint(new Coordinate(positionDTO.getLat(), positionDTO.getLng())), profile);
 
                         return positionRepository.save(newPosition);
+
                     }else {
 
                         throw new NotFoundException("Profile with user id :" + foundUser.getUserId() + " is not found");
@@ -82,44 +76,5 @@ public class PositionServiceImplement implements PositionService{
         }
     }
 
-    //DISTANCE TO METRES AND DISTANCE LESS OR EQUAL THAN 500 METRES <RADIUS>
-    @Override
-    public List<NotificationMessageDTO> getNearestUsers(Long id) {
-
-        List<DistanceDTO> unfilteredList = positionRepository.findNearestPersonList(id);
-
-        var alert = alertService.findAlertById(id);
-
-        if (alert.isPresent()){
-
-
-                List<NotificationMessageDTO> nearestUsers = new ArrayList<>();
-
-                for (DistanceDTO distanceDTO : unfilteredList){
-
-                    //if (distanceDTO.getDistance() <= 50000000){ //TODO THE DISTANCE
-
-                        var user = userService.findUserByPositionId(distanceDTO.getId());
-
-                        user.ifPresent(users -> nearestUsers.add(new NotificationMessageDTO(alert.get().getId(), users.getId(), Math.round(distanceDTO.getDistance())+" meter bort!", alert.get().getUsers().getId())));
-
-
-                    //}
-                }
-
-                return nearestUsers;
-
-        }else {
-
-            throw new NotFoundException("Alert with id:"+id+" not found!");
-
-        }
-
-    }
-
-    @Override
-    public List<Position> getAllPositions() {
-        return (List<Position>) positionRepository.findAll();
-    }
 
 }

@@ -1,14 +1,13 @@
 package com.solidbeans.call4help.service;
 
 import com.solidbeans.call4help.dtos.ProfileDTO;
-import com.solidbeans.call4help.dtos.ProfileModel;
 import com.solidbeans.call4help.entities.Profile;
 import com.solidbeans.call4help.exception.NotFoundException;
 import com.solidbeans.call4help.repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.time.ZonedDateTime;
-import java.util.List;
 
 @Service
 public class ProfileServiceImplement implements ProfileService {
@@ -30,6 +29,9 @@ public class ProfileServiceImplement implements ProfileService {
                     profile.setFullName(infos.getFullName());
                     profile.setEmail(infos.getEmail());
                     profile.setPhoneNumber(infos.getPhoneNumber());
+                    profile.setAddress(infos.getAddress());
+                    profile.setPostCode(infos.getPostCode());
+                    profile.setOrt(infos.getOrt());
                     profile.setUpdateDate(ZonedDateTime.now());
                     return profileRepository.save(profile);
 
@@ -49,7 +51,7 @@ public class ProfileServiceImplement implements ProfileService {
         if (profileIsExist.isEmpty()){
             if (user != null){
 
-                Profile newProfile = new Profile(true, null, null,null,null, user);
+                Profile newProfile = new Profile(false, null, null,null,null,null, null, null, user);
                 profileRepository.save(newProfile);
 
             }
@@ -68,12 +70,7 @@ public class ProfileServiceImplement implements ProfileService {
     }
 
     @Override
-    public List<Profile> allProfiles() {
-        return (List<Profile>) profileRepository.findAll();
-    }
-
-    @Override
-    public ProfileModel findProfileList(String userId) {
+    public ProfileDTO findProfileDTO(String userId) {
         var user = userService.findUserByUserId(userId);
         if (user != null){
             var profile = profileRepository.returnCustomisedProfile(user.getId());

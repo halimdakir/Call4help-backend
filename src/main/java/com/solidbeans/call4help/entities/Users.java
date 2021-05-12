@@ -37,6 +37,14 @@ public class Users {
 
     @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
+    private Set<Images> imagesSet;
+
+    @JsonBackReference
+    @OneToMany(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
+    private Set<Videos> videosSet;
+
+    @JsonBackReference
+    @OneToMany(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "users")
     private Set<Report> reportSet;
 
     @JsonBackReference

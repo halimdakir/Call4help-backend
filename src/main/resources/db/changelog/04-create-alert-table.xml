@@ -10,7 +10,10 @@
             <column name="id" type="int" autoIncrement="true">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
-            <column name="alert_date" type="timestamptz">
+            <column name="start_alert_date" type="timestamptz">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_alert_date" type="timestamptz">
                 <constraints nullable="false"/>
             </column>
             <column name="coordinates" type="geometry">
