@@ -57,7 +57,7 @@ public class AlertServiceImplement implements AlertService{
 
             }else {
 
-                Alert alert = new Alert(Instant.now().atZone(ZoneOffset.UTC), Instant.now().atZone(ZoneOffset.UTC).plusMinutes(2), geometryFactory.createPoint(new Coordinate(positionDTO.getLat(), positionDTO.getLng())), user);
+                Alert alert = new Alert(Instant.now().atZone(ZoneOffset.UTC), Instant.now().atZone(ZoneOffset.UTC).plusHours(1), geometryFactory.createPoint(new Coordinate(positionDTO.getLat(), positionDTO.getLng())), user);
 
                 alertRepository.save(alert);
                 entityManager.detach(alert);
@@ -76,9 +76,4 @@ public class AlertServiceImplement implements AlertService{
         return alertRepository.findById(id);
     }
 
-
-    @Override
-    public List<Alert> getAllAlerts() {
-        return (List<Alert>) alertRepository.findAll();
-    }
 }

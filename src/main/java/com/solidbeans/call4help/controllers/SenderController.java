@@ -24,9 +24,6 @@ public class SenderController {
         this.amazonSNSService = amazonSNSService;
     }
 
-//TODO Language of the MESSAGE depending on the language used on the phone
-    //TODO Delete published messages after an hour
-
     @PostMapping("/auth/sender/create")
     public ResponseEntity<?> sendHelpRequest(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId, @RequestBody PositionDTO positionDTO) {
 
@@ -38,12 +35,6 @@ public class SenderController {
 
 
         return new ResponseEntity<>("Done!", HttpStatus.OK);
-    }
-
-    //TODO THIS IS ONLY FOR TEST
-    @GetMapping("/alerts")
-    public ResponseEntity<?> getALLAlerts(){
-        return new ResponseEntity<>(alertService.getAllAlerts(), HttpStatus.OK);
     }
 
 }
