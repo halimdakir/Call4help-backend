@@ -18,7 +18,7 @@ public class ProfileController {
 
     @GetMapping(value = "/auth/profile/get")
     public ResponseEntity<?> getProfile(@RequestHeader("X-Auth-Token") String token, @RequestHeader("X-Auth-User") String userId) {
-        return new ResponseEntity<>(profileService.findProfileList(userId), HttpStatus.OK);
+        return new ResponseEntity<>(profileService.findProfileDTO(userId), HttpStatus.OK);
     }
 
 

@@ -76,7 +76,7 @@ public class ProfileServiceImplement implements ProfileService {
     }
 
     @Override
-    public ProfileModel findProfileList(String userId) {
+    public ProfileDTO findProfileDTO(String userId) {
         var user = userService.findUserByUserId(userId);
         if (user != null){
             var profile = profileRepository.returnCustomisedProfile(user.getId());
