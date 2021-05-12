@@ -9,7 +9,5 @@ import java.util.List;
 public interface PositionService {
 
     Position savePosition(String userId, PositionDTO positionDTO);
-    List<NotificationMessageDTO> getNearestUsers(Long id);
-    List<Position> getAllPositions();
 
 }

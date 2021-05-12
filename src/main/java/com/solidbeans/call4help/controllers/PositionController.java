@@ -21,10 +21,4 @@ public class PositionController {
         positionService.savePosition(userId, positionDTO);
         return ResponseEntity.ok("Done!");
     }
-
-    //TODO THIS IS ONLY FOR TEST
-    @GetMapping
-    public ResponseEntity<?> GetAllPositions(){
-        return ResponseEntity.ok(positionService.getAllPositions());
-    }
 }

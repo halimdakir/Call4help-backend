@@ -22,15 +22,13 @@ public class PositionServiceImplement implements PositionService{
 
     private final UserService userService;
     private final PositionRepository positionRepository;
-    private final AlertService alertService;
     private final ProfileService profileService;
 
     private final static GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 26910);
 
-    public PositionServiceImplement(UserService userService, PositionRepository positionRepository, AlertService alertService, ProfileService profileService) {
+    public PositionServiceImplement(UserService userService, PositionRepository positionRepository, ProfileService profileService) {
         this.userService = userService;
         this.positionRepository = positionRepository;
-        this.alertService = alertService;
         this.profileService = profileService;
     }
 
@@ -83,44 +81,5 @@ public class PositionServiceImplement implements PositionService{
         }
     }
 
-    //DISTANCE TO METRES AND DISTANCE LESS OR EQUAL THAN 500 METRES <RADIUS>
-    @Override
-    public List<NotificationMessageDTO> getNearestUsers(Long id) {
-
-        List<DistanceDTO> unfilteredList = positionRepository.findNearestPersonList(id);
-
-        var alert = alertService.findAlertById(id);
-
-        if (alert.isPresent()){
-
-
-                List<NotificationMessageDTO> nearestUsers = new ArrayList<>();
-
-                for (DistanceDTO distanceDTO : unfilteredList){
-
-                    //if (distanceDTO.getDistance() <= 50000000){ //TODO THE DISTANCE
-
-                        var user = userService.findUserByPositionId(distanceDTO.getId());
-
-                        user.ifPresent(users -> nearestUsers.add(new NotificationMessageDTO(alert.get().getId(), users.getId(), Math.round(distanceDTO.getDistance())+" meter bort!", alert.get().getUsers().getId())));
-
-
-                    //}
-                }
-
-                return nearestUsers;
-
-        }else {
-
-            throw new NotFoundException("Alert with id:"+id+" not found!");
-
-        }
-
-    }
-
-    @Override
-    public List<Position> getAllPositions() {
-        return (List<Position>) positionRepository.findAll();
-    }
 
 }
