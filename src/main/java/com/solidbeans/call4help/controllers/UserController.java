@@ -25,18 +25,4 @@ public class UserController {
     }
 
 
-
-    // use parameters when searching.
-    // for example localhost:8080/api/v1/users should automatically return all users
-    //TODO THOSE BELLOW ARE ONLY FOR TEST
-    @GetMapping
-    public ResponseEntity<?> getAllUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
-    }
-
-    @DeleteMapping(value = "/id/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-        return ResponseEntity.ok().build();
-    }
 }
