@@ -9,19 +9,18 @@ import com.solidbeans.call4help.entities.Report;
 import com.solidbeans.call4help.entities.Videos;
 import com.solidbeans.call4help.exception.FileStorageException;
 import com.solidbeans.call4help.exception.NotFoundException;
-import com.solidbeans.call4help.repository.ImageRepository;
-import com.solidbeans.call4help.repository.PositionRepository;
-import com.solidbeans.call4help.repository.ReportRepository;
-import com.solidbeans.call4help.repository.VideoRepository;
+import com.solidbeans.call4help.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.Instant;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,78 +40,82 @@ public class ReportServiceImplement implements ReportService {
     private AlertService alertService;
     @Autowired
     private PositionRepository positionRepository;
+    @Autowired
+    private AlertRepository alertRepository;
 
 
     @Override
     public void saveReport(String userId, ReportDTO reportDTO) {
-        // Normalize file name
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(reportDTO.getFile().getOriginalFilename()));
-        LOGGER.info("The file name! {}", fileName);
-        //File extension
-        String extension = "";
-        int index = fileName.lastIndexOf('.');
-        if(index > 0) {
-            extension = fileName.substring(index + 1);
-        }
 
-        LOGGER.info("The file extension! {}", extension);
-
-        //Find user who has reported
+        //Find the helper
         var reporter = userService.findUserByUserId(userId);
 
-        //Find alert to whom has reported
-        List<Alert> alertList = alertService.getAllAlerts();
+        if (reporter != null){
 
-        if (alertList.size() != 0 && reporter != null){
-
-            //CHECK THE DISTANCE IF 1KM
+            //Get Helper's position
             var position = positionRepository.findPositionByProfile_Users_UserId(userId);
 
             if (position.isPresent()){
 
-                List<DistanceToReportDTO> distanceDTOList = positionRepository.findDistanceBetweenSenderAndHelper(position.get().getId());
+                //GET ACTIVE ALERTS AND WITHIN 1 KM AS DISTANCE
+                List<Alert> activeAlertAndWithin1kmList = getActiveAlertWithin1KmDistance(positionRepository.findDistanceBetweenHelperAndActiveAlerts(position.get().getId(), Instant.now().atZone(ZoneOffset.UTC)));
 
-                for (DistanceToReportDTO distance : distanceDTOList){
+                if (activeAlertAndWithin1kmList.size() > 0 ) {
 
-                    LOGGER.info("Distance between Helper and Sender! {}", Math.round(distance.getDistance()));
+                    for (Alert alert : activeAlertAndWithin1kmList){
 
-                    var alert= alertService.findAlertById(distance.getId());
+                        var foundAlert= alertService.findAlertById(alert.getId());
 
-                    if (alert.isPresent()){
-
-                        var dateNow = Instant.now().atZone(ZoneOffset.UTC);
-
-                        //CHECK IF THE DISTANCE EQUALS 1KM AND ALERTS IS STILL ACTIVE
-                        if (distance.getDistance() <= 1000 && dateNow.isBefore(alert.get().getEndAlertDate()) && dateNow.isAfter(alert.get().getStartAlertDate()) ){
+                        if (foundAlert.isPresent()){
 
                             try{
 
                                 if (!reportDTO.getText().equals("")){   //REPORT TYPE: TEXT
 
-                                    var report = new Report(reportDTO.getText(), Instant.now().atZone(ZoneOffset.UTC), reporter, alert.get());
+                                    var report = new Report(reportDTO.getText(), Instant.now().atZone(ZoneOffset.UTC), reporter, foundAlert.get());
                                     reportRepository.save(report);
+
                                 }
 
-                                if (extension.equalsIgnoreCase("jpg")){    //REPORT TYPE : IMAGE
+                                if (reportDTO.getFile() != null){
 
-                                    var image = new Images(reportDTO.getFile().getBytes(), Instant.now().atZone(ZoneOffset.UTC), reporter, alert.get());
-                                    imageRepository.save(image);
+                                    //GET FILE NAME AND EXTENSION
+                                    String fileName = getFileName(reportDTO.getFile());
+                                    String extension = getFileExtension(fileName);
 
-                                }else if (extension.equalsIgnoreCase("mp4")){  //REPORT TYPE: VIDEO
 
-                                    var video = new Videos(reportDTO.getFile().getBytes(),Instant.now().atZone(ZoneOffset.UTC), reporter, alert.get());
-                                    videoRepository.save(video);
+                                    if (extension.equalsIgnoreCase("jpg")){    //REPORT TYPE : IMAGE
+
+
+                                        var image = new Images(reportDTO.getFile().getBytes(), Instant.now().atZone(ZoneOffset.UTC), reporter, foundAlert.get());
+                                        imageRepository.save(image);
+
+
+                                    }else if (extension.equalsIgnoreCase("mp4")){  //REPORT TYPE: VIDEO
+
+                                        var video = new Videos(reportDTO.getFile().getBytes(),Instant.now().atZone(ZoneOffset.UTC), reporter, foundAlert.get());
+                                        videoRepository.save(video);
+
+                                    }
+
                                 }
-
 
                             }catch (IOException ex) {
 
-                                throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+                                throw new FileStorageException("Could not store the file. Please try again!", ex);
 
                             }
+
+                        }else{
+
+                            throw new NotFoundException("Alert not found with the given id!"+alert.getId());
+
                         }
+
                     }
 
+                }else{
+                    throw new NotFoundException("There no active alert at the moment!");
                 }
 
 
@@ -132,7 +135,6 @@ public class ReportServiceImplement implements ReportService {
 
 
     }
-
     @Override
     public List<Report> getReportsByAlert(String userId) {
         return reportRepository.findAllByAlert_Users_UserId(userId);
@@ -141,6 +143,39 @@ public class ReportServiceImplement implements ReportService {
     @Override
     public List<ReportModel> getAllReports() {
         return reportRepository.allReports();
+    }
+
+
+    private String getFileExtension(String fileName){        //File extension
+        String extension = "";
+        int index = fileName.lastIndexOf('.');
+        if(index > 0) {
+            extension = fileName.substring(index + 1);
+        }
+        LOGGER.info("The file extension! {}", extension);
+        return extension;
+    }
+
+    private String getFileName(MultipartFile file){        // Normalize file name
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        LOGGER.info("The file name! {}", fileName);
+        return fileName;
+    }
+    private List<Alert> getActiveAlertWithin1KmDistance(List<DistanceToReportDTO> list){
+        List<Alert> alertList = new ArrayList<>();
+
+        for (DistanceToReportDTO distance : list){
+
+            if (distance.getDistance() <= 1000){
+                LOGGER.info("Distance between Helper and Sender's alert! {}",Math.round(distance.getDistance()));
+                var alert = alertService.findAlertById(distance.getId());
+                alert.ifPresent(alertList::add);
+
+            }
+
+        }
+        return alertList;
+
     }
 
 }
