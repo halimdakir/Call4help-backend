@@ -18,7 +18,7 @@ public class Videos {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
+    @Type(type="org.hibernate.type.BinaryType")
     @Column(name = "video")
     private byte[] video;
 
