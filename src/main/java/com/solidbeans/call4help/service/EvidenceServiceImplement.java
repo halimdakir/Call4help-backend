@@ -45,7 +45,7 @@ public class EvidenceServiceImplement implements EvidenceService{
                 List<Videos> videosList = videoRepository.findAllByAlert_Id(alert.getId());
 
 
-                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
                 String timeFormattedString = alert.getStartAlertDate().format(timeFormatter);
 
                 DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
