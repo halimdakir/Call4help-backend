@@ -11,6 +11,5 @@ public interface ProfileService {
     Profile updateUserInfos(String userId, ProfileDTO infos);
     void saveUserInfos(String userId);
     Profile findProfileByUserId(String userId);
-    List<Profile> allProfiles();
     ProfileDTO findProfileDTO(String userId);
 }

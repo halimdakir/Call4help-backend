@@ -27,10 +27,4 @@ public class ProfileController {
         var result = profileService.updateUserInfos(userId, profile);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-
-    //TODO ONLY FOR TEST
-    @GetMapping(value="profile/all")
-    public ResponseEntity<?> updateProfile(){
-        return new ResponseEntity<>(profileService.allProfiles(), HttpStatus.OK);
-    }
 }
