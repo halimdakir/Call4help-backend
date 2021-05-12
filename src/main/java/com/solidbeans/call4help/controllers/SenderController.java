@@ -1,7 +1,6 @@
 package com.solidbeans.call4help.controllers;
 
 import com.solidbeans.call4help.dtos.PositionDTO;
-import com.solidbeans.call4help.jms.JmsService;
 import com.solidbeans.call4help.notification.AmazonSNSService;
 import com.solidbeans.call4help.service.AlertService;
 import com.solidbeans.call4help.service.EndpointService;
@@ -18,16 +17,11 @@ public class SenderController {
     private final AlertService alertService;
     private final EndpointService endpointService;
     private final AmazonSNSService amazonSNSService;
-    private final JmsService jmsService;
-    private final PositionService positionService;
 
-    public SenderController(AlertService alertService, EndpointService endpointService,
-                            AmazonSNSService amazonSNSService, JmsService jmsService, PositionService positionService) {
+    public SenderController(AlertService alertService, EndpointService endpointService, AmazonSNSService amazonSNSService) {
         this.alertService = alertService;
         this.endpointService = endpointService;
         this.amazonSNSService = amazonSNSService;
-        this.jmsService = jmsService;
-        this.positionService = positionService;
     }
 
 //TODO Language of the MESSAGE depending on the language used on the phone
@@ -41,8 +35,6 @@ public class SenderController {
         //Push notification
         amazonSNSService.publishMessage(endpointService.getAllEndpoints(), "Någon ropar på hjälp!");
 
-        //Publish message
-        jmsService.publishMessage(positionService.getNearestUsers(alert.getId()));
 
 
         return new ResponseEntity<>("Done!", HttpStatus.OK);
