@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,8 +21,8 @@ public interface PositionRepository extends CrudRepository<Position, Long>, Pagi
     @Query(nativeQuery = true, value = query)
     List<DistanceDTO> findNearestPersonList(Long id);
 
-    String query1 ="SELECT alert.id, ST_Distance_Spheroid(geometry(alert.coordinates), geometry(position.coordinates), 'SPHEROID[\"WGS 84\",6378137,298.257223563]') AS distance FROM position INNER JOIN profile ON position.profile_id = profile.id, alert WHERE position.id = :positionId AND alert.user_id <> profile.user_id";
-    @Query(nativeQuery = true, value = query1)
-    List<DistanceToReportDTO> findDistanceBetweenSenderAndHelper(Long positionId);
+    String query2 ="SELECT alert.id, ST_Distance_Spheroid(geometry(alert.coordinates), geometry(position.coordinates), 'SPHEROID[\"WGS 84\",6378137,298.257223563]') AS distance FROM position INNER JOIN profile ON position.profile_id = profile.id, alert WHERE position.id = :positionId AND alert.user_id <> profile.user_id AND alert.end_alert_date >= :timeNow AND alert.start_alert_date <= :timeNow";
+    @Query(nativeQuery = true, value = query2)
+    List<DistanceToReportDTO> findDistanceBetweenHelperAndActiveAlerts(Long positionId, ZonedDateTime timeNow);
 
 }
