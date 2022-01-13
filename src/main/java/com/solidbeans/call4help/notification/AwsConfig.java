@@ -13,9 +13,9 @@ import org.springframework.context.annotation.Primary;
 public class AwsConfig {
 
     //@Value("${cloud.aws.credentials.access-key}")
-    private final String accessKey = "AKIAVJR6HP6GKDEYXYNA";
+    private final String accessKey = "accessKey";
     //@Value("${cloud.aws.credentials.secret-key}")
-    private final String secretKey = "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";
+    private final String secretKey = "/secretKey";
     //@Value("${cloud.aws.region.static}")
     private final String region = "EU_WEST_1";
 

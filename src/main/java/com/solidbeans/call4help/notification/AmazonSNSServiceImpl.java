@@ -20,7 +20,7 @@ import java.util.Map;
 @Service
 public class AmazonSNSServiceImpl implements AmazonSNSService{
 
-    private final String platform_App_Arn = "arn:aws:sns:eu-west-1:364128993164:app/GCM/call4help";
+    private final String platform_App_Arn = "platform_App_Arn";//arn:aws:sns:eu-west-1:364128993164:app/GCM/call4help";
 
     @Autowired
     private EndpointsRepository endpointsRepository;
